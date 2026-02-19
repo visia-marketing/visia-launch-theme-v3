@@ -8,7 +8,6 @@ $aos_duration = 0;
 $aos_step = 0;
 
 
-$class = 'columns cards cards-style--'.$card_style;
 $rand_id = $display . '_' . wp_generate_uuid4();
 
 if ($aos == 'no_animation') {
@@ -19,20 +18,20 @@ if ($aos == 'no_animation') {
 
 }
 
-$class = 'columns cards';
+$class = ' uk-card uk-margin-bottom';
 
 switch ($per_row) {
     case 2:
-        $class .= ' small-12 medium-6';
+        $class .= ' uk-width-1-1@xs uk-width-1-2@m';
         break;
     case 3:
-        $class .= ' small-12 medium-4';
+        $class .= ' uk-width-1-1@xs uk-width-1-2@s uk-width-1-3@m';
         break;
     case 4:
-        $class .= ' small-12 medium-3';
+        $class .= ' uk-width-1-1@xs uk-width-1-2@s uk-width-1-3@m uk-width-1-4@l';
         break; 
     default:
-        $class .= ' small-12 medium-4'; // Default to 3 per row
+        $class .= ' uk-width-1-1@xs uk-width-1-2@s uk-width-1-6@m'; // Default to 3 per uk-container
 }
 
 
@@ -40,32 +39,30 @@ switch ($per_row) {
 
 <div class="fc-section-columns fc-section-cards" id="<?php echo $rand_id;?>">
 
-  <div class="row padding-row" data-equalizer>
+  <div class="uk-container padding-row" data-equalizer>
     <?php get_template_part('flexible/section_header'); ?>
     
 
-    <?php if($display == "carousel"): ?><div class="carousel-wrapper"  data-slides-to-show="<?php echo $per_row; ?>" data-duration="<?php echo $aos_duration; ?>" data-step="<?php echo $aos_step; ?>"> <?php endif; ?>
+    <?php if($display == "carousel"): ?><div class="carousel-wrapper"  data-slides-to-show="<?php echo $per_row; ?>" data-duration="<?php echo $aos_duration; ?>" data-step="<?php echo $aos_step; ?>"><?php else: ?> <div class="grid-container uk-grid uk-grid-small uk-grid-match"> <?php endif; ?>
         <?php $delay = 0; ?>
 
         <?php foreach( $cards as $card ): ?>
 
         <?php $delay += $aos_step; ?>
         <div class="<?php echo $class; ?>" <?php if($aos != false): ?>data-aos="<?php echo $aos; ?>" data-aos-duration="<?php echo $aos_duration; ?>" data-aos-delay="<?php echo $delay; ?>"<?php endif; ?>> 
-            <div class="content content-cards" data-equalizer-watch>
+            <div class="uk-height-1-1 uk-flex uk-flex-column" >
 
-                <div class="card-image">
-                    <?php $image = wp_get_attachment_image($card['card_icon'], 'thumbnail'); ?>
+            <?php $image = wp_get_attachment_image($card['card_icon'], 'thumbnail', false, array( 'class' => 'uk-width-1-1')); ?>
                     
-                    <?php if( $image ): ?>
-                        <div class="card-image-inner">
-                            <?php echo $image; ?>
-                        </div>
-                    <?php endif; ?>
+            <?php if( $image ): ?>
+                <div class="card-media uk-card-media-top">
+                    <?php echo $image; ?>
                 </div>
+            <?php endif; ?>
                 
-                <div class="content-cards--inner">
+                <div class="card-body uk-card-body uk-flex-1">
 
-                    <h3 class="card-title">
+                    <h3 class="card-title uk-card-title">
                         <a href="<?php echo $card['card_link']; ?>">
                             <?php echo $card['card_title']; ?>
                         </a>
@@ -105,7 +102,7 @@ switch ($per_row) {
 
         
         </div>
-    <?php if($display == "carousel"): ?></div> <?php endif; ?>
+    </div>
 
 </div>
 

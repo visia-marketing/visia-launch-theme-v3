@@ -10,15 +10,8 @@ $top-header-link-color: $top-header-link-color;
 
 .main-header {
   background-color: $header-background;
-  height: 50px;
   padding: 0;
   position: relative;
-  width: 100%;
-  z-index: 9;
-
-  @include breakpoint(large) {
-    height: 128px;
-  }
 
   .row, .row > .columns {
     height: 100%;
@@ -44,22 +37,22 @@ $top-header-link-color: $top-header-link-color;
   */
   
   .main-logo {
-    display: flex;
-    align-items: center;
-    height: 100%;
-    margin-right: auto;
+    // display: flex;
+    // align-items: center;
+    // height: 100%;
+    // margin-right: auto;
 
     & a{
-      display: flex;
-      height: 100%;
-      padding: 1rem 0;
+      // display: flex;
+      // height: 100%;
+      // padding: 1rem 0;
     }
 
     img {
       //height: 19px;
-      width: 100%;
-      vertical-align: middle;
-      max-height: 100%;
+      // width: 100%;
+      // vertical-align: middle;
+      // max-height: 100%;
 
       @include breakpoint(medium) {
         //height: 34px;
@@ -75,7 +68,7 @@ $top-header-link-color: $top-header-link-color;
   display: none;
 }
 
-@include breakpoint(large) {
+@include breakpoint(medium) {
   
   .main-header .primary-navigation-wrapper {
     display: flex;

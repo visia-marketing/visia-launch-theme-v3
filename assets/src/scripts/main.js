@@ -9,8 +9,13 @@
  * The routing is enclosed within an anonymous function so that you can
  * always reference jQuery with $, even when in .noConflict() mode.
  * ======================================================================== */
+
+// Import styles
+import '../styles/main.scss';
+
 import $ from 'jquery';
-import 'foundation-sites';
+import UIkit from 'uikit';
+import Icons from 'uikit/dist/js/uikit-icons';
 import 'slick-carousel';
 import 'simple-lightbox';
 import AOS from 'aos';
@@ -26,9 +31,8 @@ import { CountUp } from 'countup.js';
     // All pages
     'common': {
       init: function() {
-        
-        $(document).foundation(); // Foundation JavaScript
-
+      
+        UIkit.use(Icons);
 
         AOS.init({
           duration: 1000,
@@ -36,6 +40,7 @@ import { CountUp } from 'countup.js';
         },
           console.log('AOS loaded')
         );
+
 
 
         if (document.querySelector('.countup-animated-number')) {
@@ -51,7 +56,7 @@ import { CountUp } from 'countup.js';
               separator: ',',
               enableScrollSpy: true,
               scrollSpyOnce: true,
-              scrollSpyDelay: delayMs,
+              scrollSpyDelay: 0,
               startVal: startVal,
             });
         

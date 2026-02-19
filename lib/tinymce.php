@@ -16,7 +16,7 @@ function my_mce_color_options($init) {
   // build colour grid default+custom colors
   $init['textcolor_map'] = '['.$default_colors.','.$custom_colors.']';
 
-  // enable 6th row for custom colours in grid
+  // enable 6th uk-container for custom colours in grid
   $init['textcolor_rows'] = 7;
 
   return $init;

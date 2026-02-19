@@ -7,7 +7,7 @@ module.exports = {
     entry: {
         main: [
             './assets/src/scripts/main.js',
-            './assets/src/styles/main.scss'
+            // './assets/src/styles/main.scss'
         ]
     },
     devtool: 'source-map',
@@ -15,10 +15,11 @@ module.exports = {
         filename: 'assets/dist/scripts/[name].min.js',
         path: path.resolve(__dirname)
     },
+    externals: {
+        jquery: 'jQuery'  // ✅ Tell webpack jQuery is external
+    },
     resolve: {
         alias: {
-            'jquery': 'jquery/src/jquery',
-            'foundation': 'foundation-sites/js/foundation.core',
             'slick-carousel': 'slick-carousel/slick/slick.js'
         }
     },
@@ -45,7 +46,6 @@ module.exports = {
                         options: {
                             sassOptions: {
                                 includePaths: [
-                                    path.resolve(__dirname, 'node_modules/foundation-sites/scss'),
                                     path.resolve(__dirname, 'assets/src/styles')
                                 ]
                             }
@@ -79,9 +79,7 @@ module.exports = {
         }),
         new webpack.ProvidePlugin({
             $: 'jquery',
-            jQuery: 'jquery',
-            'window.jQuery': 'jquery',
-            'window.$': 'jquery'
+            jQuery: 'jquery'
         })
     ],
     stats: {

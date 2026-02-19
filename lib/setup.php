@@ -238,10 +238,14 @@ function assets() {
   /**
    * Enqueue Stylesheets
    */
+  wp_enqueue_script( 'jquery' );
   wp_enqueue_style('theme-fonts', $fonts , false, null);          // Google/Typekit fonts
   wp_enqueue_style('sage/css', Assets\asset_path('/dist/styles/main.min.css'), false, null); // Compiled theme styles
   wp_enqueue_style('font-awesome-cdn', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css', false, null); // Font Awesome icons
   wp_enqueue_style('default-css', get_stylesheet_uri() , false, null); // WordPress default stylesheet (style.css)
+
+
+
 
   /**
    * Comment Reply Script
@@ -256,7 +260,6 @@ function assets() {
    * Note: There's a duplicate enqueue here that should be removed
    */
   wp_enqueue_script('sage/js', Assets\asset_path('dist/scripts/main.min.js'), ['jquery'], null, true);
-  wp_enqueue_script('sage/js', Assets\asset_path('dist/scripts//main.min.js'), ['jquery'], null, true); // DUPLICATE - should be removed
 
 }
 // Hook with priority 100 to load after most other scripts/styles

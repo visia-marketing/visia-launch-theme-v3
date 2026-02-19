@@ -7,7 +7,7 @@
 
 		
     <section class="page-content-wrapper">
-      <div class="row">
+      <div class="uk-container">
         <div class="small-12 columns">
 					
           <div class="page-content">

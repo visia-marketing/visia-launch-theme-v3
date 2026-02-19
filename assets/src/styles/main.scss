@@ -4,36 +4,18 @@
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// First Foundation's settings and your variables
-@import "../../../node_modules/foundation-sites/scss/settings/_settings";
+// 1. Your custom variables and variable overwrites.
 @import "common/variables";
 
-// Then Foundation's utility functions (needed for grid)
-@import "../../../node_modules/foundation-sites/scss/util/util";
+// 2. Import default variables and available mixins.
+@import "uikit/src/scss/variables-theme.scss";
+@import "uikit/src/scss/mixins-theme.scss";
 
-// Then Foundation framework (this includes the grid)
-@import "../../../node_modules/foundation-sites/scss/foundation";
+// 3. Your custom mixin overwrites.
+@mixin hook-card() { color: #000; }
 
-// Initialize Foundation
-@include foundation-everything;
-
-// Motion UI
-@import '../../../node_modules/motion-ui/motion-ui';
-@include motion-ui-transitions;
-@include motion-ui-animations;
-
-// // Font Awesome - Comment out if you do not need itf
-//@import './font-awesome/css/font-awesome.css';
-// @import '../../../node_modules/@fortawesome/fontawesome-free/css/all.css';
-
-// $fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
-// @import "~@fortawesome/fontawesome-free/scss/fontawesome.scss";
-// @import "~@fortawesome/fontawesome-free/scss/solid.scss";
-// @import "~@fortawesome/fontawesome-free/scss/brands.scss";
-// @import "~@fortawesome/fontawesome-free/scss/regular.scss";
-
-
-// @import '../../../node_modules/@fortawesome/fontawesome-free/scss/regular.scss';
+// 4. Import UIkit.
+@import "uikit/src/scss/uikit-theme.scss";
 
 
 // Slick Carousel
@@ -45,7 +27,6 @@
 
 // import AOS
 @import "../../../node_modules/aos/dist/aos.css";
-
 
 
 // Your custom styles
@@ -72,77 +53,3 @@
 @import "woocommerce/wc-single";
 @import "flexible/flexible";
 @import "pages/home";
-
-
-// ////////////////////////////////////////////////////////////////////////////////////////////////////// 
-// // 
-// // Theme @imports
-// // 
-// //////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// @import "../../../node_modules/foundation-sites/scss/settings/_settings";
-// @import "common/variables";
-
-// // Import Foundation grid
-// // Import Foundation
-// @import "../../../node_modules/foundation-sites/scss/grid/grid.scss";
-
-// // Import Foundation
-// @import "../../../node_modules/foundation-sites/scss/foundation.scss";
-
-
-
-// // Motion UI - Comment out if you do not  need it
-// @import '../../../node_modules/motion-ui/motion-ui';
-// @include motion-ui-transitions;
-// @include motion-ui-animations;
-
-// // Foundation
-// @include foundation-everything;
-
-
-// ///////////////////////////////////////////////
-
-
-
-
-// // Slick Carousel - works better than orbit
-// @import "../../../node_modules/slick-carousel/slick/slick.scss";
-// @import "../../../node_modules/slick-carousel/slick/slick-theme.scss";
-
-// // // Extras
-// @import "../../../node_modules/simplelightbox/";
-
-
-// ///////////////////////////////////////////////
-
-
-// @import "common/global-styles";
-// @import "common/global-layouts";
-// @import "common/helpers";
-
-// @import "components/boxes";
-// @import "components/breadcrumbs";
-// @import "components/buttons";
-// @import "components/forms";
-// @import "components/misc";
-// @import "components/wp-classes";
-
-// @import "partials/page-content";
-// @import "partials/page-header";
-// @import "partials/posts";
-// @import "partials/product";
-// @import "partials/search";
-// @import "partials/sidebar";
-// @import "partials/site-header";
-// @import "partials/site-footer";
-// @import "partials/tinymce";
-
-// @import "woocommerce/wc-archive";
-// @import "woocommerce/wc-single";
-
-// @import "flexible/flexible";
-
-
-// // Custom Pages
-// @import "pages/home";

@@ -3,7 +3,7 @@
   <?php get_template_part('templates/page-header'); ?>
   
   <section class="page-content-wrapper">
-    <div class="row">
+    <div class="uk-container">
       <div class="small-12 columns">
         
       <div class="alert alert-warning">

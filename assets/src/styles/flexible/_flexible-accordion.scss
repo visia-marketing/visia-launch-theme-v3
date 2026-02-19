@@ -1,176 +1,281 @@
-.fc-section-accordion-simple, .fc-section-accordion-tabs {
-  //padding-bottom: 80px;
+// .fc-section-accordion-simple, .fc-section-accordion-tabs {
+//   //padding-bottom: 80px;
 
-  .tabs {
-    margin: 0;
-    border: 1px solid $black;
+//   .tabs {
+//     margin: 0;
+//     border: 1px solid $black;
     
-    background: #fff;
-    list-style-type: none;
-  } 
+//     background: #fff;
+//     list-style-type: none;
+//   } 
 
-  .tabs-title>a {
-    border-right: 1px solid $black;
-    display: block;
-    padding: 1.5rem 2rem;
-    font-size: .925rem;
-    line-height: 1;
-    color: $black;
-  }
+//   .tabs-title>a {
+//     border-right: 1px solid $black;
+//     display: block;
+//     padding: 1.5rem 2rem;
+//     font-size: .925rem;
+//     line-height: 1;
+//     color: $black;
+//   }
 
-  .tabs-title>a:focus, .tabs-title>a[aria-selected=true] {
-    background: $primary;
-    color: #fff;
-  }
+//   .tabs-title>a:focus, .tabs-title>a[aria-selected=true] {
+//     background: $primary;
+//     color: #fff;
+//   }
 
-  .tabs-panel {
-    border: none;
-    padding: 0;
-  }
+//   .tabs-panel {
+//     border: none;
+//     padding: 0;
+//   }
 
-  .accordion {
-    background: transparent;
-    border-top: 1px solid $grey-border;
+//   .accordion {
+//     background: transparent;
+//     border-top: 1px solid $grey-border;
 
-    &.separated {
-      border-top: none;
+//     &.separated {
+//       border-top: none;
 
-      .accordion-item {
-        margin-bottom: 24px;
-      }
+//       .accordion-item {
+//         margin-bottom: 24px;
+//       }
 
-      .accordion-topic {
+//       .accordion-topic {
        
-        border: 1px solid $grey-border;
-        border-top: 1px solid $grey-border;
-        border-radius: 10px;
+//         border: 1px solid $grey-border;
+//         border-top: 1px solid $grey-border;
+//         border-radius: 10px;
 
-        overflow: hidden;
-      }
+//         overflow: hidden;
+//       }
 
-    }
+//     }
 
-    &.in-tabs {
-      border-top: none;
-    }
+//     &.in-tabs {
+//       border-top: none;
+//     }
 
-    .accordion-topic {
-      border: 1px solid $grey-border;
-      border-top: none;
-      padding: 22px 30px;
-      position: relative;
-      background: $white;
+//     .accordion-topic {
+//       border: 1px solid $grey-border;
+//       border-top: none;
+//       padding: 22px 30px;
+//       position: relative;
+//       background: $white;
 
-      h4 {
-        font-family: $sans;
-        font-size: 24px;
-        font-weight: 400;
-        margin: 0;
-      }
+//       h4 {
+//         font-family: $sans;
+//         font-size: 24px;
+//         font-weight: 400;
+//         margin: 0;
+//       }
 
-      .accordion-arrow {
-        border-left: 1px solid $grey-border;
-        display: flex;
-         align-items: center;
-         justify-content: center;
-        height: 100%;
-        position: absolute;
-         top: 0;
-         right: 0;
-         bottom: 0;
-        width: 120px;
-        transition: all .5s ease;
+//       .accordion-arrow {
+//         border-left: 1px solid $grey-border;
+//         display: flex;
+//          align-items: center;
+//          justify-content: center;
+//         height: 100%;
+//         position: absolute;
+//          top: 0;
+//          right: 0;
+//          bottom: 0;
+//         width: 120px;
+//         transition: all .5s ease;
 
-        i {
-          color: $black;
-          font-size: 34px;
-        }
+//         i {
+//           color: $black;
+//           font-size: 34px;
+//         }
 
-      }
+//       }
 
-      &:hover .accordion-arrow {
-        background-color: $primary;
+//       &:hover .accordion-arrow {
+//         background-color: $primary;
 
-        i {
-          color: #fff;
-        }
+//         i {
+//           color: #fff;
+//         }
 
-      }
+//       }
 
-      &.current  {
-        border-radius: 10px 10px 0 0;
-      }
+//       &.current  {
+//         border-radius: 10px 10px 0 0;
+//       }
 
-      &.current .accordion-arrow i {
-        transform: rotate(-90deg);
-      }
+//       &.current .accordion-arrow i {
+//         transform: rotate(-90deg);
+//       }
 
-      &:xafter { 
-        position:absolute;  
-        color: $black; 
-        content: "›"; 
-        font-size:20px; 
-        top: -4px; 
-        right: 10px; 
+//       &:xafter { 
+//         position:absolute;  
+//         color: $black; 
+//         content: "›"; 
+//         font-size:20px; 
+//         top: -4px; 
+//         right: 10px; 
         
-      }
+//       }
 
-      &.current {
-        background-color: $gray-bg;
-        font-weight: 700;
-      }
+//       &.current {
+//         background-color: $gray-bg;
+//         font-weight: 700;
+//       }
 
       
 
-    }
+//     }
 
-    .accordion-response {
-      border-left: 1px solid $grey-border;
-      border-right: 1px solid $grey-border;
-      border-bottom: 1px solid $grey-border;
-      padding: 22px 30px;
-      display: none;
+//     .accordion-response {
+//       border-left: 1px solid $grey-border;
+//       border-right: 1px solid $grey-border;
+//       border-bottom: 1px solid $grey-border;
+//       padding: 22px 30px;
+//       display: none;
 
-      &.current {
-        background-color: $gray-bg;
-      }
+//       &.current {
+//         background-color: $gray-bg;
+//       }
 
-      h1, h2, h3, h4, h5, h6, ul, p {
-        max-width: 600px;
-      }
+//       h1, h2, h3, h4, h5, h6, ul, p {
+//         max-width: 600px;
+//       }
 
-      p, li {
-        font-size: 20px;
-      }
+//       p, li {
+//         font-size: 20px;
+//       }
       
-    }
+//     }
+
+//   }
+
+// }
+
+
+// .fc-section-columns + .fc-section-accordion-simple,
+// .fc-section-columns + .fc-section-accordion-tabs{
+//   margin-top: 2rem;
+// }
+
+
+// .fc-faq-section:not(.fc-section-accordion-simple){
+
+//   margin-top: 2rem;
+
+//   & .accordion-arrow{
+//     display: none;
+//   }
+
+//   & .faq_question{
+//     display: flex;
+//   }
+
+//   & .faq_answer{
+//     padding-bottom: 0.5rem;
+//     border-bottom: 1px solid $grey-border;
+//     margin-bottom: 2.5rem;
+//   }
+// }
+
+.fc-faq-section,
+.fc-section-accordion-simple{
+
+
+  ul.uk-accordion{
+
+
+      & > li{
+        border-bottom: 1px solid $grey-border;
+
+        &:first-child{
+          border-top: 1px solid $grey-border;
+        }
+
+        // & .uk-icon{
+        //   transition: transform 0.2s ease-in;
+        // }
+
+        &.uk-open{
+
+          & .uk-icon{
+            transform: scaleY(-1);
+          }
+
+        }
+
+        & .uk-accordion-title{
+
+        }
+        & .uk-accordion-content{
+          border: none;
+          
+        }
+
+      }
 
   }
 
-}
+  &.separated{
 
 
-.fc-section-columns + .fc-section-accordion-simple,
-.fc-section-columns + .fc-section-accordion-tabs{
-  margin-top: 2rem;
-}
+    ul.uk-accordion{
+      border-top: 0px solid transparent;
 
+      & > li{
+        border-top: 1px solid $grey-border;
+        margin-bottom: 30px !important;
+        margin-top: 20px !important;
 
-.fc-faq-section:not(.fc-section-accordion-simple){
+        & .uk-accordion-title{
 
-  margin-top: 2rem;
+        }
+        & .uk-accordion-content{
+                
+        }
 
-  & .accordion-arrow{
-    display: none;
+      }
+
   }
 
-  & .faq_question{
-    display: flex;
   }
 
-  & .faq_answer{
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid $grey-border;
-    margin-bottom: 2.5rem;
+  // .accordion {
+
+  //   & li.accordion-item{
+  //     & a{
+  //       border-bottom: 1px solid $grey-border;
+  //       & i{
+  //         left: -1rem;
+  //         &:before{
+  //           display: block;
+  //           transform: rotate(90deg);
+  //         }
+  //       }
+  //     }
+
+  //     & .accordion-response{
+  //       will-change: height;
+  //       /* Hide the back of the element when facing away */
+  //       backface-visibility: hidden; 
+  //       /* Ensures hardware acceleration is used */
+  //       transform: translateZ(0); 
+  //     }
+ 
+  //   }
+  
+  //   & li.accordion-item.uk-open{
+  
+  //     & i:before{
+  //       display: block;
+  //       transform: rotate(-90deg);
+  //     }
+  
+  //   }
+  
+  // }
+    
   }
-}
+
+
+
+
+
+ 

@@ -1,7 +1,7 @@
 <article class="post-archive">
 
   <div class="post-header">
-    <div class="row">
+    <div class="uk-container">
       <div class="small-12 columns">
         <strong>Post Header -> Should be H1</strong>
       </div>
@@ -9,7 +9,7 @@
   </div>
 
   <section class="post-content">
-    <div class="row" data-equalizer data-equalize-by-row="true">
+    <div class="uk-container" data-equalizer data-equalize-by-row="true">
       
       <?php if (!have_posts()) : ?>
         <div class="alert alert-warning">

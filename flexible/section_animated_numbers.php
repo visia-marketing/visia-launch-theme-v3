@@ -22,11 +22,11 @@ if( $column_4['number'] == "" ) {
 
 <div class="fc-section-columns animated-numbers">
 
-    <div class="animated-numbers-grid number-columns--<?php echo count( $number_columns ); ?>">
+    <div class="uk-container uk-container-large uk-flex uk-flex-center uk-flex-wrap uk-child-width-1-2@m uk-child-width-1-3@l uk-child-width-1-4@xl">
 
         <?php $delay = 0; ?>
         <?php foreach( $number_columns as $number_group ): ?>
-            <?php $delay += 500; ?>
+            <?php $delay += 250; ?>
 
             <div class="number-container">
                 <div class="number-ring" data-aos="zoom-out" data-aos-delay="<?php echo $delay; ?>"></div>

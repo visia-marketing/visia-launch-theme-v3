@@ -43,7 +43,7 @@ if ( $source === 'default' ){
 
 <div class="fc-section-cta fc-section-columns call-to-action call-to-action--<?php echo $source;?> call-to-action-<?php echo $background; ?> background--<?php echo $background;?> background--<?php echo $content_color;?>" id="<?php echo $cta_id; ?>">
 
-    <div class="call-to-action--inner row">
+    <div class="call-to-action--inner uk-container">
 
         <div class="column small-12 large-10 large-offset-1">
             <?php echo $content; ?>

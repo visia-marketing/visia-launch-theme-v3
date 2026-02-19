@@ -56,8 +56,8 @@
     }
     ?>
     <div class="page-header-content-wrapper fc-section fc-section-<?php echo $page_heading_background;?> page-header-<?php echo $page_heading_size; ?>">
-      <div class="row">
-        <div class="small-12 large-8 large-offset-2 text-center columns">
+      <div class="uk-container">
+        <div class="small-12 large-8 large-offset-2 uk-text-center columns">
           <div class="page-header-content">
             <?php 
             $header_content = get_field('page_header_content');

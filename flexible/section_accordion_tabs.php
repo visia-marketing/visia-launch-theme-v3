@@ -20,8 +20,8 @@
 
 
 
-    <div class="row columns "> 
-    <div class="row columns">
+    <div class="uk-container columns "> 
+    <div class="uk-container columns">
       <ul class="tabs  <?php echo $tab_count > 4 ? 'stretch-tabs' : ''; ?>" data-tabs id="<?php echo $tabs_id;?>">
         <?php while( have_rows('tabs') ): the_row(); ?>
        
@@ -41,7 +41,7 @@
                   <div class="accordion-item">
                     <div class="accordion-topic">
                       <h4><?php echo get_sub_field('heading');?></h4>
-                      <div class="accordion-arrow"><i class="fas fa-chevron-right"></i></div>
+                      <div class="accordion-aruk-container"><i class="fas fa-chevron-right"></i></div>
                     </div>
                     <div class="accordion-response"><?php echo get_sub_field('content');?></div>
                   </div>

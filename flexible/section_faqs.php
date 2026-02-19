@@ -6,7 +6,6 @@ if( is_array($fields) ){
     $length = count($fields);
 }
 
-
 $faq_container_class = 'fc-faq-section';
 $faq_class = '';
 $faq_item_class = 'faq_item';
@@ -27,23 +26,30 @@ if($style == 'plain'){
     }
 }
 
+$faqs = get_sub_field('questions_and_answers');
+
 ?>
 
 <div class="fc-section-columns <?php echo $faq_container_class;?>" id="<?php //echo $anchor;?>">
  <?php get_template_part('flexible/section_header'); ?>
-  <?php if( have_rows('questions_and_answers') ): ?>
-  <div class="row columns "> 
-    <div class="row columns">
-      <div class="<?php echo $faq_class; ?>">
-      <?php while ( have_rows('questions_and_answers' ) ): the_row(); ?>
-          <div class="<?php echo $faq_item_class;?>">
-            <div class="<?php echo $question_class; ?>"><h4><?php echo get_sub_field('question');?></h4><div class="accordion-arrow"><i class="fas fa-chevron-right"></i></div></div>
-            <div class="<?php echo $answer_class; ?>"><?php echo get_sub_field('answer');?></div>
-          </div>
-      <?php endwhile; ?>
-      </div>
+ 
+  <?php if( is_array( $faqs ) ): ?>
+
+    <div class="uk-container"> 
+
+        <ul class="uk-accordion uk-accordion-default" uk-accordion>
+
+            <?php foreach ($faqs as $faq ): ?>
+                <li class="uk-margin-remove-top">
+                <a class="uk-accordion-title uk-flex uk-flex-middle uk-flex-between" href><h4 class="uk-margin-top uk-margin-bottom"><?php echo $faq['question'];?></h4> <span uk-icon="icon: chevron-down; ratio: 1.5"></span></a>
+                    <div class="uk-accordion-content uk-margin-medium-bottom"><?php echo $faq['answer'];?></div>
+                </li>
+            <?php endforeach; ?>
+
+        </ul>
+
     </div>
-  </div>
+
   <?php endif; ?>
 </div>
 

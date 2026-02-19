@@ -19,30 +19,33 @@ use Roots\Sage\Wrapper;
     <!-- End Google Tag Manager (noscript) -->
     <?php endif; ?>
 
-    <div class="off-canvas position-left" id="off-canvas-menu" data-off-canvas data-transition="overlap">
 
-      <!-- Close button -->
-      <button class="close-button" aria-label="Close menu" type="button" data-close>
-        <span aria-hidden="true">&times;</span>
-      </button>
+    <!-- This is the off-canvas -->
+    <div id="uk-off-canvas" uk-offcanvas="mode: push">
+        <div class="uk-offcanvas-bar">
 
-      <?php
-      if (has_nav_menu('mobile_navigation')) :
-        wp_nav_menu(['theme_location' => 'mobile_navigation', 'depth' => 3, 'menu_class' => 'vertical menu accordion-menu mobile-navigation', 'items_wrap' => '<ul class="%2$s" id="mobile-navigation" data-accordion-menu data-submenu-toggle="true">%3$s</ul>' ]); 
-        endif;
-      ?>
+            <button class="uk-offcanvas-close" type="button" uk-close></button>
 
-      <div class="off-canvas-search">
-      <form role="search" method="get" class="search-form" action="<?= site_url(); ?>">
-        <label>
-          <span class="screen-reader-text">Search</span>
-          <input type="search" class="search-field" id="search-field" placeholder="Search…" value="" name="s">
-        </label>
-        <button class="button"> <i class="far fa-search"></i></button>
-      </form>
-      </div>
+            <?php
+            if (has_nav_menu('mobile_navigation')) :
+              wp_nav_menu(['theme_location' => 'mobile_navigation', 'depth' => 3, 'menu_class' => 'vertical menu accordion-menu mobile-navigation', 'items_wrap' => '<ul class="%2$s" id="mobile-navigation" data-accordion-menu data-submenu-toggle="true">%3$s</ul>' ]); 
+              endif;
+            ?>
 
+            <div class="off-canvas-search">
+              <form role="search" method="get" class="search-form" action="<?= site_url(); ?>">
+                <label>
+                  <span class="screen-reader-text">Search</span>
+                  <input type="search" class="search-field" id="search-field" placeholder="Search…" value="" name="s">
+                </label>
+                <button class="button"> <i class="far fa-search"></i></button>
+              </form>
+            </div>
+
+        </div>
+        
     </div>
+
 
     <div class="off-canvas-content" data-off-canvas-content>
     

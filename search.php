@@ -1,7 +1,7 @@
 <article class="page page-search">
 
   <section class="page-content">
-    <div class="row">
+    <div class="uk-container">
       <div class="small-12 columns">
         
         <br>
@@ -42,7 +42,7 @@
                   <span class="search-permalink"><?php the_permalink(); ?></span>
                   <p><?php echo $excerpt; ?></p>
                   <?php 
-                    echo '<a href="' . get_the_permalink() . '" class="read-more">Read More <i class="fa-solid fa-arrow-right"></i></a>';
+                    echo '<a href="' . get_the_permalink() . '" class="read-more">Read More <i class="fa-solid fa-aruk-container-right"></i></a>';
                   ?>
                 </div>
               </div>      
@@ -59,7 +59,7 @@
 
           <div class="search-results-wrapper">
             <div class="search-results-none">
-              <div class="row">
+              <div class="uk-container">
                 <div class="small-12 columns">
                   <?php the_field('no_results_message', 'options'); ?>
                 </div>            

@@ -9,8 +9,6 @@ $accordion_layout = get_sub_field('accordion_layout');
 
 $accordion_container_class = 'fc-section-accordion-simple '.$accordion_layout;
 
-
-
 $accordion = $fields;
 
 ?>

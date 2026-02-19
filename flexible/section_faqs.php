@@ -6,7 +6,6 @@ if( is_array($fields) ){
     $length = count($fields);
 }
 
-
 $faq_container_class = 'fc-faq-section';
 $faq_class = '';
 $faq_item_class = 'faq_item';

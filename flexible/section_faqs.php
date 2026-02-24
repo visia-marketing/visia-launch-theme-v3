@@ -35,7 +35,7 @@ $faqs = get_sub_field('questions_and_answers');
  
   <?php if( is_array( $faqs ) ): ?>
 
-    <div class="uk-container"> 
+    <!-- <div class="uk-container">  -->
 
         <ul class="uk-accordion uk-accordion-default" uk-accordion>
 
@@ -48,7 +48,7 @@ $faqs = get_sub_field('questions_and_answers');
 
         </ul>
 
-    </div>
+    <!-- </div> -->
 
   <?php endif; ?>
 </div>

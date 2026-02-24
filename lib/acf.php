@@ -90,24 +90,30 @@ function get_flexible_content() {
       $top_padding = get_sub_field('top_padding') ?: 0;
       $bottom_padding = get_sub_field('bottom_padding') ?: 0;
       $content_spacing = get_sub_field('content_spacing') ?: 0;
-      $vertical_align = get_sub_field('vertical_align') ?: '';
       $horizontal_align = get_sub_field('horizontal_align') ?: '';
+
+      $containerWidth = get_sub_field('container_width') ?: 'uk-container-expand uk-width-1-1'; // Container width class (default, wide, full)
+
+
 
       //echo get_row_layout();
       echo '<style>
         #' . esc_html($id) . ' {
-          padding-top: ' . esc_html( ($top_padding * 1.5) ) . 'rem;
-          padding-bottom: ' . esc_html( ($bottom_padding * 1.5 ) ) . 'rem;
+          padding-top: ' . esc_html( $top_padding  ) . 'rem;
+          padding-bottom: ' . esc_html( $bottom_padding  ) . 'rem;
           position: relative;
         }
 
         #' . esc_html($id) . '.fc-section {
           display: flex;
           flex-direction: column;
-          gap: ' . esc_html( ($content_spacing * 1.5) ) . 'rem;
           align-items: center;
-          justify-content: ' . esc_html($horizontal_align) . ';
         }
+
+        #' . esc_html($id) . '.fc-section > .uk-container{
+            row-gap: ' . esc_html( ($content_spacing * 1.5) ) . 'rem;
+        }
+
 
         #' . esc_html($id) . ' > .fc-section-columns {
           min-width: calc(100% - 4rem);
@@ -148,22 +154,13 @@ function get_flexible_content() {
        * - Custom classes from ACF fields
        */
       echo '<section class="fc-section fc-section-' . esc_attr(get_row_index()) . ' fc-section-' . esc_attr($background) . ' ' . esc_attr($class) . '" id="' . esc_attr($id) . '">';
+        echo '<div class="' . esc_attr($containerWidth) . ' uk-grid uk-flex-column uk-flex-'.$horizontal_align.'">';
 
-      /**
-       * Output background image if applicable
-       * Only displays if background type is 'image' and an image is selected
-       */
-      // if ($background === 'image' && $background_image_id) {
-      //   echo wp_get_attachment_image($background_image_id, 'full', false, ['class' => 'fc-section-background-image']);
-      // }
 
-      /**
-       * Include the template part for this layout type
-       * Template should be located at: /flexible/[layout-name].php
-       */
 
-      get_template_part('flexible/'.get_row_layout());// ' . $layout);
-      
+          get_template_part('flexible/'.get_row_layout() );
+
+        echo '</div>';  
       echo '</section>';
 
     endwhile;

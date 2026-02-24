@@ -1,4 +1,5 @@
 <?php
+$card_source = get_sub_field('card_source'); // Manual or Post Type
 $cards = get_sub_field('cards');
 $display = get_sub_field('cards_display'); // Grid or Slider
 $per_row = get_sub_field('cards_per_row'); // 3, 4, 5
@@ -6,7 +7,6 @@ $per_row = get_sub_field('cards_per_row'); // 3, 4, 5
 $aos = get_sub_field('animate_in');
 $aos_duration = 0;
 $aos_step = 0;
-
 
 $rand_id = $display . '_' . wp_generate_uuid4();
 
@@ -18,7 +18,7 @@ if ($aos == 'no_animation') {
 
 }
 
-$class = ' uk-card uk-margin-bottom';
+$class = ' uk-card uk-margin-bottom ';
 
 switch ($per_row) {
     case 2:
@@ -37,59 +37,49 @@ switch ($per_row) {
 
 ?>
 
-<div class="fc-section-columns fc-section-cards" id="<?php echo $rand_id;?>">
 
-  <div class="uk-container padding-row" data-equalizer>
     <?php get_template_part('flexible/section_header'); ?>
     
 
-    <?php if($display == "carousel"): ?><div class="carousel-wrapper"  data-slides-to-show="<?php echo $per_row; ?>" data-duration="<?php echo $aos_duration; ?>" data-step="<?php echo $aos_step; ?>"><?php else: ?> <div class="grid-container uk-grid uk-grid-small uk-grid-match"> <?php endif; ?>
-        <?php $delay = 0; ?>
+    <?php if($display == "carousel"): ?>
+        <div id="<?php echo $rand_id;?>" class="fc-section-cards carousel-wrapper"  data-slides-to-show="<?php echo $per_row; ?>" data-duration="<?php echo $aos_duration; ?>" data-step="<?php echo $aos_step; ?>">
+    <?php else: ?>
+        <div id="<?php echo $rand_id;?>" class="fc-section-cards grid-container uk-grid uk-grid-small uk-grid-match">
+    <?php endif; ?>
+    <?php $delay = 0; ?>
 
         <?php foreach( $cards as $card ): ?>
 
         <?php $delay += $aos_step; ?>
         <div class="<?php echo $class; ?>" <?php if($aos != false): ?>data-aos="<?php echo $aos; ?>" data-aos-duration="<?php echo $aos_duration; ?>" data-aos-delay="<?php echo $delay; ?>"<?php endif; ?>> 
-            <div class="uk-height-1-1 uk-flex uk-flex-column" >
+            <div class="uk-height-1-1 uk-flex uk-flex-column uk-position-relative" >
 
-            <?php $image = wp_get_attachment_image($card['card_icon'], 'thumbnail', false, array( 'class' => 'uk-width-1-1')); ?>
-                    
-            <?php if( $image ): ?>
-                <div class="card-media uk-card-media-top">
-                    <?php echo $image; ?>
-                </div>
-            <?php endif; ?>
+                <?php $image = wp_get_attachment_image($card['card_icon'], 'thumbnail', false, array( 'class' => 'uk-width-1-1')); ?>
+                        
+                <?php if( $image ): ?>
+                    <div class="card-media uk-card-media-top">
+                        <?php echo $image; ?>
+                    </div>
+                <?php endif; ?>
                 
-                <div class="card-body uk-card-body uk-flex-1">
+                    <?php // if( array_key_exists( 'url', $card['card_link']) ): ?>
+                        <a href="<?php // echo $card['card_link']['url']; ?>" class="card-body uk-card-body uk-flex uk-flex-column uk-height-1-1">
+                    <?php // endif; ?>
 
-                    <h3 class="card-title uk-card-title">
-                        <a href="<?php echo $card['card_link']; ?>">
+                        <h3 class="card-title uk-card-title uk-margin-remove">
                             <?php echo $card['card_title']; ?>
-                        </a>
-                    </h3>
-                
-                    <p class="card-p">
-                        <?php echo $card['card_description']; ?>
-                    </p>
-
-                    <?php if( array_key_exists( 'card_link', $card) ): ?>
-                        <?php if( is_array( $card['card_link']) ): ?>
-                            <a href="<?php echo $card['card_link']['url']; ?>">
-                                <?php if($card['card_link']['title']): ?>
-                                    <?php echo $card['card_link']['title']; ?>
-                                <?php else: ?>
-                                    Read More
-                                <?php endif; ?>
-                            </a>
+                        </h3>
+                    
+                        <?php if( $card['card_description'] != ''): ?>
+                        <p class="card-p uk-margin-remove">
+                            <?php echo $card['card_description']; ?>
+                        </p>
                         <?php endif; ?>
-                    <?php endif; ?>
+                    
+                    <?php // if( array_key_exists( 'url', $card['card_link']) ): ?>
+                        </a>
+                    <?php // endif; ?>
 
-
-                </div>
-
-
-
-            
             </div>
         </div>
         <?php
@@ -100,11 +90,7 @@ switch ($per_row) {
 
         <?php endforeach; ?>
 
-        
-        </div>
     </div>
-
-</div>
 
 <?php if($display == "carousel"): ?>
 

@@ -169,78 +169,6 @@
             "save_options": 0
         },
         {
-            "key": "field_6998764066ad8",
-            "label": "Ornament",
-            "name": "ornament",
-            "aria-label": "",
-            "type": "select",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_673e310786cee",
-                        "operator": "!=",
-                        "value": "image"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "15",
-                "class": "",
-                "id": ""
-            },
-            "choices": [
-                "No Ornamentation",
-                "Willow Whisper",
-                "Frost Berry Branch",
-                "Spring Magnolia",
-                "Olive Sprig",
-                "Garden Laurel",
-                "Wild Aster",
-                "Field Clover"
-            ],
-            "default_value": false,
-            "return_format": "value",
-            "multiple": 0,
-            "allow_null": 0,
-            "allow_in_bindings": 0,
-            "ui": 0,
-            "ajax": 0,
-            "placeholder": "",
-            "create_options": 0,
-            "save_options": 0
-        },
-        {
-            "key": "field_6998786d6fab6",
-            "label": "Ornament Alignment",
-            "name": "ornament_alignment",
-            "aria-label": "",
-            "type": "true_false",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_6998764066ad8",
-                        "operator": "!=",
-                        "value": "0"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "15",
-                "class": "",
-                "id": ""
-            },
-            "message": "",
-            "default_value": 0,
-            "allow_in_bindings": 0,
-            "ui_on_text": "Right",
-            "ui_off_text": "Left",
-            "ui": 1
-        },
-        {
             "key": "field_69989ad11ab43",
             "label": "Spacing Options",
             "name": "",
@@ -456,5 +384,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1772473581
+    "modified": 1772474678
 }

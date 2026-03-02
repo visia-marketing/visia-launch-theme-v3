@@ -169,78 +169,6 @@
             "save_options": 0
         },
         {
-            "key": "field_6998764066ad8",
-            "label": "Ornament",
-            "name": "ornament",
-            "aria-label": "",
-            "type": "select",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_673e310786cee",
-                        "operator": "!=",
-                        "value": "image"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "15",
-                "class": "",
-                "id": ""
-            },
-            "choices": [
-                "No Ornamentation",
-                "Willow Whisper",
-                "Field Clover",
-                "Wild Aster",
-                "Garden Laurel",
-                "Olive Sprig",
-                "Spring Magnolia",
-                "Frost Berry Branch"
-            ],
-            "default_value": false,
-            "return_format": "value",
-            "multiple": 0,
-            "allow_null": 0,
-            "allow_in_bindings": 0,
-            "ui": 0,
-            "ajax": 0,
-            "placeholder": "",
-            "create_options": 0,
-            "save_options": 0
-        },
-        {
-            "key": "field_6998786d6fab6",
-            "label": "Ornament Alignment",
-            "name": "ornament_alignment",
-            "aria-label": "",
-            "type": "true_false",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_673e310786cee",
-                        "operator": "!=",
-                        "value": "image"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "15",
-                "class": "",
-                "id": ""
-            },
-            "message": "",
-            "default_value": 0,
-            "allow_in_bindings": 0,
-            "ui_on_text": "Right",
-            "ui_off_text": "Left",
-            "ui": 1
-        },
-        {
             "key": "field_69989ad11ab43",
             "label": "Spacing Options",
             "name": "",
@@ -274,13 +202,13 @@
             },
             "choices": {
                 "0": "None",
-                "3.25": "Tiny",
-                "5.5": "Small",
-                "7.75": "Medium",
-                "11": "Large",
-                "15.25": "X Large"
+                "tiny": "Tiny",
+                "small": "Small",
+                "regular": "Regular",
+                "large": "Large",
+                "xlarge": "X Large"
             },
-            "default_value": "7.75",
+            "default_value": "regular",
             "return_format": "value",
             "multiple": 0,
             "allow_null": 0,
@@ -307,13 +235,14 @@
             },
             "choices": {
                 "0": "None",
-                "3.25": "Tiny",
-                "5.5": "Small",
-                "7.75": "Medium",
-                "11": "Large",
+                "tiny": "Tiny",
+                "small": "Small",
+                "regular": "Regular",
+                "large": "Large",
+                "xlarge": "X Large",
                 "15.25": "X Large"
             },
-            "default_value": "7.75",
+            "default_value": "regular",
             "return_format": "value",
             "multiple": 0,
             "allow_null": 0,
@@ -340,13 +269,13 @@
             },
             "choices": {
                 "0": "None",
-                "2.5": "Tiny",
-                "5": "Small",
-                "7": "Medium",
-                "9.5": "Large",
-                "11.5": "X Large"
+                "tiny": "Tiny",
+                "small": "Small",
+                "regular": "Regular",
+                "large": "Large",
+                "xlarge": "X Large"
             },
-            "default_value": 0,
+            "default_value": "regular",
             "return_format": "value",
             "multiple": 0,
             "allow_null": 0,
@@ -455,5 +384,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1771941098
+    "modified": 1772474678
 }

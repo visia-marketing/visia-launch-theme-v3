@@ -6,11 +6,8 @@ if( is_array($fields) ){
 }
 
 $accordion_layout = get_sub_field('accordion_layout');
-
 $accordion_container_class = 'fc-section-accordion-simple '.$accordion_layout;
-
 $accordion = $fields;
-
 ?>
 
 <div class="fc-section-columns <?php echo $accordion_container_class;?>" id="<?php //echo $anchor;?>">
@@ -18,8 +15,7 @@ $accordion = $fields;
  
   <?php if( is_array( $accordion ) ): ?>
 
-    <div class="uk-container"> 
-
+    <!-- <div class="uk-container">  -->
         <ul class="uk-accordion uk-accordion-default" uk-accordion>
 
             <?php foreach ($accordion as $item ): ?>
@@ -30,8 +26,7 @@ $accordion = $fields;
             <?php endforeach; ?>
 
         </ul>
-
-    </div>
+    <!-- </div> -->
 
   <?php endif; ?>
 </div>

@@ -239,8 +239,7 @@
                 "small": "Small",
                 "regular": "Regular",
                 "large": "Large",
-                "xlarge": "X Large",
-                "15.25": "X Large"
+                "xlarge": "X Large"
             },
             "default_value": "regular",
             "return_format": "value",
@@ -384,5 +383,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1772474678
+    "modified": 1772476287
 }

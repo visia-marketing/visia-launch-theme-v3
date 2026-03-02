@@ -15834,7 +15834,6 @@ body#tinymce {
 }
 .fc-wrapper .fc-section,
 .fc-page-header .fc-section {
-  padding: 30px 0;
   position: relative;
   overflow: hidden;
   display: flex;
@@ -15845,22 +15844,6 @@ body#tinymce {
 .fc-page-header .fc-section > .fc-section-columns {
   min-width: calc(100% - 4rem);
   max-width: calc(100% - 4rem);
-}
-@media (min-width: 1100px) {
-  .fc-wrapper .fc-section,
-  .fc-page-header .fc-section {
-    padding: 50px 0;
-  }
-}
-.fc-wrapper .fc-section.fc-section-1,
-.fc-page-header .fc-section.fc-section-1 {
-  padding: 30px 0 30px;
-}
-@media (min-width: 1100px) {
-  .fc-wrapper .fc-section.fc-section-1,
-  .fc-page-header .fc-section.fc-section-1 {
-    padding: 70px 0 50px;
-  }
 }
 .fc-wrapper .fc-section.fc-section-image,
 .fc-page-header .fc-section.fc-section-image {

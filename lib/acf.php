@@ -94,56 +94,9 @@ function get_flexible_content() {
 
       $containerWidth = get_sub_field('container_width') ?: 'uk-container-expand uk-width-1-1'; // Container width class (default, wide, full)
 
-
-
-      //echo get_row_layout();
-      echo '<style>
-        #' . esc_html($id) . ' {
-          padding-top: ' . esc_html( $top_padding  ) . 'rem;
-          padding-bottom: ' . esc_html( $bottom_padding  ) . 'rem;
-          position: relative;
-        }
-
-        #' . esc_html($id) . '.fc-section {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-        }
-
-        #' . esc_html($id) . '.fc-section > .uk-container{
-            row-gap: ' . esc_html( ($content_spacing * 1.5) ) . 'rem;
-        }
-
-
-        #' . esc_html($id) . ' > .fc-section-columns {
-          min-width: calc(100% - 4rem);
-          max-width: calc(100% - 4rem);
-        }
-      </style>';
-
-      // add background image if set
-      echo '<style>';
-        if ($background === 'image' && $background_image_id) {
-          $background_image_url = wp_get_attachment_image_url($background_image_id, 'full');
-          echo '#' . esc_html($id) . '::before { 
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            display: block;
-            background-image: url(' . esc_url($background_image_url) . '); 
-            background-size: cover; 
-            background-position: center; 
-          }';
-        }
-      echo '</style>';
-
-
-
-
+      if ($background_image_id){
+        $background_image_url = wp_get_attachment_image_url($background_image_id, 'full');
+      }
 
       /**
        * Build section element with dynamic classes
@@ -153,9 +106,13 @@ function get_flexible_content() {
        * - fc-section-[background]: Background type class
        * - Custom classes from ACF fields
        */
-      echo '<section class="fc-section fc-section-' . esc_attr(get_row_index()) . ' fc-section-' . esc_attr($background) . ' ' . esc_attr($class) . '" id="' . esc_attr($id) . '">';
-        echo '<div class="' . esc_attr($containerWidth) . ' uk-grid uk-flex-column uk-flex-'.$horizontal_align.'">';
+      echo '<section class="fc-section fc-section-' . esc_attr(get_row_index()) . ' fc-section-' . esc_attr($background) . ' vis-rowgap-'.$content_spacing.' vis-sec-pad-top-'. $top_padding.' vis-sec-pad-bottom-'. $bottom_padding.' ' . esc_attr($class) . '" id="' . esc_attr($id) . '">';
 
+        if( $background == 'image'){
+          echo '<div class="background-image" style="background: url(' . esc_url($background_image_url) . ')"></div>';
+        }
+
+        echo '<div class="' . esc_attr($containerWidth) . ' uk-flex uk-flex-column uk-flex-'.$horizontal_align.'">';
 
 
           get_template_part('flexible/'.get_row_layout() );

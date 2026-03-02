@@ -193,12 +193,12 @@
             "choices": [
                 "No Ornamentation",
                 "Willow Whisper",
-                "Field Clover",
-                "Wild Aster",
-                "Garden Laurel",
-                "Olive Sprig",
+                "Frost Berry Branch",
                 "Spring Magnolia",
-                "Frost Berry Branch"
+                "Olive Sprig",
+                "Garden Laurel",
+                "Wild Aster",
+                "Field Clover"
             ],
             "default_value": false,
             "return_format": "value",
@@ -222,9 +222,9 @@
             "conditional_logic": [
                 [
                     {
-                        "field": "field_673e310786cee",
+                        "field": "field_6998764066ad8",
                         "operator": "!=",
-                        "value": "image"
+                        "value": "0"
                     }
                 ]
             ],
@@ -274,13 +274,13 @@
             },
             "choices": {
                 "0": "None",
-                "3.25": "Tiny",
-                "5.5": "Small",
-                "7.75": "Medium",
-                "11": "Large",
-                "15.25": "X Large"
+                "tiny": "Tiny",
+                "small": "Small",
+                "regular": "Regular",
+                "large": "Large",
+                "xlarge": "X Large"
             },
-            "default_value": "7.75",
+            "default_value": "regular",
             "return_format": "value",
             "multiple": 0,
             "allow_null": 0,
@@ -307,13 +307,14 @@
             },
             "choices": {
                 "0": "None",
-                "3.25": "Tiny",
-                "5.5": "Small",
-                "7.75": "Medium",
-                "11": "Large",
+                "tiny": "Tiny",
+                "small": "Small",
+                "regular": "Regular",
+                "large": "Large",
+                "xlarge": "X Large",
                 "15.25": "X Large"
             },
-            "default_value": "7.75",
+            "default_value": "regular",
             "return_format": "value",
             "multiple": 0,
             "allow_null": 0,
@@ -340,13 +341,13 @@
             },
             "choices": {
                 "0": "None",
-                "2.5": "Tiny",
-                "5": "Small",
-                "7": "Medium",
-                "9.5": "Large",
-                "11.5": "X Large"
+                "tiny": "Tiny",
+                "small": "Small",
+                "regular": "Regular",
+                "large": "Large",
+                "xlarge": "X Large"
             },
-            "default_value": 0,
+            "default_value": "regular",
             "return_format": "value",
             "multiple": 0,
             "allow_null": 0,
@@ -455,5 +456,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1771941098
+    "modified": 1772473581
 }

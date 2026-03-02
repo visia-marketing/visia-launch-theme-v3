@@ -43,6 +43,22 @@ $secondary: $dark-gray;
 $dark: darken($primary, 10%);
 
 
+
+// flexible row-gap
+$row-gap-tiny: 1rem;
+$row-gap-small: 2.25rem;
+$row-gap-regular: 5rem;
+$row-gap-large:  7.75rem;
+$row-gap-xlarge:  9rem;
+
+// flexible padding
+$sec-pad-tiny: 1rem;
+$sec-pad-small: 2.25rem;
+$sec-pad-regular: 5rem;
+$sec-pad-large:  7.75rem;
+$sec-pad-xlarge:  9rem;
+
+
 // Top Bar
 $top-header-background: #f3f3f3;
 $top-header-color: $black;

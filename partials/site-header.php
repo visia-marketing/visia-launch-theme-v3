@@ -1,7 +1,7 @@
 <?php if (has_nav_menu('top_navigation')) : ?>
 <div class="top-header">
 	<div class="uk-container">
-		<div class="small-12 columns">
+		<div class="uk-width-1-1">
       <div class="top-header-flex">
         <div class="top-header-search show-for-medium"><?php get_template_part('searchform'); ?></div>
         <?php

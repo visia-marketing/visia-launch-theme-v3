@@ -42,6 +42,48 @@ import '@awesome.me/kit-f71e020b2c';
       );
 
 
+      function hoverCardsInit(){
+        // get all elements with data-hover-card
+        const hoverCards = document.querySelectorAll('.cards-style--primary');
+
+        hoverCards.forEach(card => {
+          // get the height of card-p ( if it exists )
+          const cardP = card.querySelector('.hover-panel');
+          let cardPHeight = 0;
+          if (cardP) {
+            cardPHeight = cardP.offsetHeight;
+          }
+          // set p height to 0 and overflow to hidden
+          if (cardP) {
+            cardP.style.height = '0';
+            cardP.style.overflow = 'hidden';
+          }
+          // add mouseenter event to card
+          card.addEventListener('mouseenter', () => {
+            if (cardP) {
+              cardP.style.height = cardPHeight + 'px';
+            }
+          });
+          // add mouseleave event to card
+          card.addEventListener('mouseleave', () => {
+            if (cardP) {
+              cardP.style.height = '0';
+            }
+          });
+
+        });
+        
+      }
+
+      // wait until whole page is loaded
+      jQuery(document).ready(function($) {
+        setTimeout(
+          hoverCardsInit(),
+          500
+        )
+      });
+
+
 
         if (document.querySelector('.countup-animated-number')) {
           const animatedNumbers = document.querySelectorAll('.countup-animated-number .number-span');

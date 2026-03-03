@@ -78,11 +78,9 @@
             },
             "choices": {
                 "light": "White",
-                "grey": "Beige",
-                "light grid-svg": "White + Grid",
-                "grey grid-svg": "Beige + Grid",
-                "image": "Image",
-                "dark": "Dark Green"
+                "grey": "Gray",
+                "dark": "Dark",
+                "image": "Image"
             },
             "default_value": false,
             "return_format": "value",
@@ -383,5 +381,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1772565715
+    "modified": 1772566080
 }

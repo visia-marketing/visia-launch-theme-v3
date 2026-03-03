@@ -299,7 +299,7 @@
             },
             "choices": {
                 "left": "Left",
-                "center": "Center",
+                "middle": "Center",
                 "right": "Right"
             },
             "default_value": false,
@@ -332,7 +332,7 @@
                 "uk-container uk-container-large": "Regular",
                 "uk-container uk-container-xlarge": "Large"
             },
-            "default_value": false,
+            "default_value": "uk-container uk-container-large",
             "return_format": "value",
             "multiple": 0,
             "allow_null": 0,
@@ -381,5 +381,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1772566080
+    "modified": 1772566407
 }

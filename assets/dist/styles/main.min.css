@@ -12483,7 +12483,7 @@ iframe[data-uk-cover] {
   border-bottom-color: rgba(255, 255, 255, 0.2);
 }
 .uk-light .uk-text-lead, .uk-section-primary:not(.uk-preserve-color) .uk-text-lead, .uk-section-secondary:not(.uk-preserve-color) .uk-text-lead, .uk-tile-primary:not(.uk-preserve-color) .uk-text-lead, .uk-tile-secondary:not(.uk-preserve-color) .uk-text-lead, .uk-card-primary.uk-card-body .uk-text-lead, .uk-card-primary > :not([class*=uk-card-media]) .uk-text-lead, .uk-card-secondary.uk-card-body .uk-text-lead, .uk-card-secondary > :not([class*=uk-card-media]) .uk-text-lead, .uk-overlay-primary .uk-text-lead, .uk-offcanvas-bar .uk-text-lead {
-  color: rgba(255, 255, 255, 0.7);
+  color: #fff;
 }
 .uk-light .uk-text-meta, .uk-section-primary:not(.uk-preserve-color) .uk-text-meta, .uk-section-secondary:not(.uk-preserve-color) .uk-text-meta, .uk-tile-primary:not(.uk-preserve-color) .uk-text-meta, .uk-tile-secondary:not(.uk-preserve-color) .uk-text-meta, .uk-card-primary.uk-card-body .uk-text-meta, .uk-card-primary > :not([class*=uk-card-media]) .uk-text-meta, .uk-card-secondary.uk-card-body .uk-text-meta, .uk-card-secondary > :not([class*=uk-card-media]) .uk-text-meta, .uk-overlay-primary .uk-text-meta, .uk-offcanvas-bar .uk-text-meta {
   color: rgba(255, 255, 255, 0.5);
@@ -12683,14 +12683,14 @@ iframe[data-uk-cover] {
 
 /* Slider */
 .slick-loading .slick-list {
-  background: #fff url(../../../assets/dist/styles/images/ajax-loader.gif) center center no-repeat;
+  background: #fff url(/wp-content/themes/visia-launch-theme-uikit/assets/dist/styles/images/ajax-loader.gif) center center no-repeat;
 }
 
 /* Icons */
 @font-face {
   font-family: "slick";
-  src: url(../../../webfonts/slick.eot);
-  src: url(../../../webfonts/slick.eot?#iefix) format("embedded-opentype"), url(../../../webfonts/slick.woff) format("woff"), url(../../../webfonts/slick.ttf) format("truetype"), url(../../../assets/dist/styles/images/slick.svg#slick) format("svg");
+  src: url(/wp-content/themes/visia-launch-theme-uikit/webfonts/slick.eot);
+  src: url(/wp-content/themes/visia-launch-theme-uikit/webfonts/slick.eot?#iefix) format("embedded-opentype"), url(/wp-content/themes/visia-launch-theme-uikit/webfonts/slick.woff) format("woff"), url(/wp-content/themes/visia-launch-theme-uikit/webfonts/slick.ttf) format("truetype"), url(/wp-content/themes/visia-launch-theme-uikit/assets/dist/styles/images/slick.svg#slick) format("svg");
   font-weight: normal;
   font-style: normal;
 }

@@ -13,7 +13,8 @@ module.exports = {
     devtool: 'source-map',
     output: {
         filename: 'assets/dist/scripts/[name].min.js',
-        path: path.resolve(__dirname)
+        path: path.resolve(__dirname),
+        publicPath: '/wp-content/themes/visia-launch-theme-uikit/'
     },
     externals: {
         jquery: 'jQuery'  // ✅ Tell webpack jQuery is external

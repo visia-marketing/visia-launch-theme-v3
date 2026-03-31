@@ -24,7 +24,6 @@
     "webpackbar": "^7.0.0"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^6.7.2",
     "aos": "^2.3.4",
     "bourbon": "^4.2.7",
     "countup.js": "^2.9.0",

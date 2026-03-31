@@ -243,6 +243,7 @@ function assets() {
   wp_enqueue_style('sage/css', Assets\asset_path('/dist/styles/main.min.css'), false, null); // Compiled theme styles
   wp_enqueue_style('font-awesome-cdn', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css', false, null); // Font Awesome icons
   wp_enqueue_style('default-css', get_stylesheet_uri() , false, null); // WordPress default stylesheet (style.css)
+  wp_enqueue_style('accent-color', get_template_directory_uri() . '/accent-color.css', false, null); // Dynamic accent color CSS
 
 
 

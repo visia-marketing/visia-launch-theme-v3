@@ -80,90 +80,38 @@ function get_flexible_content() {
       /**
        * Get layout type and field values for current row
        */
-      $id = get_sub_field('id') ?: 'fc-section-' . get_row_index(); // Custom ID or auto-generated fallback
-      $class = get_sub_field('class') ?: '';                        // Optional custom CSS classes
-      $border = get_sub_field('border') ?: '';                      // Border style classes   
-      $background = get_sub_field('background') ?: '';              // Background type (color/image/etc)
-      $background_image_id = get_sub_field('background_image');     // Background image attachment ID
-      
+      $id = get_sub_field('id') ?: 'fc-section-' . get_row_index();
+      $class = get_sub_field('class') ?: '';
+      $background = get_sub_field('background') ?: '';
+      $background_image_id = get_sub_field('background_image');
       
       $top_padding = get_sub_field('top_padding') ?: 0;
       $bottom_padding = get_sub_field('bottom_padding') ?: 0;
       $content_spacing = get_sub_field('content_spacing') ?: 0;
-      $vertical_align = get_sub_field('vertical_align') ?: '';
       $horizontal_align = get_sub_field('horizontal_align') ?: '';
 
-      //echo get_row_layout();
-      echo '<style>
-        #' . esc_html($id) . ' {
-          padding-top: ' . esc_html( ($top_padding * 1.5) ) . 'rem;
-          padding-bottom: ' . esc_html( ($bottom_padding * 1.5 ) ) . 'rem;
-          position: relative;
-        }
+      $containerWidth = get_sub_field('container_width') ?: 'uk-container-expand uk-width-1-1';
 
-        #' . esc_html($id) . '.fc-section {
-          display: flex;
-          flex-direction: column;
-          gap: ' . esc_html( ($content_spacing * 1.5) ) . 'rem;
-          align-items: center;
-          justify-content: ' . esc_html($horizontal_align) . ';
-        }
+      if ($background_image_id){
+        $background_image_url = wp_get_attachment_image_url($background_image_id, 'full');
+      }
 
-        #' . esc_html($id) . ' > .fc-section-columns {
-          min-width: calc(100% - 4rem);
-          max-width: calc(100% - 4rem);
-        }
-      </style>';
-
-      // add background image if set
-      echo '<style>';
-        if ($background === 'image' && $background_image_id) {
-          $background_image_url = wp_get_attachment_image_url($background_image_id, 'full');
-          echo '#' . esc_html($id) . '::before { 
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            display: block;
-            background-image: url(' . esc_url($background_image_url) . '); 
-            background-size: cover; 
-            background-position: center; 
-          }';
-        }
-      echo '</style>';
-
-
-
-
-
-      /**
-       * Build section element with dynamic classes
-       * Classes include:
-       * - fc-section: Base class for all sections
-       * - fc-section-[index]: Numbered class for nth-child targeting
-       * - fc-section-[background]: Background type class
-       * - Custom classes from ACF fields
-       */
-      echo '<section class="fc-section fc-section-' . esc_attr(get_row_index()) . ' fc-section-' . esc_attr($background) . ' ' . esc_attr($class) . '" id="' . esc_attr($id) . '">';
-
-      /**
-       * Output background image if applicable
-       * Only displays if background type is 'image' and an image is selected
-       */
-      // if ($background === 'image' && $background_image_id) {
-      //   echo wp_get_attachment_image($background_image_id, 'full', false, ['class' => 'fc-section-background-image']);
-      // }
-
-      /**
-       * Include the template part for this layout type
-       * Template should be located at: /flexible/[layout-name].php
-       */
-
-      get_template_part('flexible/'.get_row_layout());// ' . $layout);
+      $padding_top_rem = $top_padding * 1.5;
+      $padding_bottom_rem = $bottom_padding * 1.5;
+      $gap_rem = $content_spacing * 1.5;
       
+      $inline_style = "padding-top: {$padding_top_rem}rem; padding-bottom: {$padding_bottom_rem}rem; --fc-gap: {$gap_rem}rem;";
+      if ($background === 'image' && $background_image_id) {
+        $inline_style .= " background-image: url(" . esc_url($background_image_url) . "); background-size: cover; background-position: center;";
+      }
+
+      echo '<section class="fc-section fc-section-' . esc_attr(get_row_index()) . ' fc-section-' . esc_attr($background) . ' ' . esc_attr($class) . '" id="' . esc_attr($id) . '" style="' . esc_attr($inline_style) . '">';
+
+        echo '<div class="' . esc_attr($containerWidth) . ' uk-flex uk-flex-column uk-flex-' . esc_attr($horizontal_align) . '">';
+
+          get_template_part('flexible/'.get_row_layout() );
+
+        echo '</div>';  
       echo '</section>';
 
     endwhile;
@@ -172,6 +120,51 @@ function get_flexible_content() {
   }
 }
 
+
+
+/**
+ * Dynamic Accent Color Management
+ * 
+ * Generates CSS file with accent color CSS variable from ACF options page.
+ * This allows theme-wide color customization without hardcoding values.
+ */
+add_action('acf/save_post', function ($post_id) {
+    if ($post_id !== 'options') {
+        return;
+    }
+
+    $accent_color = get_field('accent_color', 'option');
+
+    if (!$accent_color) {
+        return;
+    }
+
+    $css = ":root {\n    --accent-color: {$accent_color};\n}\n";
+
+    file_put_contents(
+        get_stylesheet_directory() . '/accent-color.css',
+        $css
+    );
+}, 20);
+
+/**
+ * Dynamically populate the "Select Global Callout" dropdown
+ * from the global_featured_callouts repeater on the options page.
+ */
+add_filter('acf/load_field/key=field_69fc_global_callout_select', function( $field ) {
+    $field['choices'] = [];
+
+    $callouts = get_field('global_featured_callouts', 'options');
+
+    if ( $callouts ) {
+        foreach ( $callouts as $i => $callout ) {
+            $label = ! empty( $callout['callout_label'] ) ? $callout['callout_label'] : 'Callout ' . ( $i + 1 );
+            $field['choices'][ $i ] = $label;
+        }
+    }
+
+    return $field;
+});
 
 
 /**

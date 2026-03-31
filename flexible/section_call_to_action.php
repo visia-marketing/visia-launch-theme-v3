@@ -45,7 +45,7 @@ if ( $source === 'default' ){
 
     <div class="call-to-action--inner uk-container">
 
-        <div class="column small-12 large-10 large-offset-1">
+        <div class="uk-width-1-1 uk-width-4-5 uk-margin-auto-left uk-margin-auto-right">
             <?php echo $content; ?>
 
 

@@ -6,7 +6,6 @@ if( is_array($fields) ){
     $length = count($fields);
 }
 
-
 $faq_container_class = 'fc-faq-section';
 $faq_class = '';
 $faq_item_class = 'faq_item';
@@ -36,7 +35,7 @@ $faqs = get_sub_field('questions_and_answers');
  
   <?php if( is_array( $faqs ) ): ?>
 
-    <div class="uk-container"> 
+    <!-- <div class="uk-container">  -->
 
         <ul class="uk-accordion uk-accordion-default" uk-accordion>
 
@@ -49,7 +48,7 @@ $faqs = get_sub_field('questions_and_answers');
 
         </ul>
 
-    </div>
+    <!-- </div> -->
 
   <?php endif; ?>
 </div>

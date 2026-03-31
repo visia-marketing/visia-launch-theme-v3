@@ -2,7 +2,7 @@
 
   <div class="post-header">
     <div class="uk-container">
-      <div class="small-12 columns">
+      <div class="uk-width-1-1">
         <strong>Post Header -> Should be H1</strong>
       </div>
     </div>
@@ -19,7 +19,7 @@
       <?php endif; ?>
 
       <?php while (have_posts()) : the_post(); ?>
-        <div class="small-12 medium-4 columns">
+        <div class="uk-width-1-1 uk-width-1-3@m">
           <?php get_template_part('templates/content', get_post_type() != 'post' ? get_post_type() : get_post_format()); ?>
         </div>
       <?php endwhile; ?>

@@ -2,7 +2,7 @@
 
   <section class="page-content">
     <div class="uk-container">
-      <div class="small-12 columns">
+      <div class="uk-width-1-1">
         
         <br>
         <p><br><?php _e( 'Search Results Found For', 'locale' ); ?>: "<?php the_search_query(); ?>" </p>
@@ -60,7 +60,7 @@
           <div class="search-results-wrapper">
             <div class="search-results-none">
               <div class="uk-container">
-                <div class="small-12 columns">
+                <div class="uk-width-1-1">
                   <?php the_field('no_results_message', 'options'); ?>
                 </div>            
               </div>

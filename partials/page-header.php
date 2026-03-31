@@ -57,7 +57,7 @@
     ?>
     <div class="page-header-content-wrapper fc-section fc-section-<?php echo $page_heading_background;?> page-header-<?php echo $page_heading_size; ?>">
       <div class="uk-container">
-        <div class="small-12 large-8 large-offset-2 uk-text-center columns">
+        <div class="uk-width-1-1 uk-width-2-3@l uk-text-center">
           <div class="page-header-content">
             <?php 
             $header_content = get_field('page_header_content');

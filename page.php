@@ -8,7 +8,7 @@
 		
     <section class="page-content-wrapper">
       <div class="uk-container">
-        <div class="small-12 columns">
+        <div class="uk-width-1-1">
 					
           <div class="page-content">
             <?php the_content(); ?>

@@ -77,9 +77,9 @@
                 "id": ""
             },
             "choices": {
-                "light": "Light",
+                "light": "White",
+                "grey": "Gray",
                 "dark": "Dark",
-                "grey": "Grey",
                 "image": "Image"
             },
             "default_value": false,
@@ -135,7 +135,15 @@
             "type": "select",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_673e310786cee",
+                        "operator": "!=",
+                        "value": "image"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "15",
                 "class": "",
@@ -159,29 +167,11 @@
             "save_options": 0
         },
         {
-            "key": "field_673e30df86cec",
-            "label": "Section Options End",
-            "name": "",
-            "aria-label": "",
-            "type": "accordion",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "open": 0,
-            "multi_expand": 0,
-            "endpoint": 1
-        },
-        {
-            "key": "field_68f241690f0df",
+            "key": "field_69989ad11ab43",
             "label": "Spacing Options",
             "name": "",
             "aria-label": "",
-            "type": "accordion",
+            "type": "message",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -190,9 +180,9 @@
                 "class": "",
                 "id": ""
             },
-            "open": 0,
-            "multi_expand": 0,
-            "endpoint": 0
+            "message": "",
+            "new_lines": "wpautop",
+            "esc_html": 0
         },
         {
             "key": "field_68f23e6e22f36",
@@ -208,15 +198,15 @@
                 "class": "",
                 "id": ""
             },
-            "choices": [
-                "None",
-                "Tiny",
-                "Small",
-                "Medium",
-                "Large",
-                "X Large"
-            ],
-            "default_value": 2,
+            "choices": {
+                "0": "None",
+                "tiny": "Tiny",
+                "small": "Small",
+                "regular": "Regular",
+                "large": "Large",
+                "xlarge": "X Large"
+            },
+            "default_value": "regular",
             "return_format": "value",
             "multiple": 0,
             "allow_null": 0,
@@ -241,15 +231,15 @@
                 "class": "",
                 "id": ""
             },
-            "choices": [
-                "None",
-                "Tiny",
-                "Small",
-                "Medium",
-                "Large",
-                "X Large"
-            ],
-            "default_value": 2,
+            "choices": {
+                "0": "None",
+                "tiny": "Tiny",
+                "small": "Small",
+                "regular": "Regular",
+                "large": "Large",
+                "xlarge": "X Large"
+            },
+            "default_value": "regular",
             "return_format": "value",
             "multiple": 0,
             "allow_null": 0,
@@ -262,7 +252,7 @@
         },
         {
             "key": "field_68f23f994ea4d",
-            "label": "Content Spacing",
+            "label": "Row Gap",
             "name": "content_spacing",
             "aria-label": "",
             "type": "select",
@@ -274,45 +264,15 @@
                 "class": "",
                 "id": ""
             },
-            "choices": [
-                "None",
-                "Tiny",
-                "Small",
-                "Medium",
-                "Large",
-                "X Large"
-            ],
-            "default_value": 0,
-            "return_format": "value",
-            "multiple": 0,
-            "allow_null": 0,
-            "allow_in_bindings": 0,
-            "ui": 0,
-            "ajax": 0,
-            "placeholder": "",
-            "create_options": 0,
-            "save_options": 0
-        },
-        {
-            "key": "field_68f243e74b309",
-            "label": "Vertical Align",
-            "name": "vertical_align",
-            "aria-label": "",
-            "type": "select",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "15",
-                "class": "",
-                "id": ""
-            },
             "choices": {
-                "flex-start": "Top",
-                "center": "Center",
-                "flex-end": "Bottom"
+                "0": "None",
+                "tiny": "Tiny",
+                "small": "Small",
+                "regular": "Regular",
+                "large": "Large",
+                "xlarge": "X Large"
             },
-            "default_value": false,
+            "default_value": "regular",
             "return_format": "value",
             "multiple": 0,
             "allow_null": 0,
@@ -338,9 +298,9 @@
                 "id": ""
             },
             "choices": {
-                "flex-start": "Left",
-                "center": "Center",
-                "flex-end": "Right"
+                "left": "Left",
+                "middle": "Center",
+                "right": "Right"
             },
             "default_value": false,
             "return_format": "value",
@@ -354,8 +314,38 @@
             "save_options": 0
         },
         {
+            "key": "field_69988be8be093",
+            "label": "Container Width",
+            "name": "container_width",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "15",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "uk-container": "Small",
+                "uk-container uk-container-large": "Regular",
+                "uk-container uk-container-xlarge": "Large"
+            },
+            "default_value": "uk-container uk-container-large",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
+        },
+        {
             "key": "field_68f243c2fbb40",
-            "label": "Spacing Options (copy)",
+            "label": "Section Options",
             "name": "",
             "aria-label": "",
             "type": "accordion",
@@ -387,9 +377,9 @@
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
-    "active": true,
+    "active": false,
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1761242586
+    "modified": 1772566407
 }

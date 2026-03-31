@@ -90,12 +90,17 @@ function get_flexible_content() {
       $content_spacing = get_sub_field('content_spacing') ?: 0;
       $horizontal_align = get_sub_field('horizontal_align') ?: '';
 
+<<<<<<< HEAD
       $containerWidth = get_sub_field('container_width') ?: 'uk-container-expand uk-width-1-1';
+=======
+      $containerWidth = get_sub_field('container_width') ?: 'uk-container-expand uk-width-1-1'; // Container width class (default, wide, full)
+>>>>>>> 063d94f5ea73ded886b6831e639b5f716d70ac3e
 
       if ($background_image_id){
         $background_image_url = wp_get_attachment_image_url($background_image_id, 'full');
       }
 
+<<<<<<< HEAD
       $padding_top_rem = $top_padding * 1.5;
       $padding_bottom_rem = $bottom_padding * 1.5;
       $gap_rem = $content_spacing * 1.5;
@@ -108,6 +113,24 @@ function get_flexible_content() {
       echo '<section class="fc-section fc-section-' . esc_attr(get_row_index()) . ' fc-section-' . esc_attr($background) . ' ' . esc_attr($class) . '" id="' . esc_attr($id) . '" style="' . esc_attr($inline_style) . '">';
 
         echo '<div class="' . esc_attr($containerWidth) . ' uk-flex uk-flex-column uk-flex-' . esc_attr($horizontal_align) . '">';
+=======
+      /**
+       * Build section element with dynamic classes
+       * Classes include:
+       * - fc-section: Base class for all sections
+       * - fc-section-[index]: Numbered class for nth-child targeting
+       * - fc-section-[background]: Background type class
+       * - Custom classes from ACF fields
+       */
+      echo '<section class="fc-section fc-section-' . esc_attr(get_row_index()) . ' fc-section-' . esc_attr($background) . ' vis-rowgap-'.$content_spacing.' vis-sec-pad-top-'. $top_padding.' vis-sec-pad-bottom-'. $bottom_padding.' ' . esc_attr($class) . '" id="' . esc_attr($id) . '">';
+
+        if( $background == 'image'){
+          echo '<div class="background-image" style="background: url(' . esc_url($background_image_url) . ')"></div>';
+        }
+
+        echo '<div class="' . esc_attr($containerWidth) . ' uk-flex uk-flex-column uk-flex-'.$horizontal_align.'">';
+
+>>>>>>> 063d94f5ea73ded886b6831e639b5f716d70ac3e
 
           get_template_part('flexible/'.get_row_layout() );
 

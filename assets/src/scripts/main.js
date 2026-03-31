@@ -20,6 +20,7 @@ import 'slick-carousel';
 import 'simple-lightbox';
 import AOS from 'aos';
 import { CountUp } from 'countup.js';
+import '@awesome.me/kit-f71e020b2c';
 
 // If you only need specific modules:
 // import { Foundation, Accordion, Tabs } from 'foundation-sites';
@@ -38,8 +39,49 @@ import { CountUp } from 'countup.js';
           duration: 1000,
           once: true,
         },
-          console.log('AOS loaded')
-        );
+      );
+
+
+      function hoverCardsInit(){
+        // get all elements with data-hover-card
+        const hoverCards = document.querySelectorAll('.cards-style--primary');
+
+        hoverCards.forEach(card => {
+          // get the height of card-p ( if it exists )
+          const cardP = card.querySelector('.hover-panel');
+          let cardPHeight = 0;
+          if (cardP) {
+            cardPHeight = cardP.offsetHeight;
+          }
+          // set p height to 0 and overflow to hidden
+          if (cardP) {
+            cardP.style.height = '0';
+            cardP.style.overflow = 'hidden';
+          }
+          // add mouseenter event to card
+          card.addEventListener('mouseenter', () => {
+            if (cardP) {
+              cardP.style.height = cardPHeight + 'px';
+            }
+          });
+          // add mouseleave event to card
+          card.addEventListener('mouseleave', () => {
+            if (cardP) {
+              cardP.style.height = '0';
+            }
+          });
+
+        });
+        
+      }
+
+      // wait until whole page is loaded
+      jQuery(document).ready(function($) {
+        setTimeout(
+          hoverCardsInit(),
+          500
+        )
+      });
 
 
 
@@ -63,7 +105,6 @@ import { CountUp } from 'countup.js';
             if (countUp.error) {
               console.error(countUp.error);
             }
-            console.log('CountUpJS loaded')
           });
         }
 
@@ -73,9 +114,7 @@ import { CountUp } from 'countup.js';
             var $this = $(this);
             var $slidesToShow = $this.data('slides-to-show');
             var $duration = $this.data('duration');
-        
-            console.log('Slides to show: ' + $slidesToShow);
-            console.log('Duration: ' + $duration);
+      
         
             $this.slick({
               infinite: true,
@@ -84,8 +123,8 @@ import { CountUp } from 'countup.js';
               slidesToScroll: 1,
               arrows: true,
               dots: false,
-              prevArrow: '<button type="button" class="slick-prev cards-next"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="41" viewBox="0 0 23 41" fill="none"> <path d="M21.123 1.5L2.12129 20.5018L21.123 39.5035" stroke="#062F6E" stroke-width="3" stroke-linecap="round"/></svg></button>',
-              nextArrow: '<button type="button" class="slick-next cards-prev"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="41" viewBox="0 0 23 41" fill="none"><path d="M1.5 39.5034L20.5018 20.5017L1.5 1.4999" stroke="#062F6E" stroke-width="3" stroke-linecap="round"/></svg></button>',
+              prevArrow: '<button type="button" class="slick-prev cards-prev"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="41" viewBox="0 0 23 41" fill="none"> <path d="M21.123 1.5L2.12129 20.5018L21.123 39.5035" stroke="#062F6E" stroke-width="3" stroke-linecap="round"/></svg></button>',
+              nextArrow: '<button type="button" class="slick-next cards-next"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="41" viewBox="0 0 23 41" fill="none"><path d="M1.5 39.5034L20.5018 20.5017L1.5 1.4999" stroke="#062F6E" stroke-width="3" stroke-linecap="round"/></svg></button>',
               responsive: [
                 {
                   breakpoint: 1024,

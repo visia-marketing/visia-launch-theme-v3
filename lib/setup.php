@@ -80,17 +80,21 @@ function setup() {
   //set_post_thumbnail_size( 300, 190, true ); // Set featured image size (width, height, crop)
 
 
-  update_option( 'thumbnail_size_w', 300 ); // Set your desired width
-	update_option( 'thumbnail_size_h', 190 );  // Set your desired height
-	update_option( 'thumbnail_size_crop', 1 ); // 0 for soft crop (resize), 1 for hard crop (crop to exact dimensions)
+  if ( ! get_option( 'visia_image_sizes_set' ) ) {
+		update_option( 'thumbnail_size_w', 300 );
+		update_option( 'thumbnail_size_h', 190 );
+		update_option( 'thumbnail_size_crop', 1 );
 
-	update_option( 'large_size_w', 1440 ); // Set your desired width
-	update_option( 'large_size_h', 1100 );  // Set your desired height
-	update_option( 'large_size_crop', 0 ); // 0 for soft crop (resize), 1 for hard crop (crop to exact dimensions)
-  
-	update_option( 'medium_size_w', 768 ); // Set your desired width
-	update_option( 'medium_size_h', 768 );  // Set your desired height
-	update_option( 'medium_size_crop', 0 ); // 0 for soft crop (resize), 1 for hard crop (crop to exact dimensions)
+		update_option( 'large_size_w', 1440 );
+		update_option( 'large_size_h', 1100 );
+		update_option( 'large_size_crop', 0 );
+
+		update_option( 'medium_size_w', 768 );
+		update_option( 'medium_size_h', 768 );
+		update_option( 'medium_size_crop', 0 );
+
+		update_option( 'visia_image_sizes_set', true );
+	}
 
 
   /**
@@ -241,7 +245,7 @@ function assets() {
   wp_enqueue_script( 'jquery' );
   wp_enqueue_style('theme-fonts', $fonts , false, null);          // Google/Typekit fonts
   wp_enqueue_style('sage/css', Assets\asset_path('/dist/styles/main.min.css'), false, null); // Compiled theme styles
-  wp_enqueue_style('font-awesome-cdn', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css', false, null); // Font Awesome icons
+  wp_enqueue_script('font-awesome-kit', 'https://kit.fontawesome.com/f71e020b2c.js', [], null, true); // Font Awesome 7 Kit
   wp_enqueue_style('default-css', get_stylesheet_uri() , false, null); // WordPress default stylesheet (style.css)
   wp_enqueue_style('accent-color', get_template_directory_uri() . '/accent-color.css', false, null); // Dynamic accent color CSS
 

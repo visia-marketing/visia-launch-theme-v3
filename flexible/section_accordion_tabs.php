@@ -20,8 +20,8 @@
 
 
 
-    <div class="uk-container columns "> 
-    <div class="uk-container columns">
+    <div class="uk-container "> 
+    <div class="uk-container">
       <ul class="tabs  <?php echo $tab_count > 4 ? 'stretch-tabs' : ''; ?>" data-tabs id="<?php echo $tabs_id;?>">
         <?php while( have_rows('tabs') ): the_row(); ?>
        

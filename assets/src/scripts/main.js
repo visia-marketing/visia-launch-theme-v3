@@ -20,7 +20,6 @@ import 'slick-carousel';
 import 'simple-lightbox';
 import AOS from 'aos';
 import { CountUp } from 'countup.js';
-import '@awesome.me/kit-f71e020b2c';
 
 // If you only need specific modules:
 // import { Foundation, Accordion, Tabs } from 'foundation-sites';

@@ -1,0 +1,9 @@
+/* 
+ * Auto-generated accent color stylesheet
+ * This file is created dynamically from the ACF options page accent_color field.
+ * Do not edit manually - changes will be overwritten when the option is saved.
+ */
+
+:root {
+    --accent-color: #000000;
+}

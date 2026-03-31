@@ -24,7 +24,10 @@
     "webpackbar": "^7.0.0"
   },
   "dependencies": {
+<<<<<<< HEAD
+=======
     "@awesome.me/kit-f71e020b2c": "^1.0.2",
+>>>>>>> 063d94f5ea73ded886b6831e639b5f716d70ac3e
     "aos": "^2.3.4",
     "bourbon": "^4.2.7",
     "countup.js": "^2.9.0",

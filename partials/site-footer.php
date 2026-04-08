@@ -11,7 +11,7 @@ if ( $footer_form && (!empty($footer_form['heading']) || !empty($footer_form['ti
 <?php endif; */ ?>
 
 <footer class="main-footer">
-  <div class="uk-container uk-flex">   
+  <div class="uk-container uk-flex uk-flex-column uk-flex-row@m">   
     <div class="uk-width-1-1@xs uk-width-1-5@m">
       <div class="footer-logo uk-margin-medium-right">
         <a href="<?= esc_url(home_url('/')); ?>"><img src="<?php the_field('footer_logo', 'option');?>" alt="<?php bloginfo('name'); ?>"></a>

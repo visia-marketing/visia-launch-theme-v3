@@ -22,15 +22,44 @@ use Roots\Sage\Wrapper;
 
     <!-- This is the off-canvas -->
     <div id="uk-off-canvas" uk-offcanvas="mode: push">
-        <div class="uk-offcanvas-bar">
+        <div class="uk-offcanvas-bar uk-flex uk-flex-column">
 
             <button class="uk-offcanvas-close" type="button" uk-close></button>
 
             <?php
             if (has_nav_menu('mobile_navigation')) :
-              wp_nav_menu(['theme_location' => 'mobile_navigation', 'depth' => 3, 'menu_class' => 'vertical menu accordion-menu mobile-navigation', 'items_wrap' => '<ul class="%2$s" id="mobile-navigation" data-accordion-menu data-submenu-toggle="true">%3$s</ul>' ]); 
+              wp_nav_menu(['theme_location' => 'mobile_navigation', 'depth' => 3, 'menu_class' => 'mobile-navigation', 'items_wrap' => '<ul class="%2$s" id="mobile-navigation">%3$s</ul>' ]);
               endif;
             ?>
+
+            <script>
+            document.addEventListener('DOMContentLoaded', function() {
+              document.querySelectorAll('#mobile-navigation > li').forEach(function(li) {
+                var submenu = li.querySelector('ul.submenu');
+                if (!submenu) return;
+
+                var link = li.querySelector('a');
+                var row = document.createElement('div');
+                row.className = 'mobile-nav-row';
+
+                var toggle = document.createElement('button');
+                toggle.className = 'mobile-submenu-toggle';
+                toggle.innerHTML = '<div class="icon-container"><span uk-icon="icon: plus;"></span> <span uk-icon="icon: minus;"></span></div>';
+                toggle.setAttribute('aria-expanded', 'false');
+
+                li.insertBefore(row, link);
+                row.appendChild(link);
+                row.appendChild(toggle);
+
+                toggle.addEventListener('click', function() {
+                  var isOpen = submenu.style.display === 'block';
+                  submenu.style.display = isOpen ? 'none' : 'block';
+                  toggle.classList.toggle('is-open', !isOpen);
+                  toggle.setAttribute('aria-expanded', !isOpen);
+                });
+              });
+            });
+            </script>
 
             <div class="off-canvas-search">
               <form role="search" method="get" class="search-form" action="<?= site_url(); ?>">
@@ -38,7 +67,7 @@ use Roots\Sage\Wrapper;
                   <span class="screen-reader-text">Search</span>
                   <input type="search" class="search-field" id="search-field" placeholder="Search…" value="" name="s">
                 </label>
-                <button class="button"> <i class="fa-solid fa-magnifying-glass"></i></button>
+                <button class="uk-button"> <i class="fa-solid fa-magnifying-glass"></i></button>
               </form>
             </div>
 

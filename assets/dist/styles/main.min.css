@@ -14077,7 +14077,7 @@ a, button, .button, [type=submit] {
 .uk-offcanvas-bar {
   background-color: #000000 !important;
   color: #fff;
-  padding: 32px 20px;
+  padding: 64px 20px 32px 20px;
 }
 .uk-offcanvas-bar .offcanvas-logo {
   display: block;

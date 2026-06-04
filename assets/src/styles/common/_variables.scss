@@ -10,6 +10,7 @@ $fontawesome: 'Font Awesome 7 Free', 'Font Awesome 7 Pro', 'Font Awesome 7 Brand
 
 $sans:      $avenirNext;
 $serif:     $sans;
+$condensed: $sans;
 
 ///////////////////////////////////////////////
 
@@ -41,6 +42,20 @@ $darkGrade: linear-gradient(270deg, rgba(0, 43, 73, 0.70) -5%, rgba(0, 34, 57, 0
 $primary: $yellow;
 $secondary: $dark-gray;
 $dark: darken($primary, 10%);
+
+
+// WooCommerce Notification Colors
+$wc-success-bg:     $light-gray;
+$wc-success-border: $secondary;
+$wc-success-text:   $black;
+
+$wc-error-bg:       $light-gray;
+$wc-error-border:   $primary;
+$wc-error-text:     $primary;
+
+$wc-info-bg:        $light-gray;
+$wc-info-border:    $secondary;
+$wc-info-text:      $black;
 
 
 
@@ -129,9 +144,17 @@ $breakpoints: (
 
   .show-for-#{$name} {
     display: none !important;
-    
+
     @include breakpoint($name) {
       display: block !important;
+    }
+  }
+
+  .show-for-#{$name}-flex{
+    display: none !important;
+
+    @include breakpoint($name) {
+      display: flex !important;
     }
   }
 }

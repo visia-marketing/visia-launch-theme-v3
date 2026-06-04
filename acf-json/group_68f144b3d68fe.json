@@ -294,6 +294,102 @@
                     ],
                     "min": "",
                     "max": ""
+                },
+                "layout_691f88df2536e": {
+                    "key": "layout_691f88df2536e",
+                    "name": "section_download_grid",
+                    "label": "Download Grid",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_691f88df_clone",
+                            "label": "Download Grid",
+                            "name": "download_grid",
+                            "aria-label": "",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "clone": [
+                                "group_691f88df2536e"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_6a2094adee1fc": {
+                    "key": "layout_6a2094adee1fc",
+                    "name": "section_video_gallery",
+                    "label": "Video Gallery",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_6a2094b6ee1ff",
+                            "label": "Video Gallery",
+                            "name": "video_gallery",
+                            "aria-label": "",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "clone": [
+                                "group_6a2093b82759f"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_69fae6f8c984c": {
+                    "key": "layout_69fae6f8c984c",
+                    "name": "section_lightbox_gallery",
+                    "label": "Lightbox Gallery",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_69fae702c984f",
+                            "label": "Lightbox Gallery",
+                            "name": "lightbox_gallery",
+                            "aria-label": "",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "clone": [
+                                "group_6912628b50967"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
                 }
             },
             "min": "",
@@ -320,5 +416,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1771347210
+    "modified": 1780584371
 }

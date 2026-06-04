@@ -124,8 +124,8 @@ function roots_nav_menu_css_class($classes, $item) {
   // Replace various WordPress "current" classes with a single "active" class
   $classes = preg_replace('/(current(-menu-|[-_]page[-_])(item|parent|ancestor))/', 'active', $classes);
   
-  // Remove WordPress default menu classes (menu-item-ID, page-item-ID, etc.)
-  $classes = preg_replace('/^((menu|page)[-_\w+]+)+/', '', $classes);
+  // Remove WordPress auto-generated menu classes but keep user-defined custom classes
+  $classes = preg_replace('/^(menu-item(-\d+|-type-\w+|-object-\w+|-has-children)?|page[-_]item[-_]\d+|page_item)$/', '', $classes);
 
   // Add semantic class based on menu item title
   $classes[] = 'menu-' . $slug;
@@ -185,3 +185,15 @@ function roots_nav_menu_args($args = '') {
   return array_merge($args, $roots_nav_menu_args);
 }
 add_filter('wp_nav_menu_args', 'roots_nav_menu_args');
+
+/**
+ * Add UIkit button classes to top navigation menu links
+ */
+function visia_top_nav_link_classes($atts, $item, $args) {
+  if (isset($args->theme_location) && $args->theme_location === 'top_navigation') {
+    $existing = isset($atts['class']) ? $atts['class'] . ' ' : '';
+    $atts['class'] = $existing . 'uk-button uk-button-text';
+  }
+  return $atts;
+}
+add_filter('nav_menu_link_attributes', 'visia_top_nav_link_classes', 10, 3);

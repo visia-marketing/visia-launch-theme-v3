@@ -1,0 +1,36 @@
+<?php
+if( array_key_exists( 'prod_id', $args ) ){
+    $id = $args['prod_id'];
+}
+?>
+
+<div class="uk-card cards-style--product">
+
+    <div class="card-body">
+        <h3 class="card-title"><a href="<?php echo esc_url(get_the_permalink($id)); ?>"><?php echo esc_html(get_the_title($id)); ?></a></h3>
+        <p class="uk-margin-xsmall-bottom"><?php
+            $excerpt = get_post_field('post_excerpt', $id);
+            if ( ! $excerpt ) {
+                $excerpt = wp_trim_words(get_post_field('post_content', $id), 35);
+            }
+            echo wp_kses_post($excerpt);
+        ?></p>
+
+            <div class="uk-card-media uk-margin-auto-top">
+                <a href="<?php echo esc_url(get_the_permalink($id)); ?>" class="uk-flex uk-width-1-1">
+                    <?php echo get_the_post_thumbnail($id, 'woocommerce_thumbnail', array('class' => 'uk-width-1-1')) ?: '<div class="placeholder"></div>'; ?>
+                </a>
+            </div>
+
+        <div class="uk-flex uk-width-1-1 uk-flex-between uk-flex-middle uk-margin-top">
+            <?php
+            $price = get_post_meta($id, '_price', true);
+            if ( $price ) {
+                echo '<p class="price">' . wc_price($price) . '</p>';
+            }
+            ?>
+            <a class="uk-button uk-button-outline uk-margin-remove-top uk-margin-remove-right" href="<?php echo esc_url(get_the_permalink($id)); ?>">View Product</a>
+        </div>
+    </div>
+
+</div>

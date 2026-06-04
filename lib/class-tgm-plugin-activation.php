@@ -15,8 +15,7 @@
  * @license   GPL-2.0+
  */
 
- error_log('class-tgm-plugin-activation.php');
-
+ 
 /*
 	Copyright 2011 Thomas Griffin (thomasgriffinmedia.com)
 

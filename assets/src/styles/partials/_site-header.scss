@@ -307,47 +307,245 @@ $top-header-link-color: $top-header-link-color;
   background-color: $top-header-background;
   color: $top-header-color;
 
+  & .uk-card{
+    background-color: $white;
+    border-radius: 5px;
+    transition: box-shadow 6s ease-out;
+
+      &.uk-card-body{
+        padding: 1rem;
+      }
+
+      &.uk-open{
+        box-shadow:
+          -6rem 4rem 24rem 0rem rgb(0, 0, 0, 0.5),
+          0 0 1rem 4px rgba(9, 9, 9, 0.10);
+      }
+
+  }
+
+  .uk-card.uk-card-body.user-account-dropdown{
+
+    padding: 1rem 0;
+
+    & p{
+      padding: 0 1rem;
+      font-weight: 700;
+      font-family: $condensed;
+    }
+
+    & .woocommerce-MyAccount-navigation{
+
+      float: unset;
+      width: 100%;
+
+      & ul{
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+
+        & li{
+          display: flex;
+
+
+          & a{
+            color: $black;
+            padding: 0.5rem 1rem;
+            border-bottom: 1px solid rgba( $black, 0.1 );
+            width: 100%;
+
+            &:hover{
+              text-decoration: none;
+              color: $primary;
+              background: $light-gray;
+            }
+          }
+        }
+      }
+    }
+  }
+
+
+
+  // ── Mini Cart Dropdown ────────────────────────────────────────────
+  .mini-cart-dropdown {
+    background-color: $white;
+    border-radius: 8px;
+    border: 1px solid darken($light-gray, 8%);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    padding: 1.25rem;
+
+    .woocommerce-mini-cart {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      max-height: 260px;
+      overflow-y: auto;
+
+      .mini_cart_item {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.5rem 0.75rem;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid $light-gray;
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        // Row 1: product link (image + title) spans full width
+        > a:not(.remove) {
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+          color: $black;
+          font-size: 0.875rem;
+          font-weight: 600;
+          text-decoration: none;
+          flex: 1 1 100%;
+          min-width: 0;
+          order: 1;
+
+          &:hover {
+            color: $primary;
+          }
+        }
+
+        img {
+          width: 50px;
+          height: 50px;
+          object-fit: contain;
+          border-radius: 4px;
+          flex-shrink: 0;
+        }
+
+        // Row 2: qty/price on the left, remove button on the right
+        .quantity {
+          font-size: 0.8rem;
+          color: $dark-gray;
+          white-space: nowrap;
+          order: 2;
+          flex: 1;
+        }
+
+        .remove_from_cart_button {
+          color: $gray;
+          font-size: 1.25rem;
+          text-decoration: none;
+          line-height: 1;
+          flex-shrink: 0;
+          order: 3;
+
+          &:hover {
+            color: $primary;
+          }
+        }
+      }
+    }
+
+    .woocommerce-mini-cart__total {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 0;
+      margin: 0;
+      border-top: 1px solid darken($light-gray, 8%);
+      font-size: 0.9rem;
+
+      strong {
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        letter-spacing: 0.5px;
+      }
+
+      .woocommerce-Price-amount {
+        font-weight: 700;
+        color: $black;
+      }
+    }
+
+    .woocommerce-mini-cart__buttons {
+      display: flex;
+      gap: 0.5rem;
+      padding-top: 0.5rem;
+      margin: 0;
+
+      .button {
+        flex: 1;
+        text-align: center;
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        text-decoration: none;
+        border-radius: 4px;
+        line-height: 1.5;
+        transition: background-color 0.2s, color 0.2s;
+
+        // "View cart" — uk-button-secondary style
+        &.wc-forward:not(.checkout) {
+          background-color: transparent;
+          color: $secondary;
+          border: 1.5px solid $secondary;
+
+          &:hover {
+            color: $primary;
+            border-color: $primary;
+          }
+        }
+
+        // "Checkout" — uk-button style
+        &.checkout {
+          background-color: transparent;
+          color: $primary;
+          border: 1.5px solid $primary;
+
+          &:hover {
+            color: $secondary;
+            border-color: $secondary;
+          }
+        }
+      }
+    }
+
+    .woocommerce-mini-cart__empty-message {
+      text-align: center;
+      padding: 1.5rem 0;
+      color: $dark-gray;
+      font-size: 0.875rem;
+    }
+
+    .uk-drop-close {
+      color: $dark-gray;
+
+      &:hover {
+        color: $black;
+      }
+    }
+  }
+
   .top-header-flex {
     display: flex;
     justify-content: flex-end;
     gap: 30px;
   }
 
-  .top-header-search {
-    background-color: #f4f4f4;
-    display: flex;
-    margin: 6px 0;
-    padding: 0 5px;
-  
+  .top-header-text {
+    color: #fff;
+    font-family: $sans;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1.65px;
+    text-transform: uppercase;
+    line-height: 1;
+    display: none;
+
     @include breakpoint(medium) {
-      //float: right;
+      display: block;
     }
-  
-    form, label {
-      display: flex;
-      align-items: center;
-      
-
-      i {
-        color: #fff;
-        margin: 0;
-      }
-
-    }
-  
-    input {
-      border: none;
-      margin-bottom: 0;
-      max-height: 2rem;
-    }
-
-    button {
-      height: 100%;
-      margin: 0;
-    }
-  
   }
-  
 
   .top-header-navigation {
     list-style: none;
@@ -365,16 +563,17 @@ $top-header-link-color: $top-header-link-color;
       a {
         color: $top-header-link-color;
         display: inline-block;
-        font-size: 13px;
+        font-size: 0.875rem;
         font-weight: 400;
-        line-height: 40px;
+        line-height: 1.75;
+        margin: 0.75rem 0 !important;
       }
 
       &.top-menu-fa-email,
-      &.top-menu-fa-phone {
+      &.top-menu-fa-phone,
+      &.icon-tele {
         position: relative;
-        padding-left: 16px;
-        
+        padding-left: 20px;
 
         &:before {
           font-family: $fontawesome;
@@ -395,8 +594,48 @@ $top-header-link-color: $top-header-link-color;
         content: "\f095";
       }
 
+      &.icon-tele::before {
+        content: "\e11b";
+        font-size: 14px;
+        margin-top: -9px;
+      }
+
     }
-    
+
+  }
+
+  .uk-button:not(input){
+    color: #fff;
+    display: inline-block;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.75;
+    margin: 0.75rem 0 0.75rem 20px !important;
+    text-transform: none;
+
+    &:hover{
+      color: $white !important;
+    }
+
+
+        & > .cart-count-badge{
+          background-color: $white;
+          color: $primary;
+          font-size: 13px;
+          font-weight: 700;
+          width: 15px;
+          height: 15px;
+          border-radius: 50%;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+
+        &:hover{
+          color: $secondary;
+        }
+
   }
 
 }

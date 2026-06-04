@@ -17,7 +17,7 @@ import $ from 'jquery';
 import UIkit from 'uikit';
 import Icons from 'uikit/dist/js/uikit-icons';
 import 'slick-carousel';
-import 'simple-lightbox';
+import SimpleLightbox from 'simple-lightbox';
 import AOS from 'aos';
 import { CountUp } from 'countup.js';
 
@@ -39,6 +39,17 @@ import { CountUp } from 'countup.js';
           once: true,
         },
       );
+
+        document.querySelectorAll('.lightbox-gallery').forEach(function(gallery) {
+            var anchors = gallery.querySelectorAll('a.lightbox-anchor');
+            if (anchors.length) {
+                new SimpleLightbox({
+                    elements: anchors,
+                    showCaptions: true,
+                    captionAttribute: 'data-caption',
+                });
+            }
+        });
 
 
       function hoverCardsInit(){

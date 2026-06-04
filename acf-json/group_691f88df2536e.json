@@ -1,0 +1,126 @@
+{
+    "key": "group_691f88df2536e",
+    "title": "COMPONENT: Download Grid",
+    "fields": [
+        {
+            "key": "field_6a218c7b7e272",
+            "label": "Source",
+            "name": "source",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "20",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "choose": "Choose Downloads",
+                "category": "By Category"
+            },
+            "default_value": false,
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
+        },
+        {
+            "key": "field_691f88df05ace",
+            "label": "Select Downloads",
+            "name": "download_ids",
+            "aria-label": "",
+            "type": "post_object",
+            "instructions": "Select one or more downloads to display in the grid.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_6a218c7b7e272",
+                        "operator": "==",
+                        "value": "choose"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "dlm_download"
+            ],
+            "post_status": "",
+            "taxonomy": "",
+            "return_format": "object",
+            "multiple": 1,
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "bidirectional": 0,
+            "ui": 1,
+            "bidirectional_target": []
+        },
+        {
+            "key": "field_6a218cb07e273",
+            "label": "Select Category",
+            "name": "dlm_download_catgory",
+            "aria-label": "",
+            "type": "taxonomy",
+            "instructions": "Select one or more downloads to display in the grid.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_6a218c7b7e272",
+                        "operator": "==",
+                        "value": "category"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "taxonomy": "dlm_download_category",
+            "add_term": 0,
+            "save_terms": 0,
+            "load_terms": 0,
+            "return_format": "object",
+            "field_type": "select",
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "bidirectional": 0,
+            "multiple": 0,
+            "bidirectional_target": []
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": false,
+    "description": "",
+    "show_in_rest": 0,
+    "display_title": "",
+    "allow_ai_access": false,
+    "ai_description": "",
+    "modified": 1780583877
+}

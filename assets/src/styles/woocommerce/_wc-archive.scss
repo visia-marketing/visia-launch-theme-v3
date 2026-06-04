@@ -1,102 +1,161 @@
-.wc-card {
-  background-color: #fff;
-  border: 1px solid #f2f2f2;
-  border-radius: 10px;
-  box-shadow: 0 5px 10px rgba(0,0,0,.1);
-  flex: 0 0 calc(50% - 16px);
-  //min-height: 340px;
-  overflow: hidden;
+// ── Archive layout ────────────────────────────────────────────────────────────
 
-  @include breakpoint(medium) {
-    flex: 0 0 calc(25% - 16px);
+
+
+
+.wc-archive-layout {
+  padding: 40px 0 80px;
+  align-items: flex-start;
+
+  .wc-archive-sidebar {
+    .widget {
+      margin-bottom: 30px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+// ── Product grid (WooCommerce loop ul.products) ───────────────────────────────
+
+.wc-archive-content ul.products {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  &:before,
+  &:after{
+    display: none;
   }
 
+  @include breakpoint(medium) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+// ── Product card ──────────────────────────────────────────────────────────────
+
+.wc-card {
+  background: #fff;
+  border: 0.5px solid $gray;
+  border-radius: 7px;
+  box-shadow: 0px 3px 6.3px -3px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  transition: border-color 0.15s;
 
   &:hover {
-    border: 1px solid $primary;
+    border-color: $primary;
+  }
+
+  // Full-card link wrapper
+  .wc-card-inner {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
   }
 
   .wc-card-image {
-    background-color: #fff;
-    height: 200px;
-    padding: 20px; 
-    text-align: center;
+    height: 148px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
 
     img {
-      height: 100%;
-      margin: 0 auto;
-      object-fit: cover;
-      width:auto;
+      max-height: 100%;
+      width: auto;
+      max-width: 100%;
+      object-fit: contain;
     }
-
   }
 
   .wc-card-content {
-    padding: 20px 16px 50px;
-    text-align: left;
-    position: relative;
-    height: 190px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 0 10px 12px;
+    gap: 4px;
 
-    .wc-card-sku {
-      color: $primary;
-      font-weight: 400;
-      font-size: 15px;
-    }
-
-    .wc-card-title, .woocommerce-loop-category__title, .woocommerce-loop-product__title {
+    .wc-card-title,
+    .woocommerce-loop-product__title,
+    .woocommerce-loop-category__title {
       color: $black !important;
-      font-size: 16px;
+      font-size: 20px;
+      font-weight: 500;
       line-height: 1.3;
-      //height: 42px;
-      padding-right: 20px;
+      margin: 0;
+
 
       a {
         color: $black !important;
       }
     }
 
-    .woocommerce-loop-product__title {
-      padding-right: 25px;
+    .wc-card-sku {
+      color: $dark-gray;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      margin: 0;
     }
 
     .wc-card-description {
-      color: $black !important;
-      font-size: 14.5px;
-      line-height: 1.4;
+      color: $black;
+      font-size: 15px;
+      line-height: 1.35;
+      flex: 1;
+      margin: 0;
     }
 
-    .wc-card-button {
-      position: absolute;
-      bottom: 15px;
-      left: 5%;
-      width: 90%;
+    .wc-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 6px;
+      gap: 8px;
     }
 
-    ul {
-      list-style: none;
-      margin: 0 0 20px;
-      padding: 0;
+    .wc-card-price {
+      font-weight: 700;
+      font-size: 15px;
       color: $black;
 
-      li {
-        line-height: 1.5;
-        font-size: 14px;
+      .woocommerce-Price-amount {
+        font-weight: 700;
       }
+    }
 
+    .wc-card-view {
+      color: $secondary;
+      font-size: 14px;
+      white-space: nowrap;
+
+      i {
+        margin-left: 4px;
+        font-size: 13px;
+      }
     }
 
   }
 
 }
 
+// ── Flexible-section card grid (non-archive) ──────────────────────────────────
+
 .wc-slider {
 
-  /* the slides */
   .slick-slide {
     margin: 10px;
   }
 
-  /* the parent */
   .slick-list {
     margin: -10px;
   }
@@ -125,26 +184,11 @@
       grid-template-columns: repeat(4, 1fr);
     }
 
-    .wc-card.wc-card-categories, .wc-card-category {
+    .wc-card.wc-card-categories,
+    .wc-card-category {
 
       .wc-card-image {
         background-color: #fff;
-      }
-
-      .wc-card-content {
-        height: 120px;
-      }
-  
-    }
-
-    .wc-card-product {
-
-      .wc-card-image {
-        background-color: #fff;
-      }
-
-      .wc-card-content {
-        height: 260px;
       }
 
     }
@@ -154,120 +198,92 @@
 }
 
 
+// ── Archive breadcrumbs (below header) ───────────────────────────────────────
+
+.woocommerce-breadcrumb {
+  padding: 12px 0;
+  font-size: 13px;
+  color: $dark-gray;
+
+  a {
+    color: $dark-gray;
+    &:hover { color: $primary; }
+  }
+}
+
+// ── Archive page header (category banner) ─────────────────────────────────────
+
 .woocommerce-products-header {
-  background: $primary;
-  //margin-bottom: 70px;
-  min-height: 100px;
-  position: relative;
   width: 100%;
+  border-top: 1px solid $gray;
+  background: $light-gray;
 
-  @include breakpoint(medium) {
-    
-    &.woocommerce-products-header-image {
-      height: 350px;
-      padding: 0;
-  
-      .taxonomy-content {
-        height: 350px;
-      }
-  
-    }
-
+  .uk-container {
+    height: 100%;
   }
 
-  
+  .taxonomy-header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+  }
 
   .taxonomy-content {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    height: 100%;
-    padding: 30px 0;
+    gap: 10px;
+    padding: 40px 0;
+    max-width: 42.825rem;
+
 
     .taxonomy-title {
-      color: #fff;
-      font-size: 24px;
-      font-weight: 800;
+      color: $secondary;
+      font-size: 3rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 0;
+      padding: 0 4.5rem;
 
       @include breakpoint(medium) {
-        font-size: 36px;
+        font-size: 50px;
+        line-height: 60px;
       }
-
     }
-  
+
     .taxonomy-description {
-      color: #fff;
+      color: $black;
       font-size: 16px;
-      font-weight: 400;
+      line-height: 24px;
+      margin: 0;
     }
+  }
 
-    .download-links {
-      margin-top: 20px;
-      padding: 30px 60px 0 0;
-      position: relative;
+  .taxonomy-image-wrap {
+    display: none;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: flex-end;
 
-      &:before {
-        border-top: 1px solid rgba(#fff,.5);
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 1px;
-        width: 40px;
-      }
-
-
-      ul {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-
-        li {
-          
-          a {
-            color: #fff;
-            font-weight: 700;
-
-            i {
-              margin-right: 10px;
-            }
-
-            &:hover {
-              text-decoration: underline;
-            }
-          }
-          
-        }
-
-      }
-
+    @include breakpoint(medium) {
+      display: flex;
     }
-
   }
 
   .taxonomy-image {
-    background-color: #fff;
-    display: none;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    height: 100%;
-    object-fit: cover;
-    width: 600px;
-
-    @include breakpoint(medium) {
-      display: block;
-    }
-
+    width: 401px;
+    height: auto;
+    max-height: 293px;
+    object-fit: contain;
   }
-
 }
 
 
+// ── Pagination ────────────────────────────────────────────────────────────────
+
 .woocommerce-pagination {
-	border: none;
+  border: none;
   margin-top: 2rem;
   margin-bottom: 2rem;
   font-size: 12px;
@@ -282,84 +298,78 @@
     list-style: none;
 
     li {
-    	border-right: none;
+      border-right: none;
     }
 
     .page-numbers {
-	    text-align: center;
-	    margin: 0 0.25em;
-	    border-bottom: 2px solid transparent;
-	    border-right: none;
-	    display: block;
-	    color: $primary;
-	    padding: 0 0.5rem;
+      text-align: center;
+      margin: 0 0.25em;
+      border-bottom: 2px solid transparent;
+      border-right: none;
+      display: block;
+      color: $primary;
+      padding: 0 0.5rem;
+      list-style: none;
 
-	    list-style: none;
+      &:hover {
+        color: #202020;
+      }
 
-	    &:hover {
-	      color: #202020;
-	    }
+      &.current {
+        background: transparent;
+        color: #202020;
+        font-weight: bold;
+      }
 
-	    &.current {
-	    	background: transparent;
-	      //border-color: $blue;
-	      color: #202020;
-	      font-weight: bold;
-	    }
+      &.next,
+      &.prev {
+        color: $primary;
+      }
 
-	    &.next,
-	    &.prev {
-	      color: $primary;
-	    }
-
-	  }
+    }
 
   }
 
 }
 
 
+// ── Filter sidebar widgets ────────────────────────────────────────────────────
 
+.wc-archive-sidebar {
 
-
-
-
-
-/*
- *
- * FILTERS
- *
- */
-
-.wc-archive-filters {
-  border: 1px solid #f1f1f1;
-  box-shadow: 0 5px 10px rgba(0,0,0,.1);
-  border-radius: 10px;
-  height: auto;
-  width: 100%;
-  margin-bottom: 40px;
-  padding: 0 12px 30px;
-
-  @include breakpoint(medium) {
-    float: left;
-    width: 18%;
-    margin-right: 2%;
-    margin-bottom: 70px;
+  .widget {
+    position: relative;
+    z-index: 9;
   }
 
+  // Filter group title (generic widget title)
+  .widgettitle,
+  h3.widget-title {
+    font-size: 1rem;
+    font-weight: 500;
+    color: $black;
+    margin-bottom: 0;
+    margin-top: 0.5rem;
+  }
+
+  // WPC Woo Filters
   .WpfWoofiltersWidget {
 
     .wpfFilterWrapper {
+      margin-bottom: 20px;
 
       .wpfFilterTitle {
         border-bottom: 1px solid $primary;
-        margin-bottom: 5px;
+        margin-bottom: 8px;
         padding-bottom: 5px;
-  
+
         .wfpTitle {
           height: auto;
-          font-size: 15px;
-          font-weight: 800;
+          font-size: 13px;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.06em;
+          color: $dark-gray;
           margin-bottom: 0;
         }
 
@@ -367,54 +377,59 @@
           content: "\f068";
           font-size: 13px;
         }
-  
+
       }
-  
+
       .wpfFilterContent {
-        margin: 20px 0 10px;
+        border-left: 1px solid $gray;
+        padding-left: 12px;
+        margin-top: 8px;
 
         .irs-bar {
           background-color: #aeaeae !important;
           border-color: #878787 !important;
           background: linear-gradient(to bottom, #aeaeae 0%, #3f3f3f 100%) !important;
         }
-  
+
         .wpfCheckboxHier {
-  
+
           .wpfLiLabel {
             font-size: 14px;
-  
+            color: $dark-gray;
+
             .wpfCheckbox label {
-              width: 14px !important;
-              height: 14px !important;
+              width: 10px !important;
+              height: 10px !important;
               line-height: 1.5 !important;
-              border: .5px solid #f1f1f1;
+              border: 0.5px solid $gray;
+              border-radius: 2px;
             }
 
             .wpfCheckbox input[type="checkbox"]:checked + label::before {
-              background: #d51f2a !important;
+              background: $primary !important;
               content: "\f00c" !important;
-              font-family: Font Awesome\ 7 Free;
+              font-family: 'Font Awesome 7 Free';
               color: #fff !important;
               font-weight: 700 !important;
-              font-size: 9px !important;
+              font-size: 8px !important;
               line-height: 1.2;
             }
-  
+
           }
-  
+
         }
-  
+
       }
-  
+
     }
 
-    .wpfFilterButton.wpfButton, .wpfClearButton.wpfButton {
+    .wpfFilterButton.wpfButton,
+    .wpfClearButton.wpfButton {
       padding: 5px;
       align-items: center;
       min-height: 36px;
       border-radius: 4px;
-      font-size: 17px;
+      font-size: 14px;
       text-decoration: none !important;
       text-align: center;
       text-transform: uppercase;
@@ -424,56 +439,66 @@
       border: none;
       font-weight: bold;
       outline: none;
-      margin: 1rem 0 0;
+      margin: 0.75rem 0 0;
+    }
+
+  }
+
+  // Product Filters Pro
+  .prdctfltr_wc_widget.prdctfltr_wc {
+
+    .prdctfltr_filter {
+      border-left: 1px solid $gray;
+      padding-left: 12px;
+      margin-bottom: 20px;
+      background: transparent;
+      box-shadow: none;
+      border-radius: 0;
+
+      & h3{
+        margin: 0;
+      }
+    }
+
+    .prdctfltr_filter .prdctfltr_widget_title {
+      display: block;
+      margin-bottom: 6px;
+      padding-bottom: 3px;
+      font-size: 1rem;
+      font-weight: 500;
+      color: $black;
+      padding-bottom:0.5rem;
+      padding-top: 0.5rem;
+    }
+
+    &.prdctfltr_checkbox .prdctfltr_filter label > span:before {
+      margin-right: 7px !important;
+    }
+
+    .prdctfltr_filter label {
+      display: block;
+      font-size: 14px;
+      line-height: 20px;
+      color: $dark-gray;
     }
 
   }
 
 }
 
-
-
-
-
-.widget{ 
-	position: relative;
+.widget {
+  position: relative;
   z-index: 9;
 }
 
- .prdctfltr_wc .prdctfltr_woocommerce_ordering {
+.prdctfltr_wc .prdctfltr_woocommerce_ordering {
   position: relative;
   margin-left: 0 !important;
   margin-right: 0 !important;
 }
 
-.prdctfltr_wc_widget.prdctfltr_wc .prdctfltr_filter {
-  margin-bottom: 20px;
-  background: #fff;
-  padding: 14px;
-  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 7px;
-}
-
-.prdctfltr_wc_widget.prdctfltr_wc .prdctfltr_filter .prdctfltr_widget_title {
-	//border-bottom: 1px solid $primary;
-	display: block;
-	margin-bottom: 5px;
-	padding-bottom: 3px;
-	text-transform: uppercase;
-	font-size: 15px;
-}
-
-.prdctfltr_wc.prdctfltr_checkbox .prdctfltr_filter label>span:before {
-  margin-right: 7px !important;
-}
-
-.prdctfltr_filter label {
-  display: block;
-  font-size: 13px;
-  line-height: 20px;
-}
-
-.prdctfltr_count, .prdctfltr_customize_count {
+.prdctfltr_count,
+.prdctfltr_customize_count {
   display: inline-block;
   vertical-align: middle;
   margin-left: 3px !important;
@@ -487,20 +512,19 @@
   border-radius: 2px;
   min-width: 0;
   text-align: center;
-  overflow: visible!important;
-
+  overflow: visible !important;
   position: relative;
 
   &:before {
-  	content: "(";
-  	position: absolute;
-  	left: -2px;
+    content: "(";
+    position: absolute;
+    left: -2px;
   }
 
   &:after {
-  	content: ")";
-  	position: absolute;
-  	right: -2px;
+    content: ")";
+    position: absolute;
+    right: -2px;
   }
 
 }

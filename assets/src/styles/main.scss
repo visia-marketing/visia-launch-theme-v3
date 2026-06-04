@@ -24,6 +24,7 @@
 
 // Simplelightbox
 @import "../../../node_modules/simplelightbox/";
+@import "../../../node_modules/simple-lightbox/dist/simpleLightbox.css";
 
 // import AOS
 @import "../../../node_modules/aos/dist/aos.css";
@@ -51,5 +52,7 @@
 @import "partials/tinymce";
 @import "woocommerce/wc-archive";
 @import "woocommerce/wc-single";
+@import "woocommerce/wc-account";
+@import "woocommerce/wc-notices";
 @import "flexible/flexible";
 @import "pages/home";

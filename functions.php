@@ -29,7 +29,8 @@ $sage_includes = [
   'lib/titles.php',    // Dynamic page title generation and management
   'lib/wrapper.php',   // Theme wrapper class for template hierarchy manipulation
   'lib/customizer.php', // WordPress Customizer API settings and controls
-  'lib/misc.php'       // Miscellaneous utility functions and features,
+  'lib/misc.php',       // Miscellaneous utility functions and features
+  'lib/woocommerce.php', // WooCommerce customisations and hook adjustments
 ];
 
 /**

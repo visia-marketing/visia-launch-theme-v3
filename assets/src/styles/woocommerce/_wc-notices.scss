@@ -1,0 +1,74 @@
+// ── WooCommerce Notices ──────────────────────────────────────────────────────
+.woocommerce-notices-wrapper{
+  background-color: $white;
+  padding: 0 0 0 0;
+}
+
+
+.woocommerce-message,
+.woocommerce-error,
+.woocommerce-info {
+
+  max-width: $container-max-width;
+  padding: 1rem 1.5rem 1rem 3.5rem;
+  border-left: 4px solid;
+  border-radius: 4px;
+  border-top: 0px solid transparent;
+  font-family: $sans;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  list-style: none;
+  margin-bottom: 0;
+  margin: 2rem auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.10);
+
+  & a.uk-button {
+    margin-left: auto !important;
+    margin-right: 0 !important;
+    margin-top: 0;
+  }
+}
+
+.woocommerce-message {
+  background: $wc-success-bg;
+  border-color: $wc-success-border;
+  color: $wc-success-text;
+
+  &:before{
+    color: $wc-success-border;
+    top: unset;
+  }
+}
+
+.woocommerce-error {
+  background: $wc-error-bg;
+  border-color: $wc-error-border;
+  color: $wc-error-text;
+
+  li {
+    padding: 0.25rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+    &:before{
+      color: $wc-error-border;
+      top: unset;
+  }
+}
+
+.woocommerce-info {
+  background: $wc-info-bg;
+  border-color: $wc-info-border;
+  color: $wc-info-text;
+
+    &:before{
+    color: $wc-info-border;
+    top: unset;
+  }
+}

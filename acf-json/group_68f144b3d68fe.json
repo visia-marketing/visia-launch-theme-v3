@@ -199,38 +199,6 @@
                     "min": "",
                     "max": ""
                 },
-                "layout_68f91244ca6ad": {
-                    "key": "layout_68f91244ca6ad",
-                    "name": "section_accordion_tabs",
-                    "label": "Tabbed Accordion",
-                    "display": "block",
-                    "sub_fields": [
-                        {
-                            "key": "field_68f91260ca6b0",
-                            "label": "accordion_tabs",
-                            "name": "tabs",
-                            "aria-label": "",
-                            "type": "clone",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "clone": [
-                                "group_67478f4bacf07"
-                            ],
-                            "display": "seamless",
-                            "layout": "block",
-                            "prefix_label": 0,
-                            "prefix_name": 0
-                        }
-                    ],
-                    "min": "",
-                    "max": ""
-                },
                 "layout_68f91711b3050": {
                     "key": "layout_68f91711b3050",
                     "name": "section_faqs",
@@ -390,70 +358,6 @@
                     ],
                     "min": "",
                     "max": ""
-                },
-                "layout_6722779604col": {
-                    "key": "layout_6722779604col",
-                    "name": "section_four_column",
-                    "label": "Four Column",
-                    "display": "block",
-                    "sub_fields": [
-                        {
-                            "key": "field_6722779604c10",
-                            "label": "Four Column",
-                            "name": "four_column",
-                            "aria-label": "",
-                            "type": "clone",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "clone": [
-                                "group_6722779604col"
-                            ],
-                            "display": "seamless",
-                            "layout": "block",
-                            "prefix_label": 0,
-                            "prefix_name": 0
-                        }
-                    ],
-                    "min": "",
-                    "max": ""
-                },
-                "layout_6a0f4e68ca112": {
-                    "key": "layout_6a0f4e68ca112",
-                    "name": "button_with_popup",
-                    "label": "Lightbox Popup",
-                    "display": "block",
-                    "sub_fields": [
-                        {
-                            "key": "field_6a0f4e78ca115",
-                            "label": "Button with Popup",
-                            "name": "button_with_popup",
-                            "aria-label": "",
-                            "type": "clone",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "clone": [
-                                "group_button_with_popup"
-                            ],
-                            "display": "seamless",
-                            "layout": "block",
-                            "prefix_label": 0,
-                            "prefix_name": 0
-                        }
-                    ],
-                    "min": "",
-                    "max": ""
                 }
             },
             "min": "",
@@ -480,5 +384,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1782135255
+    "modified": 1782141896
 }

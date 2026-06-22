@@ -52,6 +52,63 @@ import { CountUp } from 'countup.js';
         });
 
 
+        // ── Modal Links ────────────────────────────────────────────────────────
+        // Lets ANY button or link open a UIkit modal by pointing at the modal's
+        // #id — e.g. <a href="#contact-popup">. Also opens a modal automatically
+        // when the page is loaded with a matching URL hash. Pairs with the
+        // "Lightbox Popup" flexible layout (flexible/button_with_popup.php).
+        function initModalLinks() {
+          function openModal(hash) {
+            if (!hash || hash.charAt(0) !== '#' || hash.length < 2) return false;
+            var id = hash.slice(1);
+            var modal = null;
+
+            // 1. A popup section whose editor-set anchor matches.
+            try {
+              modal = document.querySelector('[uk-modal][data-modal-anchor="' + id + '"]');
+            } catch (e) {
+              modal = null;
+            }
+
+            // 2. Fall back to an element with that id — either a modal itself
+            //    or a wrapper (e.g. a section) that contains one.
+            if (!modal) {
+              var target = document.getElementById(id);
+              if (target) {
+                modal = target.hasAttribute('uk-modal')
+                  ? target
+                  : target.querySelector('[uk-modal]');
+              }
+            }
+
+            if (!modal) return false;
+            UIkit.modal(modal).show();
+            return true;
+          }
+
+          // Delegate clicks so links/buttons added anywhere on the page work,
+          // including content rendered after load. We match every <a> and read
+          // its .hash property, which returns the "#..." fragment even when the
+          // editor saved an absolute URL (e.g. https://site.com/page/#popup).
+          document.addEventListener('click', function(e) {
+            var trigger = e.target.closest('a[href], [data-modal-target]');
+            if (!trigger) return;
+            var hash = trigger.getAttribute('data-modal-target') || trigger.hash || '';
+            if (openModal(hash)) {
+              e.preventDefault();
+            }
+          });
+
+          // Open on arrival if the URL hash targets a modal.
+          if (window.location.hash) {
+            openModal(window.location.hash);
+          }
+        }
+
+        initModalLinks();
+        // ── End Modal Links ────────────────────────────────────────────────────
+
+
       function hoverCardsInit(){
         // get all elements with data-hover-card
         const hoverCards = document.querySelectorAll('.cards-style--primary');

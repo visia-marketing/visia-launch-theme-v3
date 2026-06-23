@@ -96,24 +96,82 @@
     }
 
 
-    & .slick-arrow{
-        height: 100% !important;
-        width: 3rem;
-        z-index: 99;
+    // ── Carousel (Slick) ───────────────────────────────────────────────
+    &.carousel-wrapper{
+        position: relative;
+        width: 100%;
+        // Slick's track is a non-wrapping row whose intrinsic width is the sum
+        // of all slides; `min-width: 0` lets this flex child shrink so the
+        // .slick-list can clip it instead of blowing past the viewport.
+        // `max-width: 100%` hard-caps the wrapper to its container so a bad
+        // Slick width measurement at init can never paint past the container.
+        min-width: 0;
+        max-width: 100%;
 
-        &.slick-prev{
-            background: linear-gradient(90deg, rgba( $gray-bg, 1) 25%, rgba( $gray-bg, 0) 100%);
+        .cards-slick{
+            // The Slick root must also stay capped to the container; Slick writes
+            // px widths onto .slick-track/.slick-list, and the track is clipped by
+            // .slick-list's overflow:hidden — but only if this root can't grow.
+            min-width: 0;
+            max-width: 100%;
 
-            @media screen and (min-width: 1400px){
-                left: -3rem !important;
+            // Equal-height slides: flex the track so every slide stretches to
+            // the tallest, and let each card fill its slide.
+            .slick-track{
+                display: flex;
+            }
+
+            // .card-slide is the direct child Slick turns into a .slick-slide.
+            // The horizontal padding is the inter-card gutter (matches the grid's
+            // uk-grid-medium 30px); the negative margin on .slick-list pulls the
+            // outer cards back flush with the .uk-container edges.
+            .card-slide{
+                display: flex;
+                height: auto;
+                
+
+                & > .uk-card{
+                    width: 100%;
+                }
+            }
+
+            .slick-slide{
+                padding: 0 15px;
+            }
+
+            .slick-list{
+                margin: 0 -15px;
             }
         }
 
-        &.slick-next{
-            background: linear-gradient(270deg, rgba( $gray-bg, 1) 25%, rgba( $gray-bg, 0) 100%);
+        // Custom SVG arrows (injected by Slick via prevArrow/nextArrow).
+        .cards-arrow{
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 99;
+            background: none;
+            border: none;
+            padding: 0;
+            width: 3rem;
+            cursor: pointer;
 
+            svg *{
+                stroke: #062F6E;
+            }
+        }
+
+        .cards-prev{
+            left: 0;
             @media screen and (min-width: 1400px){
-                right: -3rem !important;
+                left: -3rem;
+            }
+        }
+
+        .cards-next{
+            right: 0;
+            @media screen and (min-width: 1400px){
+                right: -3rem;
             }
         }
     }
@@ -122,4 +180,13 @@
 
 .fc-section-columns + .fc-section-cards{
     margin-top: 2rem;
+}
+
+// `.fc-section` uses `align-items: center`, so its container child is
+// shrink-to-fit. With the default `min-width: auto`, that container sizes to
+// the carousel track's intrinsic width (sum of all slides) and blows out wider
+// than the viewport. Letting it shrink fixes the overflow; scoped via :has()
+// so only carousel sections are affected.
+.fc-section > :has(.carousel-wrapper){
+    min-width: 0;
 }

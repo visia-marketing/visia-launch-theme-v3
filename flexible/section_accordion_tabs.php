@@ -20,9 +20,7 @@
 
 
 
-    <div class="uk-container "> 
-    <div class="uk-container">
-      <ul class="tabs  <?php echo $tab_count > 4 ? 'stretch-tabs' : ''; ?>" data-tabs id="<?php echo $tabs_id;?>">
+    <ul class="tabs  <?php echo $tab_count > 4 ? 'stretch-tabs' : ''; ?>" data-tabs id="<?php echo $tabs_id;?>">
         <?php while( have_rows('tabs') ): the_row(); ?>
        
           <li class="tabs-title<?php echo (get_row_index() === 1) ? ' is-active' : ''; ?>">
@@ -51,7 +49,5 @@
           </div>
         <?php endwhile; ?>
       </div>
-    </div>
-    </div>
   <?php endif; ?>
 </div>

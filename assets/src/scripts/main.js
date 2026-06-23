@@ -175,40 +175,34 @@ import { CountUp } from 'countup.js';
           });
         }
 
-        //jQuery(function($) {
-          // Initialize all carousels
-          $('.carousel-wrapper').each(function() {
-            var $this = $(this);
-            var $slidesToShow = $this.data('slides-to-show');
-            var $duration = $this.data('duration');
-      
-        
-            $this.slick({
+        // ── Card Carousels (Slick) ──────────────────────────────────────────────
+        // Initializes the "Carousel" cards layout (flexible/section_cards.php).
+        // Per-instance settings (slidesToShow + responsive breakpoints) are read
+        // natively by Slick from each .cards-slick element's data-slick attribute,
+        // so a single init call covers every carousel on the page.
+        function initCardCarousels() {
+          var prevArrow = '<button type="button" class="cards-arrow cards-prev" aria-label="Previous slide">' +
+            '<svg xmlns="http://www.w3.org/2000/svg" width="23" height="41" viewBox="0 0 23 41" fill="none"><path d="M21.123 1.5L2.12129 20.5018L21.123 39.5035" stroke="#062F6E" stroke-width="3" stroke-linecap="round"/></svg></button>';
+          var nextArrow = '<button type="button" class="cards-arrow cards-next" aria-label="Next slide">' +
+            '<svg xmlns="http://www.w3.org/2000/svg" width="23" height="41" viewBox="0 0 23 41" fill="none"><path d="M1.5 39.5034L20.5018 20.5017L1.5 1.4999" stroke="#062F6E" stroke-width="3" stroke-linecap="round"/></svg></button>';
+
+          $('.cards-slick').each(function() {
+            var $slider = $(this);
+            if ($slider.hasClass('slick-initialized')) return;
+
+            $slider.slick({
               infinite: true,
-              slidesToShow: $slidesToShow,
-              duration: $duration,
+              slidesToShow: 3,    // overridden per-instance by data-slick
               slidesToScroll: 1,
-              arrows: true,
               dots: false,
-              prevArrow: '<button type="button" class="slick-prev cards-prev"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="41" viewBox="0 0 23 41" fill="none"> <path d="M21.123 1.5L2.12129 20.5018L21.123 39.5035" stroke="#062F6E" stroke-width="3" stroke-linecap="round"/></svg></button>',
-              nextArrow: '<button type="button" class="slick-next cards-next"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="41" viewBox="0 0 23 41" fill="none"><path d="M1.5 39.5034L20.5018 20.5017L1.5 1.4999" stroke="#062F6E" stroke-width="3" stroke-linecap="round"/></svg></button>',
-              responsive: [
-                {
-                  breakpoint: 1024,
-                  settings: {
-                    slidesToShow: 2,
-                  }
-                },
-                {
-                  breakpoint: 768,
-                  settings: {
-                    slidesToShow: 1,
-                  }
-                },
-              ]
+              arrows: true,
+              prevArrow: prevArrow,
+              nextArrow: nextArrow,
             });
           });
-        //});
+        }
+
+        initCardCarousels();
 
         
       

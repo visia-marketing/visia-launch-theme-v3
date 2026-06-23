@@ -46,6 +46,22 @@ html, body {
   position: relative;
 }
 
+// `.fc-section` centers children via `align-items: center`, which shrink-wraps
+// the uk-container wrapper (a flex item) to its content width and defeats
+// uk-container's max-width + auto-margin centering — letting content sprawl to
+// the section edges.
+//
+// Give the wrapper a DEFINITE width instead. `align-self: stretch` is only a
+// flex cross-size, which wide *fixed-width* content (e.g. a Slick carousel's
+// inline-sized track) overrides — blowing the wrapper past the viewport. An
+// explicit `width: 100%` + `border-box` pins the wrapper to the section width,
+// so max-width still caps + centers it and inner content (carousels included)
+// measures the real container width.
+.fc-section > .uk-container {
+  width: 100%;
+  box-sizing: border-box;
+}
+
 .fc-section.vis-rowgap-tiny > .uk-container{
     row-gap: $row-gap-tiny;
 }

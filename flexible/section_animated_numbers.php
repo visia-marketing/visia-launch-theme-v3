@@ -22,7 +22,7 @@ if( $column_4['number'] == "" ) {
 
 <div class="fc-section-columns animated-numbers">
 
-    <div class="uk-container uk-container-large uk-flex uk-flex-center uk-flex-wrap uk-child-width-1-2@m uk-child-width-1-3@l uk-child-width-1-4@xl">
+    <div class="uk-flex uk-flex-center uk-flex-wrap uk-child-width-1-2@m uk-child-width-1-3@l uk-child-width-1-4@xl">
 
         <?php $delay = 0; ?>
         <?php foreach( $number_columns as $number_group ): ?>

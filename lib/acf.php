@@ -90,7 +90,7 @@ function get_flexible_content() {
       $content_spacing = get_sub_field('content_spacing') ?: 0;
       $horizontal_align = get_sub_field('horizontal_align') ?: '';
 
-      $containerWidth = get_sub_field('container_width') ?: 'uk-container-expand uk-width-1-1'; // Container width class (default, wide, full)
+      $containerWidth = get_sub_field('container_width') ?: 'uk-container uk-container-large'; // Container width class; matches ACF field default (Regular)
 
       if ($background_image_id){
         $background_image_url = wp_get_attachment_image_url($background_image_id, 'full');

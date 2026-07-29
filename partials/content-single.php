@@ -16,7 +16,7 @@
   </div>
   <div class="post-meta">
     <time class="updated" datetime="<?= get_post_time('c', true); ?>"><?= get_the_date('m . d . y'); ?></time>
-    <?php /*<p class="byline author vcard"><?= __('By', 'visia_starter_theme'); ?> <a href="<?= get_author_posts_url(get_the_author_meta('ID')); ?>" rel="author" class="fn"><?= get_the_author(); ?></a></p>*/?>
+    <?php /*<p class="byline author vcard"><?= __('By', 'visia_marketing'); ?> <a href="<?= get_author_posts_url(get_the_author_meta('ID')); ?>" rel="author" class="fn"><?= get_the_author(); ?></a></p>*/?>
     <!-- Will social go here? -->
   </div>
 </div>

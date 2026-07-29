@@ -32,7 +32,7 @@ add_filter('body_class', __NAMESPACE__ . '\\body_class');
  */
 
 function excerpt_more() {
-  return ' &hellip; <a href="' . esc_url(get_permalink()) . '">' . esc_html__('Continued', 'visia_starter_theme') . '</a>';
+  return ' &hellip; <a href="' . esc_url(get_permalink()) . '">' . esc_html__('Continued', 'visia_marketing') . '</a>';
 }
 add_filter('excerpt_more', __NAMESPACE__ . '\\excerpt_more');
 

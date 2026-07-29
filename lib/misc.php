@@ -17,8 +17,8 @@ add_filter( 'dlm_do_xhr', '__return_false' );
  * Security Headers - hardens site a little - could replace with simple ssl plugin
  */
 
-add_action('send_headers', 'add_security_headers');
-function add_security_headers() {
+add_action('send_headers', 'visia_add_security_headers');
+function visia_add_security_headers() {
     $nonce = base64_encode(random_bytes(16)); // Generate a unique nonce for each request
     header("Cache-Control: no-cache, must-revalidate");
     header("Content-Security-Policy: default-src 'self' https:; script-src 'self' 'unsafe-inline' https: http:;style-src 'self' https: 'unsafe-inline';font-src 'self' https: data:;img-src 'self' https: data:;frame-src https:;connect-src 'self' https:;object-src 'none';base-uri 'self';form-action 'self';");
@@ -36,8 +36,8 @@ function add_security_headers() {
 
 }
 
-add_filter('script_loader_tag', 'add_nonce_to_scripts', 10, 3);
-function add_nonce_to_scripts($tag, $handle, $src) {
+add_filter('script_loader_tag', 'visia_add_nonce_to_scripts', 10, 3);
+function visia_add_nonce_to_scripts($tag, $handle, $src) {
     global $csp_nonce;
     if (!empty($csp_nonce)) {
         // Add nonce attribute to the script tag
@@ -50,7 +50,7 @@ function add_nonce_to_scripts($tag, $handle, $src) {
 /**
  * Recommended and Required Plugins
  */
-function my_theme_register_required_plugins() {
+function visia_register_required_plugins() {
   $plugins = array(
     array(
 			'name'   => 'Advanced Custom Fields Pro',
@@ -83,33 +83,18 @@ function my_theme_register_required_plugins() {
 			'required' => false,
 	),
     array(
-			'name'     => 'Wordfence',
-			'slug'     => 'wordfence',
-			'required' => false,
-	),
-    array(
 			'name'     => 'Really Simple Security',
 			'slug'     => 'really-simple-ssl',
 			'required' => false,
 	),
     array(
-			'name'     => 'WP Fastest Cache',
-			'slug'     => 'wp-fastest-cache',
-			'required' => false,
-	),
-    array(
-			'name'     => 'UpdraftPlus: WP Backup & Migration Plugin',
-			'slug'     => 'updraftplus',
-			'required' => false,
-	),
-    array(
-			'name'     => 'WebP Express',
-			'slug'     => 'webp-express',
-			'required' => false,
-	),
-    array(
 			'name'     => 'Disable Comments',
 			'slug'     => 'disable-comments',
+			'required' => false,
+	),
+	array(
+			'name'     => 'Regenerate Thumbnails',
+			'slug'     => 'regenerate-thumbnails',
 			'required' => false,
 	),
   );
@@ -126,13 +111,13 @@ function my_theme_register_required_plugins() {
 		'is_automatic' => false,                   // Automatically activate plugins after installation or not.
 		'message'      => '',                      // Message to output right before the plugins table.
         'strings'      => array(
-        'page_title'  => __( 'Install Standard Plugins', 'visia' ),
-        'menu_title'  => __( 'Standard Plugins', 'visia' ),
+        'page_title'  => __( 'Install Standard Plugins', 'visia_marketing' ),
+        'menu_title'  => __( 'Standard Plugins', 'visia_marketing' ),
         )
   );
 
   tgmpa( $plugins, $config );
 
 }
-add_action( 'tgmpa_register', 'my_theme_register_required_plugins' );
+add_action( 'tgmpa_register', 'visia_register_required_plugins' );
 

@@ -33,7 +33,7 @@ function setup() {
    * Translation files should be placed in the /lang directory.
    * Community translations available at: https://github.com/roots/sage-translations
    */
-  load_theme_textdomain('visia_starter_theme', get_template_directory() . '/lang');
+  load_theme_textdomain('visia_marketing', get_template_directory() . '/lang');
 
   /**
    * Title Tag Support
@@ -55,15 +55,15 @@ function setup() {
    * @link http://codex.wordpress.org/Function_Reference/register_nav_menus
    */
   register_nav_menus([
-    'primary_navigation'      => __('Primary Navigation', 'visia_starter_theme'),      // Main site navigation
-    //'store_navigation'        => __('Store Navigation', 'visia_starter_theme'),      // Commented out - likely for WooCommerce
-    'top_navigation'          => __('Top Navigation', 'visia_starter_theme'),          // Top bar navigation
-    'mobile_navigation'       => __('Mobile Navigation', 'visia_starter_theme'),       // Mobile-specific menu
-    'footer_navigation_1'     => __('Footer Navigation 1', 'visia_starter_theme'),     // First footer column
-    'footer_navigation_2'     => __('Footer Navigation 2', 'visia_starter_theme'),     // Second footer column
-    'footer_navigation_3'     => __('Footer Navigation 3', 'visia_starter_theme'),     // Third footer column
-    'footer_navigation_4'     => __('Footer Navigation 4', 'visia_starter_theme'),     // Fourth footer column
-    'footer_navigation_legal' => __('Footer Navigation Legal', 'visia_starter_theme'), // Legal links (privacy, terms, etc.)
+    'primary_navigation'      => __('Primary Navigation', 'visia_marketing'),      // Main site navigation
+    //'store_navigation'        => __('Store Navigation', 'visia_marketing'),      // Commented out - likely for WooCommerce
+    'top_navigation'          => __('Top Navigation', 'visia_marketing'),          // Top bar navigation
+    'mobile_navigation'       => __('Mobile Navigation', 'visia_marketing'),       // Mobile-specific menu
+    'footer_navigation_1'     => __('Footer Navigation 1', 'visia_marketing'),     // First footer column
+    'footer_navigation_2'     => __('Footer Navigation 2', 'visia_marketing'),     // Second footer column
+    'footer_navigation_3'     => __('Footer Navigation 3', 'visia_marketing'),     // Third footer column
+    'footer_navigation_4'     => __('Footer Navigation 4', 'visia_marketing'),     // Fourth footer column
+    'footer_navigation_legal' => __('Footer Navigation Legal', 'visia_marketing'), // Legal links (privacy, terms, etc.)
   ]);
 
   /**
@@ -142,7 +142,7 @@ function widgets_init() {
    * Main sidebar displayed on blog posts and pages (when enabled)
    */
   register_sidebar([
-    'name'          => __('Primary', 'visia_starter_theme'),
+    'name'          => __('Primary', 'visia_marketing'),
     'id'            => 'sidebar-primary',
     'before_widget' => '<section class="widget %1$s %2$s">', // Wraps each widget in a section with dynamic classes
     'after_widget'  => '</section>',
@@ -155,7 +155,7 @@ function widgets_init() {
    * Widgets displayed in the site footer
    */
   register_sidebar([
-    'name'          => __('Footer', 'visia_starter_theme'),
+    'name'          => __('Footer', 'visia_marketing'),
     'id'            => 'sidebar-footer',
     'before_widget' => '<section class="widget %1$s %2$s">',
     'after_widget'  => '</section>',
@@ -168,7 +168,7 @@ function widgets_init() {
    * Widget area for WooCommerce category pages
    */
   register_sidebar([
-    'name'          => __('Shop Category', 'visia_starter_theme'),
+    'name'          => __('Shop Category', 'visia_marketing'),
     'id'            => 'sidebar-shop-category',
     'before_widget' => '<section class="widget %1$s %2$s">',
     'after_widget'  => '</section>',
@@ -181,7 +181,7 @@ function widgets_init() {
    * Widget area for WooCommerce archive/shop pages
    */
   register_sidebar([
-    'name'          => __('Shop Archive', 'visia_starter_theme'),
+    'name'          => __('Shop Archive', 'visia_marketing'),
     'id'            => 'sidebar-shop-archive',
     'before_widget' => '<section class="widget %1$s %2$s">',
     'after_widget'  => '</section>',

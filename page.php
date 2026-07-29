@@ -3,7 +3,7 @@
   <article class="page page-<?php global $post; echo $post->post_name; ?>">
 
     
-    <?php get_template_part('templates/page-header'); ?>
+    <?php get_template_part('partials/page-header'); ?>
 
 		
     <section class="page-content-wrapper">

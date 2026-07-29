@@ -12,8 +12,8 @@
  * Note: '.clones .layout' are excluded as these are the template/clone fields
  * that ACF uses internally and shouldn't be collapsed.
  */
-add_action('acf/input/admin_head','my_acf_admin_head');
-function my_acf_admin_head() { ?>
+add_action('acf/input/admin_head','visia_acf_admin_head');
+function visia_acf_admin_head() { ?>
   <script type="text/javascript">
   jQuery(document).ready(function($) {
     // Add the collapsed class to all layouts except clone templates
@@ -38,7 +38,7 @@ function my_acf_admin_head() { ?>
  * @param string $string The string to convert
  * @return string URL-safe anchor string
  */
-function create_anchor($string) {
+function visia_create_anchor($string) {
   $string = strtolower($string);                    // Convert to lowercase
   $string = preg_replace('/[^a-z0-9]+/', ' ', $string); // Replace non-alphanumeric with spaces
   $string = trim($string);                          // Remove leading/trailing spaces
@@ -73,7 +73,7 @@ function get_flexible_content() {
 
   if (have_rows('flexible_content')) {
     // Create main wrapper with unique ID based on page title
-    echo '<div class="fc-wrapper" id="fc-wrapper-' . esc_attr(create_anchor(get_the_title())) . '">';
+    echo '<div class="fc-wrapper" id="fc-wrapper-' . esc_attr(visia_create_anchor(get_the_title())) . '">';
 
     // Loop through each flexible content row
     while (have_rows('flexible_content')) : the_row();
@@ -169,70 +169,3 @@ add_filter('acf/load_field/key=field_69fc_global_callout_select', function( $fie
 
     return $field;
 });
-
-
-/**
- * ACF Helper Functions
- * 
- * Collection of utility functions for common ACF output patterns.
- * Note: These are marked as "not currently in use" but kept for potential future use.
- */
-
-
-/**
- * Output ACF Image Attachment
- * 
- * Helper to display an image from an ACF image field that returns an attachment ID.
- * Wraps wp_get_attachment_image() with ACF-specific defaults.
- * 
- * @param int $image Attachment ID from ACF image field
- * @param string $size WordPress image size (thumbnail, medium, large, full, or custom)
- * @param string $class CSS class to apply to the image element
- */
-function acf_attachment_img($image, $size = 'full', $class = 'nc'){
-  if( $image ) {
-      echo wp_get_attachment_image( $image, $size,'', array( "class" => $class ) );
-  }
-}
-
-/**
- * Wrap ACF Field in HTML Element
- * 
- * Utility function to wrap any ACF field value in an HTML element.
- * Useful for consistent markup when outputting text fields.
- * 
- * @param mixed $field The ACF field value to output
- * @param string $element HTML element to wrap content in (div, p, h2, etc.)
- * @param string $class CSS class for the wrapper element
- */
-function acf_field($field, $element = 'div', $class='nc'){
-  if( !$field ){ return; } // Exit if field is empty
-  echo '<' . $element . ' class="' . $class . '">' . $field . '</' . $element . '>';
-}
-
-/**
- * Output ACF Link Field as Button
- * 
- * Renders an ACF link field as a styled button element.
- * Handles all link attributes (URL, target, title) and optional arrow icon.
- * 
- * @param array $link ACF link field array with url, title, and target
- * @param bool $has_arrow Whether to append a right arrow icon
- * @param string $class Additional CSS classes for the button
- * @param string $attr Additional HTML attributes as a string
- */
-function acf_button($link, $has_arrow=false, $class='nc', $attr=false){
-  if( !$link ) return; // Exit if no link provided
-  
-  // Set default target to _self if not specified
-  $link['target'] = $link['target'] ?: '_self'; ?>
-
-  <a href="<?= esc_url($link['url']); ?>" 
-     target="<?= $link['target'] ?>" 
-     class="btn <?= $class ?>"
-     <?php if($attr) echo ' ' . $attr ?>>
-    <?= $link['title']; ?>
-    <?php if($has_arrow){ echo '<i class="fa-solid fa-angle-right"></i>'; }; ?>
-  </a>
-  <?php
-}

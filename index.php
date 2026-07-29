@@ -9,7 +9,7 @@
   </div>
 
   <section class="post-content">
-    <div class="uk-container" data-equalizer data-equalize-by-row="true">
+    <div class="uk-container">
       
       <?php if (!have_posts()) : ?>
         <div class="alert alert-warning">

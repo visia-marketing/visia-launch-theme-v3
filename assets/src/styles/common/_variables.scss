@@ -59,6 +59,20 @@ $wc-info-border:    $secondary;
 $wc-info-text:      $black;
 
 
+// Forms
+// UIkit's own $form-radio-* variables key off $global-primary-background (blue), which
+// this theme doesn't override — these drive the checked state instead. See components/_forms.scss.
+$form-choice-checked-background: $primary; // checkbox + radio fill when checked
+$form-choice-checked-icon-color: $white;   // the check mark / dot itself
+$form-focus-accent:              $primary; // focus border on inputs, selects, textareas
+$form-required-color:            #c8102e;  // the required marker — asterisk, "(Required)" or custom
+$form-choice-gap:                8px;      // space between a checkbox/radio and its label
+
+
+
+
+$base-heading-font-family: $sans;
+$base-heading-font-weight: 800;
 
 // flexible row-gap
 $row-gap-tiny: 1rem;
@@ -80,7 +94,7 @@ $top-header-background: #f3f3f3;
 $top-header-color: $black;
 $top-header-link-color: $black;
 
-// Main Header - this is confusing - header nav or headings
+// Main Navigation - this is confusing - header nav or headings
 $main-header-background: $light-gray;
 $main-header-link-color: $black;
 $main-header-link-font: $sans;

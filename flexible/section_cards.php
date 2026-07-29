@@ -97,7 +97,7 @@ $slick_opts = [
                                 </div>
                             <?php endif; ?>
 
-                            <a href="<?php echo esc_url($card_url ?: '#'); ?>" class="card-body uk-card-body uk-flex uk-flex-column uk-flex-right uk-flex-top uk-height-1-1">
+                            <a href="<?php echo esc_url($card_url ?: '#'); ?>" class="card-body uk-card-body uk-flex uk-flex-column uk-flex-left uk-flex-top uk-height-1-1">
 
                                 <h3 class="card-title uk-card-title uk-margin-remove">
                                     <?php echo $card['card_title']; ?>
@@ -154,7 +154,7 @@ $slick_opts = [
                             </div>
                         <?php endif; ?>
 
-                            <a href="<?php echo esc_url($card_url ?: '#'); ?>" class="card-body uk-card-body uk-flex uk-flex-column uk-flex-right uk-flex-top uk-height-1-1">
+                            <a href="<?php echo esc_url($card_url ?: '#'); ?>" class="card-body uk-card-body uk-flex uk-flex-column uk-flex-left uk-flex-top uk-height-1-1">
 
 
                                 <h3 class="card-title uk-card-title uk-margin-remove">

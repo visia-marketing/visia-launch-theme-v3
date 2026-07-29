@@ -3,9 +3,9 @@ body#tinymce {
   margin: 12px !important;
 }
 
-.g {
+.fc {
 
-  &-section-subtitle {
+  &-section-eyebrow {
     color: $black;
     display: block;
     font-family: $sans;
@@ -48,60 +48,6 @@ body#tinymce {
     font-size: 16px;
     font-weight: 400;
     margin: 0 0 0;
-  }
-
-  &-section-large-numbers {
-    color: $primary;
-    display: block;
-    font-family: $sans;
-    font-size: 90px;
-    font-weight: 300;
-    line-height: 1;
-    margin-bottom: 20px;
-  }
-
-  &-button.button {
-    margin-right: 10px;
-    background-color: transparent;
-    border-radius: 2px;
-    border: 1px solid $black;
-    color: $black;
-    display: inline-block;
-    font-family: $sans;
-    font-size: 14px !important;
-    font-weight: 600;
-    margin-top: 1rem;
-    letter-spacing: 1.5px;
-    padding: 8px 34px 8px 20px;
-    position:relative;
-    text-transform: uppercase;
-
-    a {
-      position: relative;
-    }
-
-    &:before {
-      font-family: $fontawesome;
-      content: "\f054";
-      font-weight: 900;
-      position: absolute;
-       top: 8px;
-       right: 14px;
-      height: 30px;
-      font-size: 14px;
-      width: 8px;
-    }
-
-    i {
-      margin-left: 14px;
-      //font-size: 10px;
-    }
-
-    &:hover, &.active {
-      background-color: darken($primary,7%);
-      color: #fff;
-    }
-
   }
 
 }

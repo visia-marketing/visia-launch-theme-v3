@@ -1,7 +1,6 @@
 @import "../flexible/flexible-accordion";
 @import "../flexible/flexible-columns";
 @import "../flexible/flexible-cards";
-@import "../flexible/flexible-page-header";
 @import "../flexible/flexible-section-heading";
 @import "../flexible/flexible-styles";
 
@@ -76,7 +75,7 @@
         background-position: center; 
       }
 
-      h1, h2, h3, h4, h5, h6, p, li, a, .g-section-subtitle {
+      h1, h2, h3, h4, h5, h6, p, li, a, .fc-section-subtitle {
         color: #fff;
       }
 
@@ -91,11 +90,13 @@
       padding-top: 2.5rem;
     }
 
-    & p:has(.g-section-subtitle){
+    & p:has(.fc-section-eyebrow){
       margin-bottom: 0;
 
-      & + h2{
+      & + h2,
+      & + .fc-section-title{
         padding-top: 0;
+        margin-top: 12px;
       }
 
     }
@@ -117,7 +118,7 @@ body *{
   & .fc-section-light {
     background-color: $white;
   
-    //h1, h2, h3, h4, h5, h6, p, a, li, blockquote, .g-style-section-title, .g-style-section-heading, .g-section-subtitle {
+    //h1, h2, h3, h4, h5, h6, p, a, li, blockquote, .g-style-section-title, .g-style-section-heading, .fc-section-subtitle {
     & * {
       color: $black;
     }
@@ -131,7 +132,7 @@ body *{
   & .fc-section-dark {
     background-color: $black;
   
-    //h1, h2, h3, h4, h5, h6, p, a, li, blockquote, .g-style-section-title, .g-style-section-heading, .g-section-subtitle {
+    //h1, h2, h3, h4, h5, h6, p, a, li, blockquote, .g-style-section-title, .g-style-section-heading, .fc-section-subtitle {
     & * {
       color: #fff;
     }

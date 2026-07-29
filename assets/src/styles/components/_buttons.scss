@@ -1,7 +1,9 @@
-.button,
-.uk-button,
-.woocommerce:where(body:not(.woocommerce-block-theme-has-button-styles)) a.button,
-.wpfFilterButton.wpfButton {
+//
+// The primary button, as a mixin so other components can match it exactly rather than
+// re-declaring the values. Used by components/_forms.scss for Gravity Forms buttons,
+// which need a higher specificity than `.button` to beat the plugin's own stylesheet.
+//
+@mixin primary-button {
 	background-color: $primary;
 	border-radius: 2px;
   border: none;
@@ -15,15 +17,34 @@
 	padding: 8px 16px 8px 16px;
 	text-transform: uppercase;
   text-align: center;
+}
 
+//
+// Icon spacing, kept out of primary-button so the mixin stays declaration-only.
+// A nested rule inside it would emit `::file-selector-button i`, which can never
+// match, and would split any declarations that follow into a second rule.
+//
+@mixin primary-button-icon {
   i {
     margin-left: 11px;
 
   }
+}
+
+@mixin primary-button-hover {
+	background-color: darken($primary,7%);
+  color: #fff !important;
+}
+
+.button,
+.uk-button,
+.woocommerce:where(body:not(.woocommerce-block-theme-has-button-styles)) a.button,
+.wpfFilterButton.wpfButton {
+	@include primary-button;
+	@include primary-button-icon;
 
 	&:hover, &.active {
-		background-color: darken($primary,7%);
-    color: #fff !important;
+		@include primary-button-hover;
 	}
 
   &-text{

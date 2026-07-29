@@ -91,7 +91,7 @@
 <header class="main-header">
 	<div class="uk-container uk-container-large uk-flex ">
     <div class="uk-width-1-4 uk-width-1-6@m">
-      <div class="main-logo uk-width-small uk-margin-small-top uk-margin-small-bottom">
+      <div class="main-logo uk-width-xsmall uk-margin-small-top uk-margin-small-bottom">
         <a href="<?= esc_url(home_url('/')); ?>"><img src="<?php the_field('main_logo', 'option');?>" alt="<?php bloginfo('name'); ?>"></a>
       </div>
     </div>

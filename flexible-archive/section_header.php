@@ -4,11 +4,11 @@
   <div class="fc-section-heading <?php echo $top_border; ?>">
     <div class="uk-width-1-1">
       <?php if ( get_sub_field('section_heading_title') ): ?>
-        <h2 class="g-section-title"><?php echo get_sub_field('section_heading_title'); ?></h2>
+        <h2 class="fc-section-title"><?php echo get_sub_field('section_heading_title'); ?></h2>
       <?php endif; ?>
 
       <?php if ( get_sub_field('section_heading') ): ?>
-        <p class="g-section-intro"><?php echo get_sub_field('section_heading'); ?></p>
+        <p class="fc-section-intro"><?php echo get_sub_field('section_heading'); ?></p>
       <?php endif; ?>
     </div>
   </div>

@@ -2,28 +2,10 @@
   $page_header_content = get_field('page_header_content');
   $page_header_style = get_field('page_header_style');
   $show_page_header = get_field('show_page_header');
+
   // if( is_front_page() ){
   //   $show_page_header = false;
   // }
-
-  if( is_array( $page_header_content) ){
-
-    if( array_key_exists( 'heading', $page_header_content) ){
-      if( $page_header_content['heading'] ){
-        $page_heading = $page_header_content['heading'];
-      }    
-    }
-    if( array_key_exists( 'sub_heading', $page_header_content) ){
-      if( $page_header_content['sub_heading'] ){
-        $page_sub_heading = $page_header_content['sub_heading'];
-      }    
-    }
-    if( array_key_exists( 'heading_text', $page_header_content) ){
-      if( $page_header_content['heading_text'] ){
-        $page_heading_text = $page_header_content['heading_text'];
-      }    
-    }
-  }
 
   if( is_array( $page_header_style) ){
     if( array_key_exists( 'background', $page_header_style) ){
@@ -59,23 +41,11 @@
       <div class="uk-container uk-container-large">
         <div class="uk-width-1-1 uk-width-2-3@l uk-text-left">
           <div class="page-header-content">
-            <?php 
-            $header_content = get_field('page_header_content');
-          // if ( $page_heading || $page_sub_heading ): 
-            ?>
-              <?php if ( !empty($page_sub_heading) ): ?>
-                <p class="g-section-subtitle">
-                  <?php echo esc_html($page_sub_heading); ?>
-              </p>
+
+              <?php if ( !empty($page_header_content) ): ?>
+                <?php echo $page_header_content; ?>
               <?php endif; ?>
-              <h1 class="g-section-title">
-                <?php if ( $page_heading ): echo esc_html($page_heading); else: the_title(); endif; ?>
-              </h1>
-              <?php if ( !empty($page_heading_text) ): ?>
-                <p>
-                    <?php echo esc_html($page_heading_text); ?>
-                </p>
-            <?php  endif; ?>
+
           </div>
         </div>
       </div>

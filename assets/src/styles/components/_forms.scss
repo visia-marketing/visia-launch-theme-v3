@@ -1,53 +1,370 @@
-.gform_wrapper.gravity-theme {
+//////////////////////////////////////////////////////////////////////////////////////////////
+//
+// Gravity Forms
+//
+// Restyles Gravity Forms controls to match UIkit's form component without adding
+// `uk-input` / `uk-select` / `uk-textarea` classes to the markup. GF ships its own
+// stylesheet whose selectors outrank UIkit's single-class ones, so we mirror UIkit's
+// values here at a specificity that wins instead.
+//
+// Specificity note: every rule below resolves to (0,4,1) — e.g.
+//   .gform_wrapper.gravity-theme .gfield input[type="text"]
+// which beats basic.min.css (0,3,1) and the theme framework's
+//   .gform-theme--framework input[type]:where(...)  (0,2,1)
+// Both wrappers are covered so the styles hold if a form is switched between the
+// 2.5 "gravity-theme" and the orbital / framework themes.
+//
+// Submit buttons are intentionally not styled here — see components/_buttons.scss.
+//
+//////////////////////////////////////////////////////////////////////////////////////////////
 
-  .gform_required_legend {
-    display: none;
-  }
+// UIkit form variables are available via variables-theme.scss (imported in main.scss).
+// Colour knobs live in common/_variables.scss: $form-choice-checked-background,
+// $form-choice-checked-icon-color and $form-focus-accent.
+//
+// UIkit has no global border-radius variable in this theme's setup, so it's named here.
+$gf-input-border-radius: 5px !default;
+// Browse button inside the single-file upload field. Sized to sit within $form-height
+// (40px) less its two 1px borders, leaving an even 5px above and below.
+$gf-file-button-height: 28px !default;
 
-  .gform_required_legend {
-    display: none;
-  }
+//
+// Buttons GF can render. Two different class names are in play depending on where the
+// submit button sits: `.gform_button` (underscore) when GF puts it in the form footer,
+// and `.gform-button` (hyphen) when it is placed inline as a Submit field — the button
+// location is a per-form setting, so both must be covered.
+//
+// Each is compounded with `.button`, which GF's get_submit_button_class() always
+// appends, purely to buy a point of specificity.
+//
+$gf-buttons:
+  '.gform_button.button, .gform-button.button, .gform_next_button.button, ' +
+  '.gform_previous_button.button, .gform_button_select_files.button';
 
-  /* Make input fields transparent */
-  .gfield input[type="text"],
-  .gfield input[type="email"],
-  .gfield input[type="tel"],
-  .gfield input[type="url"],
-  .gfield textarea,
-  .gfield select {
-    background-color: white;
-    box-shadow: none;
-    border: 1px solid grey; // Border color
-    color: $black; // Text color
-    padding: 10px;
-    border-radius: 5px;
-    width: 100%;
+@mixin gf-primary-button {
+  @include primary-button;
+  cursor: pointer;
+  @include primary-button-icon;
 
-    &:focus {
-        //border-color: #0073aa; // Change border color on focus
-        outline: none;
+  &:hover,
+  &.active { @include primary-button-hover; }
+}
+
+// Text-ish controls GF can render. Interpolated so the list stays in one place.
+$gf-text-inputs:
+  'input[type="text"], input[type="email"], input[type="tel"], input[type="url"], ' +
+  'input[type="number"], input[type="password"], input[type="date"], ' +
+  'input[type="time"], input[type="search"]';
+
+.gform_wrapper {
+  &.gravity-theme,
+  &.gform-theme {
+
+    .gform_required_legend { display: none; }
+
+    .gfield {
+
+      /*
+       * Shared control styling — mirrors UIkit's `.uk-input, .uk-select, .uk-textarea`
+       * plus its hook-form() border/transition.
+       */
+      #{$gf-text-inputs},
+      textarea,
+      select {
+        box-sizing: border-box;
+        max-width: 100%;
+        width: 100%;
+        padding: 0 $form-padding-horizontal;
+        background: $form-background;
+        color: $form-color;
+        border: $form-border-width solid $form-border;
+        border-radius: $gf-input-border-radius;
+        box-shadow: none;
+        transition: 0.2s ease-in-out;
+        transition-property: color, background-color, border;
+
+        &:focus {
+          outline: none;
+          background-color: $form-focus-background;
+          color: $form-focus-color;
+          border-color: $form-focus-accent;
+        }
+
+        &:disabled {
+          background-color: $form-disabled-background;
+          color: $form-disabled-color;
+          border-color: $form-disabled-border;
+        }
+      }
+
+      /* Single-line */
+      #{$gf-text-inputs},
+      select:not([multiple]):not([size]) {
+        height: $form-height;
+        vertical-align: middle;
+      }
+
+      /* Multi-line */
+      textarea,
+      select[multiple],
+      select[size] {
+        height: auto;
+        padding: $form-multi-line-padding-vertical $form-multi-line-padding-horizontal;
+        vertical-align: top;
+      }
+
+      /* Placeholders */
+      #{$gf-text-inputs},
+      textarea {
+        &::placeholder { color: $form-placeholder-color; }
+      }
+
+      /*
+       * Select — strips the native control and applies UIkit's chevron.
+       */
+      select:not([multiple]):not([size]) {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        padding-right: $form-select-padding-right;
+        @include svg-fill($internal-form-select-image, "#000", $form-select-icon-color);
+        background-repeat: no-repeat;
+        background-position: 100% 50%;
+
+        option { color: $form-select-option-color; }
+
+        &:disabled {
+          @include svg-fill($internal-form-select-image, "#000", $form-select-disabled-icon-color);
+        }
+      }
+
+      /*
+       * Choices — mirrors UIkit's `.uk-radio` / `.uk-checkbox`.
+       *
+       * Alignment is handled on `.gchoice` rather than by UIkit's inline-block
+       * `margin-top: -4px` nudge, so that labels wrapping to a second line stay
+       * aligned to the control instead of drifting.
+       */
+      .gchoice {
+        display: flex;
+        align-items: flex-start;
+        gap: $form-choice-gap;
+
+        label {
+          margin: 0;
+          line-height: 1.5;
+        }
+      }
+
+      .gfield-choice-input {
+        box-sizing: border-box;
+        flex: 0 0 auto;
+        height: $form-radio-size;
+        width: $form-radio-size;
+        // Optically centres the control on the first line of its label
+        // (1.5 line-height on a 1em label leaves 0.25em above the cap height).
+        margin: 0.25em 0 0 0;
+        overflow: hidden;
+        // The standard property is required as well as the prefixed ones — without it
+        // the browser keeps painting the native control and the white marker below
+        // never shows.
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background-color: $form-radio-background;
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+        border: $form-radio-border-width solid $form-radio-border;
+        transition: 0.2s ease-in-out;
+        transition-property: background-color, border;
+
+        &[type="radio"] { border-radius: 50%; }
+
+        &:focus {
+          outline: none;
+          background-color: $form-radio-focus-background;
+        }
+
+        &:checked {
+          background-color: $form-choice-checked-background;
+          border-color: $form-choice-checked-background;
+        }
+
+        &[type="radio"]:checked {
+          @include svg-fill($internal-form-radio-image, "#000", $form-choice-checked-icon-color);
+        }
+
+        &[type="checkbox"]:checked {
+          @include svg-fill($internal-form-checkbox-image, "#000", $form-choice-checked-icon-color);
+        }
+
+        &:disabled {
+          background-color: $form-radio-disabled-background;
+          border-color: $form-radio-disabled-border;
+        }
+      }
+
+      /*
+       * File upload — single-file mode is a bare `input[type="file"]`, so the control
+       * shell is styled here and the browse button via ::file-selector-button.
+       */
+      input[type="file"] {
+        box-sizing: border-box;
+        max-width: 100%;
+        width: 100%;
+        height: $form-height;
+        padding: 0 $form-padding-horizontal;
+        background: $form-background;
+        color: $form-color;
+        border: $form-border-width solid $form-border;
+        border-radius: $gf-input-border-radius;
+        // Fills the field's inner height so the file name centres against the button.
+        line-height: $form-line-height;
+        vertical-align: middle;
+        transition: 0.2s ease-in-out;
+        transition-property: color, background-color, border;
+
+        &:focus {
+          outline: none;
+          border-color: $form-focus-accent;
+        }
+
+        &::file-selector-button {
+          @include primary-button;
+          // Overrides the primary button's block sizing so it fits inside the field
+          // rather than stretching it past the height of every other input.
+          height: $gf-file-button-height;
+          min-height: 0;
+          line-height: $gf-file-button-height;
+          padding: 0 16px;
+          margin: 0 $form-choice-gap 0 0;
+          vertical-align: middle;
+          cursor: pointer;
+        }
+
+        &:hover::file-selector-button { @include primary-button-hover; }
+      }
+
+      /*
+       * File upload — multi-file (plupload) mode: a drop area wrapping a
+       * `.gform_button_select_files` button, plus the uploaded-file list.
+       */
+      .gform_drop_area {
+        box-sizing: border-box;
+        padding: $form-multi-line-padding-horizontal;
+        background: $form-background;
+        color: $form-color;
+        border: $form-border-width dashed $form-border;
+        border-radius: $gf-input-border-radius;
+        text-align: center;
+        transition: 0.2s ease-in-out;
+        transition-property: color, background-color, border;
+
+        &:hover { border-color: $form-focus-accent; }
+      }
+
+      .gform_drop_instructions {
+        display: block;
+        margin-bottom: $form-stacked-margin-bottom;
+        color: $form-placeholder-color;
+      }
+
+      .gform_fileupload_rules {
+        display: block;
+        margin-top: $form-stacked-margin-bottom;
+        color: $form-placeholder-color;
+        font-size: $form-label-font-size;
+      }
+
+      .ginput_preview {
+        display: flex;
+        align-items: center;
+        gap: $form-choice-gap;
+        margin-top: $form-stacked-margin-bottom;
+      }
+
+      /* Trash icon beside an uploaded file — not a primary button. */
+      .gform_delete_file {
+        background: none;
+        border: none;
+        padding: 0;
+        margin: 0;
+        min-height: 0;
+        color: $form-danger-color;
+        cursor: pointer;
+      }
+
+      /* Labels */
+      .gfield_label {
+        color: $form-label-color;
+        margin-bottom: $form-stacked-margin-bottom;
+      }
+
+      &--type-checkbox { margin-top: 12px; }
     }
 
-    &::placeholder {
-      font-size: 16px;
-      opacity: 1; // Full opacity for placeholders
+    /*
+     * Required marker — covers the asterisk, "(Required)" text and custom variants,
+     * which GF nests inside `span.gfield_required`.
+     */
+    .gfield_required,
+    .gfield_required_asterisk,
+    .gfield_required_text,
+    .gfield_required_custom {
+      color: $form-required-color;
+    }
+
+    /*
+     * Buttons — see the $gf-buttons note above. (0,5,0), which clears everything in
+     * basic.min.css (it ships only width utilities for these).
+     */
+    .gform_footer,
+    .gform_page_footer,
+    .gfield {
+      #{$gf-buttons} { @include gf-primary-button; }
+    }
+
+    /*
+     * Validation — UIkit's danger colours on GF's error states.
+     */
+    .gfield_error {
+      #{$gf-text-inputs},
+      textarea,
+      select {
+        border-color: $form-danger-border;
+      }
+    }
+
+    .gfield_validation_message,
+    .validation_message {
+      color: $form-danger-color;
+      font-size: $form-label-font-size;
     }
   }
+}
 
-  /* Hide labels */
-  .gfield_label {
-      //font-family: $condensed;
-      //text-transform: uppercase;
-  }
-
-  .gfield--type-checkbox {
-    margin-top: 12px;
-
-    .gfield-choice-input { 
-      margin-bottom: 0;
+/*
+ * Buttons, orbital theme only.
+ *
+ * A form set to the orbital theme gets the wrapper classes
+ * `gform_wrapper gform-theme gform-theme--foundation gform-theme--framework gform-theme--orbital`
+ * and loads gravity-forms-theme-framework.min.css. Its heaviest submit-button rule is
+ *
+ *   .gform-theme--framework.gform-theme.gform_wrapper
+ *     input[type=submit].button.gform_button:where(...)        (0,6,1)
+ *
+ * so the wrapper compound alone only reaches (0,6,0) and loses the resting state while
+ * still winning :hover — which is exactly the "blue button, yellow on hover" symptom.
+ * The `:not()` below adds one class-level token for (0,7,0), clearing it outright. It
+ * is the same guard GF puts on its own rules, so it never changes what matches.
+ *
+ * Forms using the default 2.5 theme never match this block and are unaffected.
+ */
+.gform_wrapper.gform-theme.gform-theme--framework {
+  .gform_footer,
+  .gform_page_footer,
+  .gfield {
+    #{$gf-buttons} {
+      &:not(.gform-theme-no-framework) { @include gf-primary-button; }
     }
-    
   }
-} 
-
-
+}

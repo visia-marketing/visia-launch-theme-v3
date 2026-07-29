@@ -70,7 +70,7 @@
                     aspect-ratio: 3/2;
                     object-fit: cover;
                     min-width: 100%;
-                    border-radius:1.25rem;
+                    border-radius:0;
                     overflow: hidden;
                 }
             }
@@ -90,6 +90,21 @@
 
                 &  span{ // Button
                     color: $white !important;
+                }
+
+                & .hover-panel{
+                    flex-grow: 1;
+                    display: inline-flex;
+                    flex-direction: column;
+
+                    & p{
+                        margin-bottom: auto;
+                    }
+                }
+
+                & .uk-button{
+                    margin-top: 16px;
+                    max-width: max-content;
                 }
             }
         }

@@ -56,7 +56,7 @@
     }
     ?>
     <div class="page-header-content-wrapper fc-section fc-section-<?php echo $page_heading_background;?> page-header-<?php echo $page_heading_size; ?>">
-      <div class="uk-container">
+      <div class="uk-container uk-container-large">
         <div class="uk-width-1-1 uk-width-2-3@l uk-text-left">
           <div class="page-header-content">
             <?php 

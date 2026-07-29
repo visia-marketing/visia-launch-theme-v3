@@ -13519,6 +13519,10 @@ body.hidden-scroll {
     opacity: 0;
   }
 }
+.uk-width-xsmall {
+  width: 120px;
+}
+
 html, body {
   -webkit-font-smoothing: antialiased;
   -moz-font-smoothing: antialiased;

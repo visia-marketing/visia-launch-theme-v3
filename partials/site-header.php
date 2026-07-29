@@ -1,6 +1,6 @@
 <?php if (has_nav_menu('top_navigation')) : ?>
 <div class="top-header">
-	<div class="uk-container uk-container-xlarge">
+	<div class="uk-container uk-container-large">
 		<div class="uk-width-1-1">
       <div class="uk-flex uk-flex-between uk-flex-middle">
         <?php $top_header_text = get_field('top_header_text', 'options'); if ($top_header_text) : ?>
@@ -89,9 +89,9 @@
 <?php endif; ?>
 
 <header class="main-header">
-	<div class="uk-container uk-flex ">
+	<div class="uk-container uk-container-large uk-flex ">
     <div class="uk-width-1-4 uk-width-1-6@m">
-      <div class="main-logo">
+      <div class="main-logo uk-width-small uk-margin-small-top uk-margin-small-bottom">
         <a href="<?= esc_url(home_url('/')); ?>"><img src="<?php the_field('main_logo', 'option');?>" alt="<?php bloginfo('name'); ?>"></a>
       </div>
     </div>

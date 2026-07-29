@@ -82,12 +82,13 @@ $top-header-link-color: $top-header-link-color;
       justify-content: center;
       gap: 30px;
       height: 100%;
-
+      margin-bottom: 0;
 
       > li {
         height: 100%;
         display: flex;
         align-items: center;
+
 
         @include breakpoint(medium) {
           //display: inline-block;
@@ -613,9 +614,9 @@ $top-header-link-color: $top-header-link-color;
     margin: 0.75rem 0 0.75rem 20px !important;
     text-transform: none;
 
-    &:hover{
-      color: $white !important;
-    }
+    // &:hover{
+    //   color: $white !important;
+    // }
 
 
         & > .cart-count-badge{

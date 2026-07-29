@@ -18,13 +18,24 @@
 
   i {
     margin-left: 11px;
-    //font-size: 10px;
+
   }
 
 	&:hover, &.active {
 		background-color: darken($primary,7%);
     color: #fff !important;
 	}
+
+  &-text{
+    background: transparent;
+    padding-left: 0;
+    padding-right: 0;
+    
+    &:hover{
+      background: transparent;
+      color: $black !important;
+    }
+  }
 
   &.grey {
 		background-color: #f3f3f3;

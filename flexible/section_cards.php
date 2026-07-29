@@ -8,7 +8,9 @@ $aos = get_sub_field('animate_in');
 $aos_duration = 0;
 $aos_step = 0;
 
-$card_style = get_sub_field('card_style');
+
+$card_style =  empty(get_sub_field('cards_style')) ? '' : get_sub_field('cards_style');
+
 
 $rand_id = $display . '_' . wp_generate_uuid4();
 
@@ -19,8 +21,6 @@ if ($aos == 'no_animation') {
     $aos_step = get_sub_field('animation_step');
 
 }
-
-// $card_style = 'primary';
 
 $class = ' uk-card uk-margin-bottom card-background--image cards-style--'.$card_style;
 

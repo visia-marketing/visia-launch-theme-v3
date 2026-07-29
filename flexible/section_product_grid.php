@@ -46,7 +46,7 @@ $query = new WP_Query( $args );
                             </p>
                         <?php endif; ?>
                         <a href="<?php echo esc_url($card_url); ?>" class="uk-button uk-button-primary uk-margin-top">
-                            <?php esc_html_e('Learn More', 'visia_starter_theme'); ?>
+                            <?php esc_html_e('Learn More', 'visia_marketing'); ?>
                         </a>
                     </div>
                 </div>

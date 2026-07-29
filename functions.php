@@ -44,7 +44,7 @@ foreach ($sage_includes as $file) {
   // Attempt to locate the file within the theme directory structure
   if (!$filepath = locate_template($file)) {
     // If file cannot be found, trigger a fatal error with a translatable message
-    trigger_error(sprintf(__('Error locating %s for inclusion', 'visia_starter_theme'), $file), E_USER_ERROR);
+    trigger_error(sprintf(__('Error locating %s for inclusion', 'visia_marketing'), $file), E_USER_ERROR);
   }
 
   // Include the located file (require_once prevents duplicate inclusions)

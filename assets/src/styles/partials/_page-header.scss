@@ -19,12 +19,23 @@
     align-self: flex-end;
     width: 100%;
 
+    &.fc-section-image,
+    &.fc-section-dark{
+
+      & *:not(.uk-button){
+        color: $white;
+      }
+
+    }
+
     &.page-header-expanded{
       padding-top: 12.5rem;
       padding-bottom: 12.5rem;
     }
 
     .page-header-content {
+
+      
 
      & p:last-child{
       margin-bottom: 0;

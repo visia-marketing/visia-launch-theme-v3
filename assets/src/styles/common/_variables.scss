@@ -69,6 +69,18 @@ $form-required-color:            #c8102e;  // the required marker — asterisk, 
 $form-choice-gap:                8px;      // space between a checkbox/radio and its label
 
 
+// Accordion / FAQ
+// Shared by all three styles of the Accordion/FAQ layout. See flexible/_flexible-accordion.scss.
+$faq-border-color:        $grey-border;
+$faq-item-gap:            20px;   // space between items in the separated style
+$faq-padding-vertical:    22px;
+$faq-title-font-size:     24px;
+$faq-title-color:         $black;
+$faq-title-hover-color:   $primary;
+$faq-toggle-color:        $primary;
+$faq-toggle-gap:          15px;   // space between the question text and the chevron
+
+
 
 
 $base-heading-font-family: $sans;

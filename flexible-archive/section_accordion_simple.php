@@ -11,7 +11,6 @@ $accordion = $fields;
 ?>
 
 <div class="fc-section-columns <?php echo $accordion_container_class;?>" id="<?php //echo $anchor;?>">
- <?php get_template_part('flexible/section_header'); ?>
  
   <?php if( is_array( $accordion ) ): ?>
 

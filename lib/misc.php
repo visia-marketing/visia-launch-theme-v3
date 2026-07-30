@@ -63,6 +63,11 @@ function visia_register_required_plugins() {
 			'slug'     => 'regenerate-thumbnails',
 			'required' => false,
 	),
+	array(
+			'name'     => 'Download Monitor',
+			'slug'     => 'download-monitor',
+			'required' => false,
+	),
   );
 
   $config = array(

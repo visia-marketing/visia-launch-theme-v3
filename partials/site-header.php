@@ -3,6 +3,9 @@
 	<div class="uk-container uk-container-large">
 		<div class="uk-width-1-1">
       <div class="uk-flex uk-flex-between uk-flex-middle">
+
+        <?php get_search_form(); ?>
+
         <?php $top_header_text = get_field('top_header_text', 'options'); if ($top_header_text) : ?>
           <span class="top-header-text"><?php echo esc_html($top_header_text); ?></span>
         <?php endif; ?>
@@ -12,23 +15,21 @@
         ?>
 
 
-            <?php if ( class_exists( 'WooCommerce' ) ) : ?>
-            <?php
+        <?php if ( class_exists( 'WooCommerce' ) ) : ?>
+          <?php
             $cart_has_items = WC()->cart && WC()->cart->get_cart_contents_count() > 0;
             $cart_count     = $cart_has_items ? WC()->cart->get_cart_contents_count() : 0;
-            ?>
-            <a class="cart-icon-link uk-button uk-button-text uk-flex uk-flex-center uk-flex-middle" href="<?php echo esc_url(wc_get_cart_url()); ?>">
+          ?>
+          <a class="cart-icon-link uk-button uk-button-text uk-flex uk-flex-center uk-flex-middle" href="<?php echo esc_url(wc_get_cart_url()); ?>">
 
-                <i class="fa-light fa-bag-shopping"></i>
-                <?php if ($cart_count == 1) : ?>
-                    <?php echo esc_html($cart_count); ?> item in cart
-                <?php elseif( $cart_count > 1): ?>
-                   <?php echo esc_html($cart_count); ?> items in cart
-                <?php else: ?>
-                    Shopping Cart
-                <?php endif; ?>
-
-
+            <i class="fa-light fa-bag-shopping"></i>
+            <?php if ($cart_count == 1) : ?>
+                <?php echo esc_html($cart_count); ?> item in cart
+            <?php elseif( $cart_count > 1): ?>
+                <?php echo esc_html($cart_count); ?> items in cart
+            <?php else: ?>
+                Shopping Cart
+            <?php endif; ?>
 
             </a>
             <div class="uk-card uk-card-body uk-card-default mini-cart-dropdown uk-width-medium <?php echo $cart_has_items ? ' cart-has-items' : ''; ?>" uk-drop="pos: bottom-right; animation: uk-animation-slide-top-small; animate-out: true; offset: 6px; ">
@@ -80,7 +81,7 @@
                 </div>
 
             </div>
-            <?php endif; ?>
+        <?php endif; ?>
 
       </div>
 		</div>

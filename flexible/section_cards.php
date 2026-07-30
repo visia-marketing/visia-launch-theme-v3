@@ -68,7 +68,6 @@ $slick_opts = [
 ?>
 
 
-    <?php get_template_part('flexible/section_header'); ?>
     
 
 

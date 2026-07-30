@@ -35,7 +35,6 @@ if ($source === 'category') {
 if ($downloads) : ?>
 
   <div class="fc-section-downloads">
-    <?php get_template_part('flexible/section_header'); ?>
 
     <?php if (!empty($category_title)) : ?>
       <h2 class="download-grid-category-title"><?php echo esc_html($category_title); ?></h2>

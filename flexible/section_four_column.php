@@ -1,5 +1,4 @@
 <div class="fc-section-columns">
-  <?php get_template_part('flexible/section_header'); ?>
   <div class="fc-columns-grid fc-columns-grid--4">
 
       <div>

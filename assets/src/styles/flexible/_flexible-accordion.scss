@@ -1,281 +1,128 @@
-// .fc-section-accordion-simple, .fc-section-accordion-tabs {
-//   //padding-bottom: 80px;
+//////////////////////////////////////////////////////////////////////////////////////////////
+//
+// Accordion / FAQ
+//
+// One component, three styles chosen by the `faq_style` radio on the Accordion/FAQ
+// layout. The template emits a matching modifier class:
+//
+//   .fc-faq-section--plain      no accordion; every question and answer is always open
+//   .fc-faq-section--stacked    accordion, items flush and divided by rules
+//   .fc-faq-section--separated  accordion, each item a bordered card with a gap between
+//
+// The markup is identical across all three apart from the plain style using a `div` for
+// the question instead of the `a.uk-accordion-title` UIkit's JS needs, so everything
+// below keys off the `.fc-faq-*` classes, which are always present.
+//
+// Note the template does not apply `uk-accordion-default` — its `:nth-child(n+2)`
+// margins and title styling would override the per-style spacing set here.
+//
+//////////////////////////////////////////////////////////////////////////////////////////////
 
-//   .tabs {
-//     margin: 0;
-//     border: 1px solid $black;
-    
-//     background: #fff;
-//     list-style-type: none;
-//   } 
+.fc-faq-section {
 
-//   .tabs-title>a {
-//     border-right: 1px solid $black;
-//     display: block;
-//     padding: 1.5rem 2rem;
-//     font-size: .925rem;
-//     line-height: 1;
-//     color: $black;
-//   }
-
-//   .tabs-title>a:focus, .tabs-title>a[aria-selected=true] {
-//     background: $primary;
-//     color: #fff;
-//   }
-
-//   .tabs-panel {
-//     border: none;
-//     padding: 0;
-//   }
-
-//   .accordion {
-//     background: transparent;
-//     border-top: 1px solid $grey-border;
-
-//     &.separated {
-//       border-top: none;
-
-//       .accordion-item {
-//         margin-bottom: 24px;
-//       }
-
-//       .accordion-topic {
-       
-//         border: 1px solid $grey-border;
-//         border-top: 1px solid $grey-border;
-//         border-radius: 10px;
-
-//         overflow: hidden;
-//       }
-
-//     }
-
-//     &.in-tabs {
-//       border-top: none;
-//     }
-
-//     .accordion-topic {
-//       border: 1px solid $grey-border;
-//       border-top: none;
-//       padding: 22px 30px;
-//       position: relative;
-//       background: $white;
-
-//       h4 {
-//         font-family: $sans;
-//         font-size: 24px;
-//         font-weight: 400;
-//         margin: 0;
-//       }
-
-//       .accordion-arrow {
-//         border-left: 1px solid $grey-border;
-//         display: flex;
-//          align-items: center;
-//          justify-content: center;
-//         height: 100%;
-//         position: absolute;
-//          top: 0;
-//          right: 0;
-//          bottom: 0;
-//         width: 120px;
-//         transition: all .5s ease;
-
-//         i {
-//           color: $black;
-//           font-size: 34px;
-//         }
-
-//       }
-
-//       &:hover .accordion-arrow {
-//         background-color: $primary;
-
-//         i {
-//           color: #fff;
-//         }
-
-//       }
-
-//       &.current  {
-//         border-radius: 10px 10px 0 0;
-//       }
-
-//       &.current .accordion-arrow i {
-//         transform: rotate(-90deg);
-//       }
-
-//       &:xafter { 
-//         position:absolute;  
-//         color: $black; 
-//         content: "›"; 
-//         font-size:20px; 
-//         top: -4px; 
-//         right: 10px; 
-        
-//       }
-
-//       &.current {
-//         background-color: $gray-bg;
-//         font-weight: 700;
-//       }
-
-      
-
-//     }
-
-//     .accordion-response {
-//       border-left: 1px solid $grey-border;
-//       border-right: 1px solid $grey-border;
-//       border-bottom: 1px solid $grey-border;
-//       padding: 22px 30px;
-//       display: none;
-
-//       &.current {
-//         background-color: $gray-bg;
-//       }
-
-//       h1, h2, h3, h4, h5, h6, ul, p {
-//         max-width: 600px;
-//       }
-
-//       p, li {
-//         font-size: 20px;
-//       }
-      
-//     }
-
-//   }
-
-// }
-
-
-// .fc-section-columns + .fc-section-accordion-simple,
-// .fc-section-columns + .fc-section-accordion-tabs{
-//   margin-top: 2rem;
-// }
-
-
-// .fc-faq-section:not(.fc-section-accordion-simple){
-
-//   margin-top: 2rem;
-
-//   & .accordion-arrow{
-//     display: none;
-//   }
-
-//   & .faq_question{
-//     display: flex;
-//   }
-
-//   & .faq_answer{
-//     padding-bottom: 0.5rem;
-//     border-bottom: 1px solid $grey-border;
-//     margin-bottom: 2.5rem;
-//   }
-// }
-
-.fc-faq-section,
-.fc-section-accordion-simple{
-
-
-  ul.uk-accordion{
-
-
-      & > li{
-        border-bottom: 1px solid $grey-border;
-
-        &:first-child{
-          border-top: 1px solid $grey-border;
-        }
-
-        // & .uk-icon{
-        //   transition: transform 0.2s ease-in;
-        // }
-
-        &.uk-open{
-
-          & .uk-icon{
-            transform: scaleY(-1);
-          }
-
-        }
-
-        & .uk-accordion-title{
-
-        }
-        & .uk-accordion-content{
-          border: none;
-          
-        }
-
-      }
-
+  .fc-faq-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
   }
 
-  &.separated{
-
-
-    ul.uk-accordion{
-      border-top: 0px solid transparent;
-
-      & > li{
-        border-top: 1px solid $grey-border;
-        margin-bottom: 30px !important;
-        margin-top: 20px !important;
-
-        & .uk-accordion-title{
-
-        }
-        & .uk-accordion-content{
-                
-        }
-
-      }
-
+  .fc-faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $faq-toggle-gap;
+    color: $faq-title-color;
+    text-decoration: none;
   }
 
+  .fc-faq-question__text {
+    font-family: $sans;
+    font-size: $faq-title-font-size;
+    font-weight: 400;
+    line-height: 1.3;
+    margin: 0;
+    color: inherit;
   }
 
-  // .accordion {
-
-  //   & li.accordion-item{
-  //     & a{
-  //       border-bottom: 1px solid $grey-border;
-  //       & i{
-  //         left: -1rem;
-  //         &:before{
-  //           display: block;
-  //           transform: rotate(90deg);
-  //         }
-  //       }
-  //     }
-
-  //     & .accordion-response{
-  //       will-change: height;
-  //       /* Hide the back of the element when facing away */
-  //       backface-visibility: hidden; 
-  //       /* Ensures hardware acceleration is used */
-  //       transform: translateZ(0); 
-  //     }
- 
-  //   }
-  
-  //   & li.accordion-item.uk-open{
-  
-  //     & i:before{
-  //       display: block;
-  //       transform: rotate(-90deg);
-  //     }
-  
-  //   }
-  
-  // }
-    
+  // Chevron. Only rendered for the two accordion styles.
+  .fc-faq-toggle {
+    flex: 0 0 auto;
+    color: $faq-toggle-color;
+    transition: transform 0.2s ease-in-out;
   }
 
+  .fc-faq-item.uk-open .fc-faq-toggle { transform: scaleY(-1); }
+
+  // Collapse the outer margins of whatever wpautop produced so the answer's spacing is
+  // controlled by the item padding rather than by its first and last paragraphs.
+  .fc-faq-answer {
+    > :first-child { margin-top: 0; }
+    > :last-child { margin-bottom: 0; }
+  }
+}
 
 
+/*
+ * Plain — no accordion. Questions and answers are always visible, separated by a rule
+ * under each pair so the list stays readable without any affordance to click.
+ */
+.fc-faq-section--plain {
+
+  .fc-faq-item {
+    padding-bottom: $faq-padding-vertical;
+    border-bottom: 1px solid $faq-border-color;
+
+    & + .fc-faq-item { margin-top: $faq-padding-vertical; }
+  }
+
+  .fc-faq-question { margin-bottom: 0.5rem; }
+}
 
 
- 
+/*
+ * Stacked — accordion items flush against each other, divided by rules. The first item
+ * carries a top border so the list reads as one bounded block.
+ */
+.fc-faq-section--stacked {
+
+  .fc-faq-item {
+    border-bottom: 1px solid $faq-border-color;
+
+    &:first-child { border-top: 1px solid $faq-border-color; }
+  }
+
+  .fc-faq-question {
+    padding: $faq-padding-vertical 0;
+    cursor: pointer;
+
+    &:hover { color: $faq-title-hover-color; }
+  }
+
+  .fc-faq-answer { padding-bottom: $faq-padding-vertical; }
+}
+
+
+/*
+ * Separated — the same rule-based treatment as stacked, but each item is bounded top
+ * and bottom with a gap between so the questions read as discrete blocks. No fill, no
+ * radius and no horizontal inset, which keeps the question text on the same left edge
+ * as the plain and stacked styles.
+ */
+.fc-faq-section--separated {
+
+  .fc-faq-item {
+    border-top: 1px solid $faq-border-color;
+    border-bottom: 1px solid $faq-border-color;
+
+    & + .fc-faq-item { margin-top: $faq-item-gap; }
+  }
+
+  .fc-faq-question {
+    padding: $faq-padding-vertical 0;
+    cursor: pointer;
+
+    &:hover { color: $faq-title-hover-color; }
+  }
+
+  .fc-faq-answer { padding-bottom: $faq-padding-vertical; }
+}

@@ -26,7 +26,6 @@ $sage_includes = [
   'lib/setup.php',     // Core theme setup, support declarations, and initialization
   'lib/shortcodes.php',// Custom WordPress shortcode definitions
   'lib/tinymce.php',   // TinyMCE editor customizations and enhancements
-  'lib/titles.php',    // Dynamic page title generation and management
   'lib/wrapper.php',   // Theme wrapper class for template hierarchy manipulation
   'lib/customizer.php', // WordPress Customizer API settings and controls
   'lib/misc.php',       // Miscellaneous utility functions and features

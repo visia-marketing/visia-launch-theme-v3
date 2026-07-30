@@ -17,6 +17,8 @@
 	padding: 8px 16px 8px 16px;
 	text-transform: uppercase;
   text-align: center;
+  line-height: 1;
+
 }
 
 //
@@ -27,7 +29,6 @@
 @mixin primary-button-icon {
   i {
     margin-left: 11px;
-
   }
 }
 
@@ -69,10 +70,26 @@
 
 	}
 
-  &.button-arrow {
+  // Matches the `uk-button uk-button-outline` class pair emitted by
+  // partials/content-product-card.php and tinymce/style_formats.json.
+  &-outline {
+    background-color: transparent;
+    border: 1px solid $primary;
+    color: $primary;
+
+    &:hover, &.active {
+      background-color: $primary;
+      border-color: $primary;
+      color: #fff !important;
+    }
+  }
+
+  // Matches the `uk-button uk-button-arrow` class pair emitted by
+  // flexible/section_cards.php and tinymce/style_formats.json.
+  &-arrow {
     padding-right: 40px;
     position: relative;
-    
+
     &:after {
       color: #fff;
       content: "\f178";
@@ -95,6 +112,8 @@
   }
 
 }
+
+
 
 
 .gform_wrapper.gravity-theme.uavionix_wrapper .gform_button {

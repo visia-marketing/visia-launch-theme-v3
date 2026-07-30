@@ -1,7 +1,6 @@
 
 
 <div class="fc-section-accordion-tabs">
-  <?php get_template_part('flexible/section_header'); ?>
 
   <?php
   $tabs = get_sub_field('tabs'); 

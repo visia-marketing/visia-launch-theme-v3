@@ -1,5 +1,4 @@
 <div class="fc-section-columns">
-  <?php get_template_part('flexible/section_header'); ?>
   <div class="uk-flex uk-flex-wrap uk-child-width-1-1@s uk-child-width-1-3@m">
 
       <div class="">

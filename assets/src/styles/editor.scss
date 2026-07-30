@@ -1,0 +1,40 @@
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+// Editor stylesheet
+//
+// Loaded into the TinyMCE iframe via add_editor_style() in lib/setup.php, including every
+// ACF WYSIWYG field. Deliberately a much smaller bundle than main.scss: an editor iframe
+// only ever renders body copy plus whatever tinymce/style_formats.json can apply, so the
+// layout, navigation, carousel and lightbox components are all left out.
+//
+// Anything added here must be a *content* style. Layout styles belong in main.scss.
+//
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// 1. Theme variables and overrides. Must come first so UIkit picks them up.
+@import "common/variables";
+
+// 2. UIkit theme variables and hook mixins.
+@import "uikit/src/scss/variables-theme.scss";
+@import "uikit/src/scss/mixins-theme.scss";
+
+// 3. UIkit core variables and utility mixins. main.scss gets these for free via
+//    uikit-theme.scss -> components/_import.scss; importing components individually
+//    means pulling them in explicitly, otherwise list.scss cannot find svg-fill().
+@import "uikit/src/scss/components/variables.scss";
+@import "uikit/src/scss/components/mixin.scss";
+
+// 4. The UIkit components an editor iframe can actually render. Base supplies the
+//    typography (p, h1-h6, a, ul, ol, blockquote, hr, img); button supplies the
+//    uk-button-secondary modifier used by style_formats.json.
+@import "uikit/src/scss/components/base.scss";
+@import "uikit/src/scss/components/link.scss";
+@import "uikit/src/scss/components/heading.scss";
+@import "uikit/src/scss/components/list.scss";
+@import "uikit/src/scss/components/table.scss";
+@import "uikit/src/scss/components/button.scss";
+
+// 5. Theme styles for editable content.
+@import "components/buttons";
+@import "components/wp-classes";
+@import "partials/tinymce";

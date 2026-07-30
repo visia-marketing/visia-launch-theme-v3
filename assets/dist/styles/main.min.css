@@ -14409,12 +14409,12 @@ a, button, .button, [type=submit] {
   align-self: flex-end;
   width: 100%;
 }
+.fc-page-header .page-header-content-wrapper.fc-section-image *:not(.uk-button), .fc-page-header .page-header-content-wrapper.fc-section-dark *:not(.uk-button) {
+  color: #ffffff;
+}
 .fc-page-header .page-header-content-wrapper.page-header-expanded {
   padding-top: 12.5rem;
   padding-bottom: 12.5rem;
-}
-.fc-page-header .page-header-content-wrapper .page-header-content *:not(.uk-button) {
-  color: #ffffff;
 }
 .fc-page-header .page-header-content-wrapper .page-header-content p:last-child {
   margin-bottom: 0;

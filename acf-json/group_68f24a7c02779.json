@@ -129,7 +129,7 @@
                     "choices": {
                         "light": "Light",
                         "grey": "Grey",
-                        "dark": "Black",
+                        "dark": "Dark",
                         "image": "Image"
                     },
                     "default_value": false,
@@ -227,5 +227,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1785364752
+    "modified": 1785412953
 }

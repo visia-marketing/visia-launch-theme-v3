@@ -344,6 +344,33 @@
             "placeholder": "",
             "prepend": "",
             "append": ""
+        },
+        {
+            "key": "field_6a6399ab9acaa",
+            "label": "404 Page",
+            "name": "id_404_page",
+            "aria-label": "",
+            "type": "post_object",
+            "instructions": "Render this page's content on 404s in place of the default message. The response keeps its 404 status.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "page"
+            ],
+            "post_status": "",
+            "taxonomy": "",
+            "return_format": "id",
+            "multiple": 0,
+            "allow_null": 1,
+            "allow_in_bindings": 0,
+            "bidirectional": 0,
+            "ui": 1,
+            "bidirectional_target": []
         }
     ],
     "location": [
@@ -365,5 +392,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1761230014
+    "modified": 1785425891
 }

@@ -26,6 +26,10 @@
 
     .page-header-content {
 
+      & *:not(.uk-button){
+        color: $white;
+      }
+
      & p:last-child{
       margin-bottom: 0;
      }

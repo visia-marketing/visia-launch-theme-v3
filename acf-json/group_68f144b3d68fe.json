@@ -167,47 +167,15 @@
                     "min": "",
                     "max": ""
                 },
-                "layout_68f147e99ab7f": {
-                    "key": "layout_68f147e99ab7f",
-                    "name": "section_accordion_simple",
-                    "label": "Accordion",
-                    "display": "block",
-                    "sub_fields": [
-                        {
-                            "key": "field_68f147e99ab81",
-                            "label": "Accordion",
-                            "name": "accordion",
-                            "aria-label": "",
-                            "type": "clone",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "clone": [
-                                "group_672245220ae45"
-                            ],
-                            "display": "seamless",
-                            "layout": "block",
-                            "prefix_label": 0,
-                            "prefix_name": 0
-                        }
-                    ],
-                    "min": "",
-                    "max": ""
-                },
                 "layout_68f91711b3050": {
                     "key": "layout_68f91711b3050",
                     "name": "section_faqs",
-                    "label": "Frequently Asked Questions",
+                    "label": "Accordion/FAQ",
                     "display": "block",
                     "sub_fields": [
                         {
                             "key": "field_68f91711b3052",
-                            "label": "Frequently Asked Questions",
+                            "label": "Accordion/FAQ",
                             "name": "frequently_asked_questions",
                             "aria-label": "",
                             "type": "clone",
@@ -384,5 +352,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1782141896
+    "modified": 1785369600
 }

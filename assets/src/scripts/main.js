@@ -21,8 +21,6 @@ import SimpleLightbox from 'simple-lightbox';
 import AOS from 'aos';
 import { CountUp } from 'countup.js';
 
-// If you only need specific modules:
-// import { Foundation, Accordion, Tabs } from 'foundation-sites';
 (function($) {
 
   // Use this variable to set up the common and page specific functions. If you
@@ -37,8 +35,7 @@ import { CountUp } from 'countup.js';
         AOS.init({
           duration: 1000,
           once: true,
-        },
-      );
+        });
 
         document.querySelectorAll('.lightbox-gallery').forEach(function(gallery) {
             var anchors = gallery.querySelectorAll('a.lightbox-anchor');
@@ -109,48 +106,26 @@ import { CountUp } from 'countup.js';
         // ── End Modal Links ────────────────────────────────────────────────────
 
 
-      function hoverCardsInit(){
-        // get all elements with data-hover-card
-        const hoverCards = document.querySelectorAll('.cards-style--primary');
+        // ── Hover Cards ─────────────────────────────────────────────────────────
+        // Expands the .hover-panel inside primary-style cards on hover. The panel
+        // is collapsed by CSS (height: 0, _flexible-cards.scss); scrollHeight is
+        // read at hover time because it reports the natural content height even
+        // while collapsed, so the value stays correct after resizes and reflows.
+        // Called after initCardCarousels() below — Slick clones slides for
+        // infinite mode, and the clones need hover listeners too.
+        function hoverCardsInit(){
+          document.querySelectorAll('.cards-style--primary').forEach(card => {
+            const panel = card.querySelector('.hover-panel');
+            if (!panel) return;
 
-        hoverCards.forEach(card => {
-          // get the height of card-p ( if it exists )
-          const cardP = card.querySelector('.hover-panel');
-          let cardPHeight = 0;
-          if (cardP) {
-            cardPHeight = cardP.offsetHeight;
-          }
-          // set p height to 0 and overflow to hidden
-          if (cardP) {
-            cardP.style.height = '0';
-            cardP.style.overflow = 'hidden';
-          }
-          // add mouseenter event to card
-          card.addEventListener('mouseenter', () => {
-            if (cardP) {
-              cardP.style.height = cardPHeight + 'px';
-            }
+            card.addEventListener('mouseenter', () => {
+              panel.style.height = panel.scrollHeight + 'px';
+            });
+            card.addEventListener('mouseleave', () => {
+              panel.style.height = '0';
+            });
           });
-          // add mouseleave event to card
-          card.addEventListener('mouseleave', () => {
-            if (cardP) {
-              cardP.style.height = '0';
-            }
-          });
-
-        });
-        
-      }
-
-      // wait until whole page is loaded
-      jQuery(document).ready(function($) {
-        setTimeout(
-          hoverCardsInit(),
-          500
-        )
-      });
-
-
+        }
 
         if (document.querySelector('.countup-animated-number')) {
           const animatedNumbers = document.querySelectorAll('.countup-animated-number .number-span');
@@ -165,7 +140,7 @@ import { CountUp } from 'countup.js';
               separator: ',',
               enableScrollSpy: true,
               scrollSpyOnce: true,
-              scrollSpyDelay: 0,
+              scrollSpyDelay: isNaN(delayMs) ? 0 : delayMs, // per-number data-delay set in the editor
               startVal: startVal,
             });
         
@@ -202,12 +177,14 @@ import { CountUp } from 'countup.js';
           });
         }
 
-        initCardCarousels();
+      initCardCarousels();
 
-        
-      
+      // After carousel init so Slick's cloned slides get listeners too.
+      hoverCardsInit();
+
       },
       finalize: function() {
+         // JavaScript to be fired on every page, after the init JS
       }
     },
     // Home page
@@ -222,16 +199,10 @@ import { CountUp } from 'countup.js';
     // All Other Pages.
     'page': {
       init: function() {
-        
-        // Accordion
-        $('.accordion-topic').click(function(){
-          $(this).next('.accordion-response').slideToggle(500).toggleClass('current');
-          $(this).toggleClass('current');
-          $(this).parents('.accordion').siblings().find('.accordion-topic').slideUp(500);
-          $(this).parents('.accordion').siblings().find('.accordion-response').removeClass('current');
-        });
-        
-
+        // JavaScript to be fired on all standard pages
+      },
+      finalize: function() {
+        // JavaScript to be fired on all standard pages, after the init JS
       }
     },
   };

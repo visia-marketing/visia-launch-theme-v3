@@ -1,5 +1,4 @@
 
-  <?php get_template_part('flexible/section_header'); ?>  
 
   <?php 
   $column_ratio = get_sub_field('column_ratio');

@@ -14,14 +14,14 @@
   {
     "title": "Button",
     "selector": "a",
-    "classes": "uk-button uk-button"
+    "classes": "uk-button"
   },
   {
     "title": "Button Secondary",
     "selector": "a",
     "classes": "uk-button uk-button-secondary"
   },
-    {
+  {
     "title": "Button Outline",
     "selector": "a",
     "classes": "uk-button uk-button-outline"
@@ -35,5 +35,5 @@
     "title": "Button with Arrow",
     "selector": "a",
     "classes": "uk-button uk-button-arrow"
-  },
+  }
 ]

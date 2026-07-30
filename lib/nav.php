@@ -8,18 +8,6 @@
 
 class Roots_Nav_Walker extends Walker_Nav_Menu {
   /**
-   * Check if menu item is currently active
-   * 
-   * Searches for WordPress's various "current" class names and active states.
-   * 
-   * @param string $classes Space-separated list of CSS classes
-   * @return bool True if item is current/active, false otherwise
-   */
-  function check_current($classes) {
-    return preg_match('/(current[-_])|active|dropdown/', $classes);
-  }
-
-  /**
    * Start Level Output
    * 
    * Outputs the opening HTML for a new submenu level.
@@ -52,19 +40,10 @@ class Roots_Nav_Walker extends Walker_Nav_Menu {
     parent::start_el($item_html, $item, $depth, $args);
 
     /**
-     * Handle dropdown toggles for top-level items with children
-     * Currently commented out - likely for Bootstrap dropdown compatibility
-     */
-    if ($item->is_dropdown && ($depth === 0)) {
-      // Bootstrap dropdown toggle markup (currently disabled)
-      // $item_html = str_replace('<a', '<a class="dropdown-toggle" data-toggle="dropdown" data-target="#"', $item_html);
-      // $item_html = str_replace('</a>', ' <b class="caret"></b></a>', $item_html);
-    }
-    /**
      * Handle divider menu items
      * Removes the anchor tag for menu items marked as dividers
      */
-    elseif (stristr($item_html, 'li class="divider')) {
+    if (stristr($item_html, 'li class="divider')) {
       $item_html = preg_replace('/<a[^>]*>.*?<\/a>/iU', '', $item_html);
     }
     /**
@@ -93,12 +72,14 @@ class Roots_Nav_Walker extends Walker_Nav_Menu {
    * @param array $args Array of wp_nav_menu() arguments
    * @param string $output Passed by reference. Used to append additional content
    */
-  function display_element($element, &$children_elements, $max_depth, $depth = 0, $args, &$output) {
-    // Check if this element has children and we haven't reached max depth
-    $element->is_dropdown = ((!empty($children_elements[$element->ID]) && (($depth + 1) < $max_depth || ($max_depth === 0))));
+  function display_element($element, &$children_elements, $max_depth, $depth, $args, &$output) {
+    // Check if this element has children and we haven't reached max depth.
+    // Kept as a local: assigning to $element would create a dynamic property on
+    // WP_Post, which is deprecated as of PHP 8.2.
+    $is_dropdown = ((!empty($children_elements[$element->ID]) && (($depth + 1) < $max_depth || ($max_depth === 0))));
 
     // Add Foundation's 'has-submenu' class to parent items
-    if ($element->is_dropdown) {
+    if ($is_dropdown) {
       $element->classes[] = 'has-submenu'; // Foundation class (Bootstrap would use 'has-dropdown')
     }
 

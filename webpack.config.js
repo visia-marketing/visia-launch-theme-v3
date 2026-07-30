@@ -11,6 +11,13 @@ module.exports = {
         ],
         customizer: [
             './assets/src/scripts/customizer.js'
+        ],
+        // CSS-only entry for the TinyMCE editor iframe. MiniCssExtractPlugin names its
+        // output after the chunk, so this emits assets/dist/styles/editor.min.css.
+        // It also emits an empty assets/dist/scripts/editor.min.js stub, because
+        // output.filename applies to every chunk; that stub is never enqueued.
+        editor: [
+            './assets/src/styles/editor.scss'
         ]
     },
     devtool: 'source-map',
@@ -20,7 +27,14 @@ module.exports = {
         publicPath: '/wp-content/themes/visia-launch-theme-v3/'
     },
     externals: {
-        jquery: 'jQuery'  // ✅ Tell webpack jQuery is external
+        // Resolve `import $ from 'jquery'` to the global jQuery that WordPress core
+        // enqueues, rather than bundling a copy.
+        //
+        // Do not remove this. node_modules/jquery is 4.x (installed only as a
+        // slick-carousel peer dependency), so dropping it would bundle a second jQuery
+        // alongside core's 3.x — and jQuery 4 removed $.trim, $.isArray and .bind(),
+        // which slick 1.8.1 depends on.
+        jquery: 'jQuery'
     },
     resolve: {
         alias: {

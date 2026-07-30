@@ -42,7 +42,7 @@ function visia_create_anchor($string) {
   $string = strtolower($string);                    // Convert to lowercase
   $string = preg_replace('/[^a-z0-9]+/', ' ', $string); // Replace non-alphanumeric with spaces
   $string = trim($string);                          // Remove leading/trailing spaces
-  $string = str_replace(' ', '-', $string);         // Replace spaces with hyphens
+  $string = str_replace(' ', '-', $string);         // Replace spaces wi. h hyphens
   return $string;
 }
 
@@ -92,9 +92,11 @@ function get_flexible_content() {
 
       $containerWidth = get_sub_field('container_width') ?: 'uk-container uk-container-large'; // Container width class; matches ACF field default (Regular)
 
-      if ($background_image_id){
-        $background_image_url = wp_get_attachment_image_url($background_image_id, 'full');
-      }
+      // Reset per row: without this, a row set to background=image but with no
+      // image selected would inherit the previous row's image.
+      $background_image_url = $background_image_id
+        ? wp_get_attachment_image_url($background_image_id, 'full')
+        : '';
 
       /**
        * Build section element with dynamic classes
@@ -104,13 +106,13 @@ function get_flexible_content() {
        * - fc-section-[background]: Background type class
        * - Custom classes from ACF fields
        */
-      echo '<section class="fc-section fc-section-' . esc_attr(get_row_index()) . ' fc-section-' . esc_attr($background) . ' vis-rowgap-'.$content_spacing.' vis-sec-pad-top-'. $top_padding.' vis-sec-pad-bottom-'. $bottom_padding.' ' . esc_attr($class) . '" id="' . esc_attr($id) . '">';
+      echo '<section class="fc-section fc-section-' . esc_attr(get_row_index()) . ' fc-section-' . esc_attr($background) . ' vis-rowgap-' . esc_attr($content_spacing) . ' vis-sec-pad-top-' . esc_attr($top_padding) . ' vis-sec-pad-bottom-' . esc_attr($bottom_padding) . ' ' . esc_attr($class) . '" id="' . esc_attr($id) . '">';
 
-        if( $background == 'image'){
+        if ($background === 'image' && $background_image_url) {
           echo '<div class="background-image" style="background: url(' . esc_url($background_image_url) . ')"></div>';
         }
 
-        echo '<div class="' . esc_attr($containerWidth) . ' uk-flex uk-flex-column uk-flex-'.$horizontal_align.'">';
+        echo '<div class="' . esc_attr($containerWidth) . ' uk-flex uk-flex-column uk-flex-' . esc_attr($horizontal_align) . '">';
 
 
           get_template_part('flexible/'.get_row_layout() );
@@ -123,49 +125,3 @@ function get_flexible_content() {
     echo '</div>';
   }
 }
-
-
-
-/**
- * Dynamic Accent Color Management
- * 
- * Generates CSS file with accent color CSS variable from ACF options page.
- * This allows theme-wide color customization without hardcoding values.
- */
-add_action('acf/save_post', function ($post_id) {
-    if ($post_id !== 'options') {
-        return;
-    }
-
-    $accent_color = get_field('accent_color', 'option');
-
-    if (!$accent_color) {
-        return;
-    }
-
-    $css = ":root {\n    --accent-color: {$accent_color};\n}\n";
-
-    file_put_contents(
-        get_stylesheet_directory() . '/accent-color.css',
-        $css
-    );
-}, 20);
-
-/**
- * Dynamically populate the "Select Global Callout" dropdown
- * from the global_featured_callouts repeater on the options page.
- */
-add_filter('acf/load_field/key=field_69fc_global_callout_select', function( $field ) {
-    $field['choices'] = [];
-
-    $callouts = get_field('global_featured_callouts', 'options');
-
-    if ( $callouts ) {
-        foreach ( $callouts as $i => $callout ) {
-            $label = ! empty( $callout['callout_label'] ) ? $callout['callout_label'] : 'Callout ' . ( $i + 1 );
-            $field['choices'][ $i ] = $label;
-        }
-    }
-
-    return $field;
-});

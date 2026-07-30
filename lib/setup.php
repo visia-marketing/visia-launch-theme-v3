@@ -6,57 +6,42 @@ use Roots\Sage\Assets;
 
 /**
  * Theme setup
- * 
+ *
  * Configures theme defaults and registers support for various WordPress features.
  * This function runs during the 'after_setup_theme' action hook.
  */
 function setup() {
-  /**
-   * Soil Plugin Support
-   * 
-   * Enables features from the Soil plugin when activated.
-   * Soil is a WordPress plugin that contains a collection of modules to apply
-   * theme-agnostic front-end modifications.
-   * 
-   * @link https://roots.io/plugins/soil/
-   */
-  add_theme_support('soil-clean-up');      // Cleaner WordPress markup
-  add_theme_support('soil-nav-walker');    // Bootstrap-compatible nav walker
-  add_theme_support('soil-nice-search');   // Redirects /?s=query to /search/query/ for cleaner URLs
-  add_theme_support('soil-jquery-cdn');    // Loads jQuery from Google's CDN with local fallback
-  add_theme_support('soil-relative-urls'); // Makes URLs relative for portability
 
   /**
    * Internationalization
-   * 
-   * Makes the theme available for translation.
-   * Translation files should be placed in the /lang directory.
-   * Community translations available at: https://github.com/roots/sage-translations
+   *
+   * Makes the theme available for translation. WordPress looks for
+   * WP_LANG_DIR/themes/visia_marketing-{locale}.mo first, then the theme's own
+   * /lang directory, so translations can be dropped in without touching the theme.
    */
   load_theme_textdomain('visia_marketing', get_template_directory() . '/lang');
 
   /**
    * Title Tag Support
-   * 
+   *
    * Let WordPress manage the document title.
    * By adding theme support, we declare that this theme does not use a
    * hard-coded <title> tag in the document head.
-   * 
+   *
    * @link http://codex.wordpress.org/Function_Reference/add_theme_support#Title_Tag
    */
   add_theme_support('title-tag');
 
   /**
    * Navigation Menus
-   * 
+   *
    * Registers custom navigation menu locations.
    * These can be assigned in WordPress admin under Appearance > Menus.
-   * 
+   *
    * @link http://codex.wordpress.org/Function_Reference/register_nav_menus
    */
   register_nav_menus([
     'primary_navigation'      => __('Primary Navigation', 'visia_marketing'),      // Main site navigation
-    //'store_navigation'        => __('Store Navigation', 'visia_marketing'),      // Commented out - likely for WooCommerce
     'top_navigation'          => __('Top Navigation', 'visia_marketing'),          // Top bar navigation
     'mobile_navigation'       => __('Mobile Navigation', 'visia_marketing'),       // Mobile-specific menu
     'footer_navigation_1'     => __('Footer Navigation 1', 'visia_marketing'),     // First footer column
@@ -68,18 +53,19 @@ function setup() {
 
   /**
    * Featured Images Support
-   * 
+   *
    * Enables featured images (post thumbnails) for posts and pages.
-   * Additional image sizes can be defined using add_image_size().
-   * 
+   *
    * @link http://codex.wordpress.org/Post_Thumbnails
-   * @link http://codex.wordpress.org/Function_Reference/set_post_thumbnail_size
-   * @link http://codex.wordpress.org/Function_Reference/add_image_size
    */
   add_theme_support('post-thumbnails');
-  //set_post_thumbnail_size( 300, 190, true ); // Set featured image size (width, height, crop)
 
-
+  /**
+   * Default Image Sizes
+   *
+   * One-shot migration of the WordPress media settings to the sizes this theme
+   * expects. Guarded by an option so it only ever runs once per install.
+   */
   if ( ! get_option( 'visia_image_sizes_set' ) ) {
 		update_option( 'thumbnail_size_w', 300 );
 		update_option( 'thumbnail_size_h', 190 );
@@ -96,130 +82,38 @@ function setup() {
 		update_option( 'visia_image_sizes_set', true );
 	}
 
-
-  /**
-   * Post Formats
-   * 
-   * Enables support for Post Formats.
-   * Post Formats allow users to format posts differently based on content type.
-   * 
-   * @link http://codex.wordpress.org/Post_Formats
-   */
-  add_theme_support('post-formats', ['aside', 'gallery', 'link', 'image', 'quote', 'video', 'audio']);
-
   /**
    * HTML5 Markup
-   * 
+   *
    * Switches default core markup to output valid HTML5.
    * Affects: captions, comment forms, comment lists, galleries, and search forms.
-   * 
+   *
    * @link http://codex.wordpress.org/Function_Reference/add_theme_support#HTML5
    */
   add_theme_support('html5', ['caption', 'comment-form', 'comment-list', 'gallery', 'search-form']);
 
   /**
    * Editor Stylesheet
-   * 
-   * Adds main theme stylesheet to the visual editor.
-   * This ensures the editor matches the front-end styling.
-   * Custom editor styles can be added in /assets/styles/layouts/_tinymce.scss
+   *
+   * Loads the theme's editor styles into the TinyMCE iframe, including every ACF
+   * WYSIWYG field, so the visual editor matches the front end.
+   *
+   * This is a dedicated, much smaller bundle than the front-end stylesheet; the
+   * source is /assets/src/styles/editor.scss. add_editor_style() takes no version
+   * argument, so the cache-busting version is appended to the URL by hand.
    */
-  add_editor_style(Assets\asset_path('styles/main.css'));
+  $editor_css = 'dist/styles/editor.min.css';
+  $editor_version = Assets\asset_version($editor_css);
+
+  add_editor_style(Assets\asset_path($editor_css) . ($editor_version ? '?ver=' . $editor_version : ''));
 }
 
 // Hook the setup function to run after the theme is initialized
 add_action('after_setup_theme', __NAMESPACE__ . '\\setup');
 
 /**
- * Register Sidebars and Widget Areas
- * 
- * Creates widget-ready areas that can be populated through the WordPress admin.
- * Each sidebar can contain multiple widgets.
- */
-function widgets_init() {
-  /**
-   * Primary Sidebar
-   * Main sidebar displayed on blog posts and pages (when enabled)
-   */
-  register_sidebar([
-    'name'          => __('Primary', 'visia_marketing'),
-    'id'            => 'sidebar-primary',
-    'before_widget' => '<section class="widget %1$s %2$s">', // Wraps each widget in a section with dynamic classes
-    'after_widget'  => '</section>',
-    'before_title'  => '<h3>',                               // Widget title wrapped in h3
-    'after_title'   => '</h3>'
-  ]);
-
-  /**
-   * Footer Widget Area
-   * Widgets displayed in the site footer
-   */
-  register_sidebar([
-    'name'          => __('Footer', 'visia_marketing'),
-    'id'            => 'sidebar-footer',
-    'before_widget' => '<section class="widget %1$s %2$s">',
-    'after_widget'  => '</section>',
-    'before_title'  => '<h3>',
-    'after_title'   => '</h3>'
-  ]);
-
-  /**
-   * Shop Category Sidebar
-   * Widget area for WooCommerce category pages
-   */
-  register_sidebar([
-    'name'          => __('Shop Category', 'visia_marketing'),
-    'id'            => 'sidebar-shop-category',
-    'before_widget' => '<section class="widget %1$s %2$s">',
-    'after_widget'  => '</section>',
-    'before_title'  => '<h3>',
-    'after_title'   => '</h3>'
-  ]);
-
-  /**
-   * Shop Archive Sidebar
-   * Widget area for WooCommerce archive/shop pages
-   */
-  register_sidebar([
-    'name'          => __('Shop Archive', 'visia_marketing'),
-    'id'            => 'sidebar-shop-archive',
-    'before_widget' => '<section class="widget %1$s %2$s">',
-    'after_widget'  => '</section>',
-    'before_title'  => '<h3>',
-    'after_title'   => '</h3>'
-  ]);
-  
-}
-// Hook widget initialization to the widgets_init action
-add_action('widgets_init', __NAMESPACE__ . '\\widgets_init');
-
-/**
- * Sidebar Display Logic
- * 
- * Determines which pages should NOT display the sidebar.
- * Uses static variable to cache the result for performance.
- * 
- * @return bool True if sidebar should be displayed, false otherwise
- */
-function display_sidebar() {
-  static $display; // Cache the result to avoid recalculation
-
-  // Only calculate if not already cached
-  isset($display) || $display = !in_array(true, [
-    // The sidebar will NOT be displayed if ANY of the following return true.
-    // @link https://codex.wordpress.org/Conditional_Tags
-    is_404(),                                    // Hide on 404 error pages
-    is_front_page(),                            // Hide on the front page
-    is_page_template('template-custom.php'),    // Hide on custom page template
-  ]);
-
-  // Allow other plugins/themes to filter this decision
-  return apply_filters('sage/display_sidebar', $display);
-}
-
-/**
  * Enqueue Theme Assets
- * 
+ *
  * Loads all CSS and JavaScript files needed by the theme.
  * Hooked with priority 100 to ensure it runs after other plugins.
  */
@@ -241,16 +135,13 @@ function assets() {
 
   /**
    * Enqueue Stylesheets
+   *
+   * Remote third-party URLs pass null for $ver; theme assets are versioned by
+   * file modification time so a rebuild always busts the cache.
    */
-  wp_enqueue_script( 'jquery' );
-  wp_enqueue_style('theme-fonts', $fonts , false, null);          // Google/Typekit fonts
-  wp_enqueue_style('sage/css', Assets\asset_path('/dist/styles/main.min.css'), false, null); // Compiled theme styles
+  wp_enqueue_style('theme-fonts', $fonts, false, null);          // Google/Typekit fonts
+  wp_enqueue_style('sage/css', Assets\asset_path('dist/styles/main.min.css'), false, Assets\asset_version('dist/styles/main.min.css')); // Compiled theme styles
   wp_enqueue_script('font-awesome-kit', 'https://kit.fontawesome.com/f71e020b2c.js', [], null, true); // Font Awesome 7 Kit
-  wp_enqueue_style('default-css', get_stylesheet_uri() , false, null); // WordPress default stylesheet (style.css)
-  wp_enqueue_style('accent-color', get_template_directory_uri() . '/accent-color.css', false, null); // Dynamic accent color CSS
-
-
-
 
   /**
    * Comment Reply Script
@@ -262,9 +153,11 @@ function assets() {
 
   /**
    * Main Theme JavaScript
-   * Note: There's a duplicate enqueue here that should be removed
+   *
+   * Declaring 'jquery' as a dependency is what loads WordPress core's jQuery;
+   * it does not need to be enqueued separately.
    */
-  wp_enqueue_script('sage/js', Assets\asset_path('dist/scripts/main.min.js'), ['jquery'], null, true);
+  wp_enqueue_script('sage/js', Assets\asset_path('dist/scripts/main.min.js'), ['jquery'], Assets\asset_version('dist/scripts/main.min.js'), true);
 
 }
 // Hook with priority 100 to load after most other scripts/styles

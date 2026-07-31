@@ -107,14 +107,14 @@ import { CountUp } from 'countup.js';
 
 
         // ── Hover Cards ─────────────────────────────────────────────────────────
-        // Expands the .hover-panel inside primary-style cards on hover. The panel
+        // Expands the .hover-panel inside overlay-style cards on hover. The panel
         // is collapsed by CSS (height: 0, _flexible-cards.scss); scrollHeight is
         // read at hover time because it reports the natural content height even
         // while collapsed, so the value stays correct after resizes and reflows.
         // Called after initCardCarousels() below — Slick clones slides for
         // infinite mode, and the clones need hover listeners too.
         function hoverCardsInit(){
-          document.querySelectorAll('.cards-style--primary').forEach(card => {
+          document.querySelectorAll('.cards-style--overlay').forEach(card => {
             const panel = card.querySelector('.hover-panel');
             if (!panel) return;
 

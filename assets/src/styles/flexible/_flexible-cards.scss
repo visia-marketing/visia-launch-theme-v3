@@ -3,8 +3,8 @@
 
     & .uk-card{
 
-        // ── Primary Style ──────────────────────────────────────────────
-        &.cards-style--primary{
+        // ── Overlay Style ──────────────────────────────────────────────
+        &.cards-style--overlay{
 
             & h3,
             & p,
@@ -62,8 +62,9 @@
             }
         }
 
-        // ── Basic Style ────────────────────────────────────────────────
-        &.cards-style--basic{
+        // ── Simple + Plain Styles ──────────────────────────────────────
+        &.cards-style--simple,
+        &.cards-style--plain{
 
             & .uk-card--inner{
                 background: #fff;
@@ -111,6 +112,21 @@
                     margin-top: 16px;
                     max-width: max-content;
                 }
+            }
+        }
+
+        // ── Plain Style ────────────────────────────────────────────────
+        // Same as simple, minus the card surface and the body padding — for
+        // sections whose own background already provides the contrast.
+        &.cards-style--plain{
+
+            & .uk-card--inner{
+                background: transparent;
+            }
+
+            & a.card-body{
+                padding: 0;
+                padding-top: 1.25rem;
             }
         }
     }

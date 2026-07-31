@@ -17040,19 +17040,19 @@ body.woocommerce.single-product .product_meta {
   overflow: hidden;
 }
 
-.fc-section-cards .uk-card.cards-style--primary h3, .fc-section-cards .uk-card.cards-style--primary p, .fc-section-cards .uk-card.cards-style--primary span {
+.fc-section-cards .uk-card.cards-style--overlay h3, .fc-section-cards .uk-card.cards-style--overlay p, .fc-section-cards .uk-card.cards-style--overlay span {
   color: #ffffff;
 }
-.fc-section-cards .uk-card.cards-style--primary .uk-card--inner {
+.fc-section-cards .uk-card.cards-style--overlay .uk-card--inner {
   border-radius: 1.25rem;
   overflow: hidden;
 }
-.fc-section-cards .uk-card.cards-style--primary .uk-card--inner .card-media img {
+.fc-section-cards .uk-card.cards-style--overlay .uk-card--inner .card-media img {
   aspect-ratio: 4/3;
   -o-object-fit: cover;
      object-fit: cover;
 }
-.fc-section-cards .uk-card.cards-style--primary .uk-card--inner .card-body {
+.fc-section-cards .uk-card.cards-style--overlay .uk-card--inner .card-body {
   background: linear-gradient(180deg, rgba(0, 47, 134, 0) 0%, var(--ELK-Blue, rgba(0, 47, 134, 0.95)) 57.47%);
   background-size: 100% 400%;
   background-position: 0% 0%;
@@ -17065,28 +17065,28 @@ body.woocommerce.single-product .product_meta {
   text-decoration: none;
   transition: background-position 0.5s ease-out;
 }
-.fc-section-cards .uk-card.cards-style--primary .uk-card--inner .card-body:hover {
+.fc-section-cards .uk-card.cards-style--overlay .uk-card--inner .card-body:hover {
   background-position: 0% 33%;
 }
-.fc-section-cards .uk-card.cards-style--primary .uk-card--inner .card-body:hover .hover-panel {
+.fc-section-cards .uk-card.cards-style--overlay .uk-card--inner .card-body:hover .hover-panel {
   transition: height 0.2s ease-in-out, opacity 0.25s ease-in 0.15s;
   opacity: 1;
 }
-.fc-section-cards .uk-card.cards-style--primary .uk-card--inner .card-body > *:not(.uk-button) {
+.fc-section-cards .uk-card.cards-style--overlay .uk-card--inner .card-body > *:not(.uk-button) {
   max-width: 33rem;
 }
-.fc-section-cards .uk-card.cards-style--primary .uk-card--inner .card-body .hover-panel {
+.fc-section-cards .uk-card.cards-style--overlay .uk-card--inner .card-body .hover-panel {
   height: 0;
   overflow: hidden;
   padding-bottom: 0.5rem;
   opacity: 0;
   transition: opacity 0.25s ease-in, height 0.4s ease-in-out 0.1s;
 }
-.fc-section-cards .uk-card.cards-style--basic .uk-card--inner {
+.fc-section-cards .uk-card.cards-style--simple .uk-card--inner, .fc-section-cards .uk-card.cards-style--plain .uk-card--inner {
   background: #fff;
   height: 100%;
 }
-.fc-section-cards .uk-card.cards-style--basic .card-media img {
+.fc-section-cards .uk-card.cards-style--simple .card-media img, .fc-section-cards .uk-card.cards-style--plain .card-media img {
   aspect-ratio: 3/2;
   -o-object-fit: cover;
      object-fit: cover;
@@ -17094,33 +17094,40 @@ body.woocommerce.single-product .product_meta {
   border-radius: 0;
   overflow: hidden;
 }
-.fc-section-cards .uk-card.cards-style--basic a.card-body {
+.fc-section-cards .uk-card.cards-style--simple a.card-body, .fc-section-cards .uk-card.cards-style--plain a.card-body {
   padding: 2rem;
   color: #000000;
   text-decoration: none;
 }
-.fc-section-cards .uk-card.cards-style--basic a.card-body h3 {
+.fc-section-cards .uk-card.cards-style--simple a.card-body h3, .fc-section-cards .uk-card.cards-style--plain a.card-body h3 {
   font-size: 1.75rem;
   font-style: normal;
   font-weight: 700;
   line-height: 1.3;
   color: #000000;
 }
-.fc-section-cards .uk-card.cards-style--basic a.card-body span {
+.fc-section-cards .uk-card.cards-style--simple a.card-body span, .fc-section-cards .uk-card.cards-style--plain a.card-body span {
   color: #ffffff !important;
 }
-.fc-section-cards .uk-card.cards-style--basic a.card-body .hover-panel {
+.fc-section-cards .uk-card.cards-style--simple a.card-body .hover-panel, .fc-section-cards .uk-card.cards-style--plain a.card-body .hover-panel {
   flex-grow: 1;
   display: inline-flex;
   flex-direction: column;
 }
-.fc-section-cards .uk-card.cards-style--basic a.card-body .hover-panel p {
+.fc-section-cards .uk-card.cards-style--simple a.card-body .hover-panel p, .fc-section-cards .uk-card.cards-style--plain a.card-body .hover-panel p {
   margin-bottom: auto;
 }
-.fc-section-cards .uk-card.cards-style--basic a.card-body .uk-button {
+.fc-section-cards .uk-card.cards-style--simple a.card-body .uk-button, .fc-section-cards .uk-card.cards-style--plain a.card-body .uk-button {
   margin-top: 16px;
   max-width: -moz-max-content;
   max-width: max-content;
+}
+.fc-section-cards .uk-card.cards-style--plain .uk-card--inner {
+  background: transparent;
+}
+.fc-section-cards .uk-card.cards-style--plain a.card-body {
+  padding: 0;
+  padding-top: 1.25rem;
 }
 .fc-section-cards.carousel-wrapper {
   position: relative;

@@ -1,0 +1,111 @@
+.fc-section-cta {
+  padding: 80px 0;
+
+  // Full-bleed band: break out of the section's content container so the
+  // background spans edge-to-edge, while the content is re-contained by the
+  // container-width class on .call-to-action--inner. `.fc-section` uses
+  // overflow:hidden, which clips the 100vw width and prevents horizontal scroll.
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: calc(50% - 50vw);
+  position: relative;
+
+  &:after {
+    content: "";
+    position: absolute;
+    left: 10%;
+    top: 0;
+    height: 150%;
+    width: 300px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: .5;
+    // Decorative only — must never intercept clicks (it overlaps the button
+    // now that the band spans the full viewport).
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  // Keep the content (and its button) above the decorative ::after layer.
+  .call-to-action--inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  // Content / button layout, driven by the `cta_content_alignment` ACF field.
+  // The button is a sibling flex item so it can sit on the side opposite the
+  // content (row-reverse for `right`), or below it when centered. Stacks below
+  // `medium` in all three cases, keeping the chosen text alignment.
+  .call-to-action--layout {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    &.cta-align--left   { align-items: flex-start; text-align: left; }
+    &.cta-align--center { align-items: center;     text-align: center; }
+    &.cta-align--right  { align-items: flex-end;   text-align: right; }
+
+    // Preserves the readable measure the CTA has always had (was uk-width-4-5).
+    &.cta-align--center .call-to-action--content {
+      max-width: 80%;
+    }
+
+    @include breakpoint(medium) {
+      &.cta-align--left,
+      &.cta-align--right {
+        align-items: center;
+        justify-content: space-between;
+        gap: 50px;
+      }
+
+      &.cta-align--left  { flex-direction: row; }
+      &.cta-align--right { flex-direction: row-reverse; }
+    }
+  }
+
+  .call-to-action--content > *:last-child {
+    margin-bottom: 0;
+  }
+
+  .call-to-action--action {
+    flex-shrink: 0;
+
+    // `primary-button` sets `margin: 1rem 0 0 0`; the flex gap handles spacing here.
+    .uk-button {
+      margin: 0;
+    }
+  }
+
+  .flex {
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+
+    @include breakpoint(medium) {
+      flex-direction: row;
+      gap: 50px;
+    }
+
+    h6 {
+      font-size: 22px;
+      margin-bottom: 0;
+      text-align: center;
+
+      @include breakpoint(medium) {
+        flex-direction: row;
+        text-align: left;
+      }
+
+    }
+
+    .uk-button {
+      margin: 0;
+      background-color: $green;
+      color: $white;
+    }
+
+  }
+
+}

@@ -1,6 +1,18 @@
 <?php $source = get_sub_field('cta_content_source');?>
 <?php $cta_id = 'call-to-action-' . rand(); ?>
 <?php
+// Content position for this row. The button is placed on the opposite side
+// (or below, when centered). Applies to both the Default and Custom sources,
+// since it's a layout choice for the section rather than part of the content.
+$alignment = get_sub_field('cta_content_alignment');
+$alignment = in_array($alignment, ['left', 'center', 'right'], true) ? $alignment : 'left';
+
+// Reset per row: these are only assigned in the `background == image` branch
+// below, but are read unconditionally further down — without this they'd raise
+// undefined-variable notices and leak from a previous CTA row on the same page.
+$image = null;
+$content_color = '';
+
 if ( $source === 'default' ){
 
     $background = get_field('cta_background', 'option');
@@ -20,7 +32,7 @@ if ( $source === 'default' ){
     $background = get_sub_field('cta_background');
    
     if( $background == 'image'){
-        $content_color = get_field('cta_text_color') ?? '';
+        $content_color = get_sub_field('cta_text_color') ?? '';
         $bg_image = get_sub_field('cta_background_image');
         $image = wp_get_attachment_image_src( $bg_image, 'large' );
     }
@@ -43,25 +55,24 @@ if ( $source === 'default' ){
 
 <div class="fc-section-cta fc-section-columns call-to-action call-to-action--<?php echo $source;?> call-to-action-<?php echo $background; ?> background--<?php echo $background;?> background--<?php echo $content_color;?>" id="<?php echo $cta_id; ?>">
 
-    <div class="call-to-action--inner <?php echo esc_attr( get_sub_field('container_width') ?: 'uk-container uk-container-large' ); ?>">
+    <div class="call-to-action--inner <?php echo esc_attr( get_sub_field('container_width') ?: 'uk-container' ); ?>">
 
-        <div class="uk-width-1-1 uk-width-4-5 uk-margin-auto-left uk-margin-auto-right">
-            <?php echo $content; ?>
+        <div class="call-to-action--layout cta-align--<?php echo esc_attr( $alignment ); ?>">
 
+            <div class="call-to-action--content">
+                <?php echo $content; ?>
+            </div>
 
-            <?php if( is_array($button) ): ?>
-                <?php if( array_key_exists('url', $button) ): ?>
+            <?php if( is_array($button) && ! empty($button['url']) ): ?>
+                <div class="call-to-action--action">
                     <a href="<?php echo esc_url( $button['url'] ); ?>" class="uk-button uk-button-green" <?php if( $button['target'] ): ?> target="<?php echo esc_attr( $button['target'] ); ?>" <?php endif; ?>>
                         <?php echo esc_html( $button['title'] ); ?>
                     </a>
-                <?php endif; ?>
+                </div>
             <?php endif; ?>
 
         </div>
 
-        
-
-        
     </div>
 
 </div>

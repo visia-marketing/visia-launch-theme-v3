@@ -29,6 +29,66 @@
             "save_other_choice": 0
         },
         {
+            "key": "field_6a9f4c18b2d70",
+            "label": "Content Alignment",
+            "name": "cta_content_alignment",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "Button is placed on the opposite side. Center places the button below.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "left": "Left",
+                "center": "Center",
+                "right": "Right"
+            },
+            "default_value": "left",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
+        },
+        {
+            "key": "field_6a9f4c18b2d71",
+            "label": "Container Width",
+            "name": "container_width",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "Width of the content box. The background band always spans the full viewport.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "15",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "uk-container": "Small",
+                "uk-container uk-container-large": "Regular",
+                "uk-container uk-container-xlarge": "Large"
+            },
+            "default_value": "uk-container",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
+        },
+        {
             "key": "field_68f91b894994f",
             "label": "Default CTA Content",
             "name": "",
@@ -238,5 +298,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1761230277
+    "modified": 1785514267
 }

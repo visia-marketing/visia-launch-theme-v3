@@ -605,14 +605,47 @@ $top-header-link-color: $top-header-link-color;
 
   }
 
+  & .search-form{
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    & label{
+      display: block;
+    }
+
+    & .search-field{
+      @include gf-control-base;
+      width: 260px;          // header layout choice; GF's width:100% doesn't apply here
+      height: $form-height;
+      vertical-align: middle;
+
+      &::placeholder{
+        color: $form-placeholder-color;
+      }
+    }
+
+    & button.uk-button{
+      margin: 0 !important;
+      font-size: 1rem !important;
+      text-align: center;
+      padding: 5px 16px;
+
+      & i{
+        margin-left: 0;
+      }
+    }
+  }
+
   .uk-button:not(input){
     color: #fff;
     display: inline-block;
     font-size: 0.875rem;
     font-weight: 400;
     line-height: 1.75;
-    margin: 0.75rem 0 0.75rem 20px !important;
+    margin: 0.75rem 0 0.75rem 20px;
     text-transform: none;
+
 
     // &:hover{
     //   color: $white !important;

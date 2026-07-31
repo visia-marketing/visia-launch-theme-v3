@@ -50,6 +50,36 @@ $gf-buttons:
   &.active { @include primary-button-hover; }
 }
 
+// Base control styling shared between GF fields and the top-header search input
+// (partials/_site-header.scss). Mirrors UIkit's `.uk-input, .uk-select, .uk-textarea`
+// plus its hook-form() border/transition.
+@mixin gf-control-base {
+  box-sizing: border-box;
+  max-width: 100%;
+  width: 100%;
+  padding: 0 $form-padding-horizontal;
+  background: $form-background;
+  color: $form-color;
+  border: $form-border-width solid $form-border;
+  border-radius: $gf-input-border-radius;
+  box-shadow: none;
+  transition: 0.2s ease-in-out;
+  transition-property: color, background-color, border;
+
+  &:focus {
+    outline: none;
+    background-color: $form-focus-background;
+    color: $form-focus-color;
+    border-color: $form-focus-accent;
+  }
+
+  &:disabled {
+    background-color: $form-disabled-background;
+    color: $form-disabled-color;
+    border-color: $form-disabled-border;
+  }
+}
+
 // Text-ish controls GF can render. Interpolated so the list stays in one place.
 $gf-text-inputs:
   'input[type="text"], input[type="email"], input[type="tel"], input[type="url"], ' +
@@ -64,37 +94,10 @@ $gf-text-inputs:
 
     .gfield {
 
-      /*
-       * Shared control styling — mirrors UIkit's `.uk-input, .uk-select, .uk-textarea`
-       * plus its hook-form() border/transition.
-       */
       #{$gf-text-inputs},
       textarea,
       select {
-        box-sizing: border-box;
-        max-width: 100%;
-        width: 100%;
-        padding: 0 $form-padding-horizontal;
-        background: $form-background;
-        color: $form-color;
-        border: $form-border-width solid $form-border;
-        border-radius: $gf-input-border-radius;
-        box-shadow: none;
-        transition: 0.2s ease-in-out;
-        transition-property: color, background-color, border;
-
-        &:focus {
-          outline: none;
-          background-color: $form-focus-background;
-          color: $form-focus-color;
-          border-color: $form-focus-accent;
-        }
-
-        &:disabled {
-          background-color: $form-disabled-background;
-          color: $form-disabled-color;
-          border-color: $form-disabled-border;
-        }
+        @include gf-control-base;
       }
 
       /* Single-line */

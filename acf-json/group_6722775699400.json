@@ -3,6 +3,97 @@
     "title": "COMPONENT: Two Columns",
     "fields": [
         {
+            "key": "field_6a6ca427f87e1",
+            "label": "Columns Ratio",
+            "name": "columns_ratio",
+            "aria-label": "",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "60",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "3-9": "25 \/ 75",
+                "4-8": "33 \/ 66",
+                "5-7": "40 \/ 60",
+                "6-6": "50 \/ 50",
+                "7-5": "60 \/ 40",
+                "8-4": "66 \/ 33",
+                "9-3": "75 \/ 25"
+            },
+            "default_value": "6-6",
+            "return_format": "value",
+            "allow_null": 0,
+            "other_choice": 0,
+            "allow_in_bindings": 0,
+            "layout": "horizontal",
+            "save_other_choice": 0
+        },
+        {
+            "key": "field_6a6ca457f87e2",
+            "label": "Column 1 Vertical Align",
+            "name": "vertical_align_col_1",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "20",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "start": "Top",
+                "center": "Middle",
+                "right": "Bottom"
+            },
+            "default_value": "start",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
+        },
+        {
+            "key": "field_6a6ca488f87e3",
+            "label": "Column 2 Vertical Align",
+            "name": "vertical_align_col_2",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "20",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "start": "Top",
+                "center": "Middle",
+                "right": "Bottom"
+            },
+            "default_value": "start",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
+        },
+        {
             "key": "field_67227757afd50",
             "label": "Column 1",
             "name": "column_1",
@@ -61,5 +152,8 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1737492829
+    "display_title": "",
+    "allow_ai_access": false,
+    "ai_description": "",
+    "modified": 1785507668
 }

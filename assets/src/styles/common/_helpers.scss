@@ -3,6 +3,20 @@
   text-align: center;
 }
 
+// WP-standard visually-hidden text (e.g. the search form's "Search" label).
+// Nothing site-wide defines this — only GF/Woo CSS on pages where they load.
+.screen-reader-text {
+  border: 0;
+  clip-path: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute !important;
+  width: 1px;
+  word-wrap: normal !important;
+}
+
 // Remove focus outline
 :focus {
   outline: none;

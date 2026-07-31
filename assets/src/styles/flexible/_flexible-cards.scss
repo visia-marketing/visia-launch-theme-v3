@@ -3,8 +3,8 @@
 
     & .uk-card{
 
-        // ── Primary Style ──────────────────────────────────────────────
-        &.cards-style--primary{
+        // ── Overlay Style ──────────────────────────────────────────────
+        &.cards-style--overlay{
 
             & h3,
             & p,
@@ -49,6 +49,11 @@
                     }
 
                     & .hover-panel{
+                        // Collapsed by default; main.js animates height on hover.
+                        // Set here rather than inline from JS so panels never
+                        // flash open before the script runs.
+                        height: 0;
+                        overflow: hidden;
                         padding-bottom: 0.5rem;
                         opacity: 0;
                         transition: opacity 0.25s ease-in, height 0.4s ease-in-out 0.1s;
@@ -57,8 +62,9 @@
             }
         }
 
-        // ── Basic Style ────────────────────────────────────────────────
-        &.cards-style--basic{
+        // ── Simple + Plain Styles ──────────────────────────────────────
+        &.cards-style--simple,
+        &.cards-style--plain{
 
             & .uk-card--inner{
                 background: #fff;
@@ -106,6 +112,21 @@
                     margin-top: 16px;
                     max-width: max-content;
                 }
+            }
+        }
+
+        // ── Plain Style ────────────────────────────────────────────────
+        // Same as simple, minus the card surface and the body padding — for
+        // sections whose own background already provides the contrast.
+        &.cards-style--plain{
+
+            & .uk-card--inner{
+                background: transparent;
+            }
+
+            & a.card-body{
+                padding: 0;
+                padding-top: 1.25rem;
             }
         }
     }

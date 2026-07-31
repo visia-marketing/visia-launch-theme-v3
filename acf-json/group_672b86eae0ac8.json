@@ -46,8 +46,9 @@
                 "id": ""
             },
             "choices": {
-                "basic": "Simple",
-                "primary": "Overlay"
+                "simple": "Simple",
+                "overlay": "Overlay",
+                "plain": "Plain"
             },
             "default_value": false,
             "return_format": "value",
@@ -327,5 +328,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1784897377
+    "modified": 1785509244
 }

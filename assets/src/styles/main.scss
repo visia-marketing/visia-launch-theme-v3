@@ -55,3 +55,6 @@
 @import "woocommerce/wc-notices";
 @import "flexible/flexible";
 @import "pages/home";
+
+// Accessibility — imported last so the focus ring wins over UIkit/Slick/theme resets.
+@import "common/a11y";

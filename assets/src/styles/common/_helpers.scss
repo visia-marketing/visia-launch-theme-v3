@@ -4,7 +4,7 @@
 }
 
 // WP-standard visually-hidden text (e.g. the search form's "Search" label).
-// Nothing site-wide defines this — only GF/Woo CSS on pages where they load.
+// The matching :focus escape hatch (used by the skip link) lives in common/_a11y.scss.
 .screen-reader-text {
   border: 0;
   clip-path: inset(50%);
@@ -17,10 +17,9 @@
   word-wrap: normal !important;
 }
 
-// Remove focus outline
-:focus {
-  outline: none;
-}
+// NOTE: the global `:focus { outline: none }` that used to live here was removed — it
+// stripped the focus indicator from every control on the site with no replacement.
+// Focus styling is now defined in common/_a11y.scss.
 
 // anchor transitions
 a, button, .button, [type=submit] {

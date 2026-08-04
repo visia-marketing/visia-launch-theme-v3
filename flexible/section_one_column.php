@@ -35,8 +35,14 @@ switch ($column_width) {
 
 
 
-  <div class="content <?php if ( get_sub_field('column_width') ): echo 'uk-width-'.$column_width; else: echo 'uk-width-'.$column_width; endif; ?> ">
-    <?php echo get_sub_field('column_1'); ?>
+  <?php // Both branches of the old conditional here emitted the same string. ?>
+  <div class="content uk-width-<?php echo esc_attr($column_width); ?>">
+    <?php
+    // NOT wp_kses_post(): WYSIWYG field, already filtered by ACF. wp_kses_post() strips
+    // <form>, <input>, <script> and <iframe>, which breaks embedded Gravity Forms and
+    // video embeds placed in a column.
+    echo get_sub_field('column_1');
+    ?>
   </div>
 
 

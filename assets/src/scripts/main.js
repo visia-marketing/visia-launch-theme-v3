@@ -32,10 +32,19 @@ import { CountUp } from 'countup.js';
       
         UIkit.use(Icons);
 
-        AOS.init({
-          duration: 1000,
-          once: true,
-        });
+        // ── Reduced motion ─────────────────────────────────────────────────────
+        // Users who ask their OS for reduced motion get the end state of every
+        // animation rather than the animation. The CSS half of this lives in
+        // assets/src/styles/common/_a11y.scss. WCAG 2.3.3.
+        var prefersReducedMotion = window.matchMedia &&
+          window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        if (!prefersReducedMotion) {
+          AOS.init({
+            duration: 1000,
+            once: true,
+          });
+        }
 
         document.querySelectorAll('.lightbox-gallery').forEach(function(gallery) {
             var anchors = gallery.querySelectorAll('a.lightbox-anchor');
@@ -113,16 +122,35 @@ import { CountUp } from 'countup.js';
         // while collapsed, so the value stays correct after resizes and reflows.
         // Called after initCardCarousels() below — Slick clones slides for
         // infinite mode, and the clones need hover listeners too.
+        // Keyboard parity: focusin/focusout mirror mouseenter/mouseleave so the panel — and
+        // the CTA inside it — is reachable without a pointer, and aria-expanded reports the
+        // state that was previously conveyed by height alone. WCAG 2.1.1 / 1.4.13.
         function hoverCardsInit(){
           document.querySelectorAll('.cards-style--overlay').forEach(card => {
             const panel = card.querySelector('.hover-panel');
             if (!panel) return;
+            if (card.dataset.hoverCardBound === 'true') return;
+            card.dataset.hoverCardBound = 'true';
 
-            card.addEventListener('mouseenter', () => {
+            const trigger = card.querySelector('a');
+
+            const open = () => {
               panel.style.height = panel.scrollHeight + 'px';
-            });
-            card.addEventListener('mouseleave', () => {
+              if (trigger) trigger.setAttribute('aria-expanded', 'true');
+            };
+            const close = () => {
               panel.style.height = '0';
+              if (trigger) trigger.setAttribute('aria-expanded', 'false');
+            };
+
+            if (trigger) trigger.setAttribute('aria-expanded', 'false');
+
+            card.addEventListener('mouseenter', open);
+            card.addEventListener('mouseleave', close);
+            card.addEventListener('focusin', open);
+            card.addEventListener('focusout', (e) => {
+              // Only collapse once focus has left the card entirely.
+              if (!card.contains(e.relatedTarget)) close();
             });
           });
         }
@@ -135,6 +163,16 @@ import { CountUp } from 'countup.js';
             let delayMs = parseInt(element.getAttribute('data-delay'), 10);
             let startVal = parseInt(element.getAttribute('data-start'), 10) || 0;
         
+            // Reduced motion: show the final figure immediately instead of counting to it.
+            // The markup (flexible/section_animated_numbers.php) already exposes the target
+            // to assistive technology, so this only affects what is painted.
+            if (prefersReducedMotion) {
+              element.textContent = isNaN(targetNumber)
+                ? element.textContent
+                : targetNumber.toLocaleString();
+              return;
+            }
+
             let countUp = new CountUp(element, targetNumber, {
               duration: 2,
               separator: ',',
@@ -143,7 +181,7 @@ import { CountUp } from 'countup.js';
               scrollSpyDelay: isNaN(delayMs) ? 0 : delayMs, // per-number data-delay set in the editor
               startVal: startVal,
             });
-        
+
             if (countUp.error) {
               console.error(countUp.error);
             }
@@ -165,8 +203,30 @@ import { CountUp } from 'countup.js';
             var $slider = $(this);
             if ($slider.hasClass('slick-initialized')) return;
 
+            // Slick supplies no container semantics of its own. Naming the region and
+            // describing it as a carousel is what lets a screen reader announce "carousel"
+            // and offer it as a navigable region rather than a wall of anonymous divs.
+            $slider.attr({
+              'role': 'region',
+              'aria-roledescription': 'carousel',
+              'aria-label': $slider.data('carousel-label') || 'Cards carousel',
+            });
+
+            $slider.on('init reInit setPosition', function() {
+              // Slick's infinite mode duplicates slides. The clones are visually identical
+              // to the originals, so leaving them exposed doubles every card for AT users
+              // and adds unreachable tab stops.
+              $slider.find('.slick-cloned')
+                .attr('aria-hidden', 'true')
+                .find('a, button, input, [tabindex]')
+                .attr('tabindex', '-1');
+            });
+
             $slider.slick({
-              infinite: true,
+              // Looping is continuous motion the user did not start; reduced-motion users
+              // get a finite track instead.
+              infinite: !prefersReducedMotion,
+              speed: prefersReducedMotion ? 0 : 300,
               slidesToShow: 3,    // overridden per-instance by data-slick
               slidesToScroll: 1,
               dots: false,
@@ -176,6 +236,74 @@ import { CountUp } from 'countup.js';
             });
           });
         }
+
+        // ── Disclosure state sync ──────────────────────────────────────────────
+        // The header cart/account panels (partials/site-header.php) and the off-canvas
+        // menu are opened by UIkit, which does not update the trigger's aria-expanded.
+        // The markup ships aria-expanded="false"; these listeners keep it honest so the
+        // state is not communicated by appearance alone. WCAG 4.1.2.
+        function initDisclosureState() {
+          function syncFor(target, expanded) {
+            if (!target || !target.id) return;
+            document
+              .querySelectorAll('[aria-controls="' + target.id + '"][aria-expanded]')
+              .forEach(function(trigger) {
+                trigger.setAttribute('aria-expanded', String(expanded));
+              });
+          }
+
+          ['show', 'hide'].forEach(function(evt) {
+            document.addEventListener(evt, function(e) {
+              var target = e.target;
+              if (!target || !target.hasAttribute) return;
+              if (!target.hasAttribute('uk-drop') &&
+                  !target.hasAttribute('uk-offcanvas') &&
+                  !target.hasAttribute('uk-dropdown')) return;
+              syncFor(target, evt === 'show');
+            }, true);
+          });
+        }
+
+        initDisclosureState();
+
+        // ── Video gallery filters ──────────────────────────────────────────────
+        // UIkit's filter component signals the selected control with a .uk-active class and
+        // nothing else, and swaps cards in and out of the grid silently. This mirrors the
+        // class onto aria-pressed and announces the resulting count through the status
+        // region rendered by partials/content-video-gallery.php. WCAG 4.1.2 / 4.1.3.
+        function initVideoFilters() {
+          document.querySelectorAll('.g1-video-gallery[uk-filter]').forEach(function(gallery) {
+            var controls = gallery.querySelectorAll('.g1-video-filter');
+            var grid = gallery.querySelector('.js-video-filter');
+            if (!controls.length || !grid) return;
+
+            var status = grid.dataset.filterStatus
+              ? document.getElementById(grid.dataset.filterStatus)
+              : null;
+
+            function sync(announce) {
+              controls.forEach(function(control) {
+                var button = control.querySelector('button');
+                if (button) {
+                  button.setAttribute('aria-pressed', String(control.classList.contains('uk-active')));
+                }
+              });
+
+              // Only after a real filter action — writing into the live region on load
+              // would announce a count nobody asked for.
+              if (status && announce) {
+                var shown = grid.querySelectorAll('.g1-video-card-col:not(.uk-hidden)').length;
+                status.textContent = shown === 1 ? '1 video shown' : shown + ' videos shown';
+              }
+            }
+
+            // UIkit fires `afterFilter` on the uk-filter element once the swap settles.
+            UIkit.util.on(gallery, 'afterFilter', function() { sync(true); });
+            sync(false);
+          });
+        }
+
+        initVideoFilters();
 
       initCardCarousels();
 

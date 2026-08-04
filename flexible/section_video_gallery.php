@@ -57,4 +57,6 @@ if ( ! $video_ids ) {
 get_template_part( 'partials/content-video-gallery', null, array(
 	'videos'       => $video_ids,
 	'show_filters' => $show_filters,
+	// Names the gallery's section landmark and its (visually hidden) heading.
+	'label'        => get_sub_field( 'gallery_label' ) ?: __( 'Videos', 'visia_marketing' ),
 ) );

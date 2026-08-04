@@ -3,7 +3,14 @@
   <div class="post-header">
     <div class="uk-container">
       <div class="uk-width-1-1">
-        <strong>Post Header -> Should be H1</strong>
+        <?php // Was a placeholder <strong>, so the archive had no <h1> at all. ?>
+        <h1><?php
+          if ( is_home() && ! is_front_page() ) {
+            echo esc_html( get_the_title( get_option('page_for_posts') ) );
+          } else {
+            the_archive_title();
+          }
+        ?></h1>
       </div>
     </div>
   </div>

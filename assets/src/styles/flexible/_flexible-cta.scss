@@ -26,6 +26,29 @@
     z-index: 0;
   }
 
+  // Contrast scrim. The CTA text sits directly on an editor-chosen photograph, so nothing
+  // guarantees it stays legible — the only control is the `cta_text_color` radio, which
+  // just flips the text between black and white. This lays a translucent wash between the
+  // image and the text in whichever direction that radio implies, so body copy clears
+  // 4.5:1 regardless of which image is selected. WCAG 1.4.3.
+  &.call-to-action-image::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  // .background--light means black text, so the image needs lightening.
+  &.call-to-action-image.background--light::before {
+    background: rgba(255, 255, 255, 0.6);
+  }
+
+  // .background--dark means white text, so the image needs darkening.
+  &.call-to-action-image.background--dark::before {
+    background: rgba(0, 0, 0, 0.5);
+  }
+
   // Keep the content (and its button) above the decorative ::after layer.
   .call-to-action--inner {
     position: relative;

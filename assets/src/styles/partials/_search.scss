@@ -28,10 +28,6 @@
         display: flex;
         align-items: center;
 
-        .is-screen-reader-text {
-          display: none;
-        }
-
         label {
           flex-grow: 1;
           margin-right: 1rem;
@@ -52,7 +48,6 @@
             margin: 0;
             background-color: #fff;
             border: none;
-            outline: none;
             font-size: 14px;
             color: $black;
             width: 100%;
@@ -61,9 +56,8 @@
               font-size: 20px;
             }
 
-            &:focus,
+            // Border/shadow only — the focus ring itself comes from common/_a11y.scss.
             &:active {
-              outline: none;
               border: none;
               box-shadow: none;
             }

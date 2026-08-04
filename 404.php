@@ -47,6 +47,10 @@ if ($page_404_id && get_post_status($page_404_id) === 'publish') {
     <div class="uk-container">
       <div class="uk-width-1-1">
 
+      <?php // Every page needs exactly one <h1>; this template previously had none, and the
+            // page-header partial above only renders when the editor filled it in. ?>
+      <h1><?php esc_html_e('Page not found', 'visia_marketing'); ?></h1>
+
       <div class="alert alert-warning">
         <?php _e('Sorry, but the page you were trying to view does not exist.', 'visia_marketing'); ?>
       </div>

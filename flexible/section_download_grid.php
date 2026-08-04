@@ -32,12 +32,16 @@ if ($source === 'category') {
   $downloads = get_sub_field('download_ids');
 }
 
+$heading_tag = visia_heading_tag( get_sub_field('heading_level'), 'h2' );
+
 if ($downloads) : ?>
 
   <div class="fc-section-downloads">
 
     <?php if (!empty($category_title)) : ?>
-      <h2 class="download-grid-category-title"><?php echo esc_html($category_title); ?></h2>
+      <?php // Level is configurable rather than always h2 — this section is often nested
+            // under another section's heading. ?>
+      <<?php echo $heading_tag; ?> class="download-grid-category-title"><?php echo esc_html($category_title); ?></<?php echo $heading_tag; ?>>
     <?php endif; ?>
 
     <div class="download-grid">
@@ -51,12 +55,15 @@ if ($downloads) : ?>
       ?>
 
         <div class="download-item">
-          <a href="<?php echo esc_url($permalink); ?>" target="_blank" rel="noopener">
+          <?php // Two adjacent links to the same file. The thumbnail link has no accessible
+                // name whenever the featured image alt is blank, so it is hidden from AT and
+                // taken out of the tab order; the titled link below stays. ?>
+          <a href="<?php echo esc_url($permalink); ?>" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
             <div class="download-thumbnail">
-              <?php echo $thumbnail; ?>
+              <?php echo get_the_post_thumbnail($download->ID, 'large', array('alt' => '')); ?>
             </div>
           </a>
-          <a href="<?php echo esc_url($permalink); ?>" target="_blank" rel="noopener" class="download-title"><i class="fa-sharp fa-solid fa-download"></i><?php echo esc_html($title); ?></a>
+          <a href="<?php echo esc_url($permalink); ?>" target="_blank" rel="noopener noreferrer" class="download-title"><?php echo visia_icon('fa-sharp fa-solid fa-download'); ?><?php echo esc_html($title); ?><?php echo visia_new_window_notice('_blank'); ?></a>
         </div>
 
       <?php endforeach; ?>

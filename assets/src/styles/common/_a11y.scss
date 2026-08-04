@@ -1,0 +1,137 @@
+//////////////////////////////////////////////////////////////////////////////////////////////
+//
+// Accessibility
+//
+// Imported LAST from main.scss on purpose. UIkit, Slick, SimpleLightbox and several of the
+// theme's own partials all clear focus outlines on their own controls; loading this file at
+// the end means the focus ring below wins without having to chase every one of them.
+//
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+// Two-tone focus ring: the dark outline reads against white and against $primary (#FBA919),
+// the white halo keeps it visible on dark/photographic backgrounds. WCAG 2.4.7 / 2.4.11.
+$focus-ring-color:  #101010 !default;
+$focus-ring-halo:   #ffffff !default;
+$focus-ring-width:  2px !default;
+$focus-ring-offset: 2px !default;
+
+// !important is deliberate and load-bearing here. UIkit ships a global
+// `:focus { outline: none }` (uikit/src/scss/components/base.scss) plus higher-specificity
+// resets on .uk-input / .uk-select / .uk-textarea / .uk-radio / .uk-checkbox /
+// .uk-search-input / .uk-range, and Slick clears the outline on .slick-list, .slick-prev,
+// .slick-next and its dot buttons. Import order alone does not beat those, and losing this
+// rule means losing the focus indicator on exactly the controls that matter most.
+@mixin visia-focus-ring {
+  outline: $focus-ring-width solid $focus-ring-color !important;
+  outline-offset: $focus-ring-offset !important;
+  box-shadow: 0 0 0 ($focus-ring-width + $focus-ring-offset) $focus-ring-halo !important;
+}
+
+// :focus-visible only paints for keyboard/AT interaction, so mouse users see nothing new.
+a,
+button,
+[role="button"],
+[type="button"],
+[type="submit"],
+[type="reset"],
+input,
+select,
+textarea,
+summary,
+[tabindex]:not([tabindex="-1"]) {
+  &:focus-visible {
+    @include visia-focus-ring;
+  }
+}
+
+// Browsers without :focus-visible fall back to a plain :focus ring rather than nothing.
+@supports not selector(:focus-visible) {
+  a,
+  button,
+  [role="button"],
+  [type="button"],
+  [type="submit"],
+  [type="reset"],
+  input,
+  select,
+  textarea,
+  summary,
+  [tabindex]:not([tabindex="-1"]) {
+    &:focus {
+      @include visia-focus-ring;
+    }
+  }
+}
+
+// `tabindex="-1"` targets (e.g. <main id="main">) receive focus programmatically from the
+// skip link; a ring there is noise, the page has already jumped. Declared after the ring,
+// and with !important, so it wins for elements the ring's selectors also match.
+[tabindex="-1"]:focus,
+[tabindex="-1"]:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// Visually hidden text
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+// The base .screen-reader-text lives in _helpers.scss. This is the focus escape hatch that
+// lets a visually-hidden element (the skip link) become visible when tabbed to.
+.screen-reader-text {
+  &:focus,
+  &:focus-within {
+    background-color: $white;
+    clip-path: none;
+    color: $secondary;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    padding: 0.75rem 1.25rem;
+    width: auto;
+    z-index: 100000;
+  }
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// Skip link
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+// First focusable element on the page (base.php). Off-screen until focused, then pinned to
+// the top-left above the sticky header. WCAG 2.4.1.
+.skip-link {
+  &:focus,
+  &:focus-visible {
+    border-radius: 0 0 4px 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    font-weight: bold;
+    left: 0;
+    position: fixed !important;
+    text-decoration: underline;
+    top: 0;
+  }
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// Reduced motion
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+// AOS, Slick and UIkit's slide/scroll animations all run unconditionally. The JS side is
+// gated in main.js; this covers everything driven purely by CSS. WCAG 2.3.3.
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  // AOS hides elements until they scroll into view; with its transitions neutralised the
+  // reveal never runs, so force the "animated" end state.
+  [data-aos] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

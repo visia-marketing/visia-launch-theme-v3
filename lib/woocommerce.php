@@ -129,11 +129,23 @@ add_filter( 'woocommerce_add_to_cart_fragments', function ( $fragments ) {
 
     ob_start();
     ?>
-    <a class="cart-icon-link" href="<?php echo esc_url( wc_get_cart_url() ); ?>">
-        <i class="fa-light fa-bag-shopping fa-2xl"></i>
+    <?php
+    // This fragment REPLACES the header cart link from partials/site-header.php on every
+    // cart change, so it has to carry the same accessible name and disclosure attributes —
+    // otherwise adding to the cart silently downgrades the link to an unnamed icon.
+    ?>
+    <a class="cart-icon-link" href="<?php echo esc_url( wc_get_cart_url() ); ?>" aria-haspopup="true" aria-expanded="false" aria-controls="mini-cart-dropdown">
+        <i class="fa-light fa-bag-shopping fa-2xl" aria-hidden="true"></i>
         <?php if ( $cart_has_items ) : ?>
-            <span class="cart-count-badge"><?php echo esc_html( $cart_count ); ?></span>
+            <span class="cart-count-badge" aria-hidden="true"><?php echo esc_html( $cart_count ); ?></span>
         <?php endif; ?>
+        <span class="screen-reader-text"><?php
+            printf(
+                /* translators: %s: number of items in the cart. */
+                esc_html( _n( 'Shopping cart, %s item', 'Shopping cart, %s items', $cart_count, 'visia_marketing' ) ),
+                esc_html( $cart_count )
+            );
+        ?></span>
     </a>
     <?php
     $fragments['a.cart-icon-link'] = ob_get_clean();

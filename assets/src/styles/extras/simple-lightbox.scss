@@ -67,10 +67,6 @@ body.hidden-scroll {
 		font-family: $sl-font-family;
 		color: $sl-navigation-color;
 		font-size: $sl-close-fontsize;
-
-		&:focus {
-			outline: none;
-		}
 	}
 
 	.sl-counter {
@@ -106,10 +102,6 @@ body.hidden-scroll {
 			&.sl-prev {
 				left: 5px;
 				font-size: $sl-arrow-fontsize-small;
-			}
-
-			&:focus {
-				outline: none;
 			}
 
 			@media (min-width: $sl-breakpoint-medium) {

@@ -86,8 +86,10 @@ $slick_opts = [
 
     <?php if($display == "carousel"): ?>
 
-        <div id="<?php echo $rand_id;?>" class="fc-section-cards carousel-wrapper">
-            <div class="cards-slick" data-slick="<?php echo esc_attr( wp_json_encode( $slick_opts ) ); ?>">
+        <div id="<?php echo esc_attr($rand_id);?>" class="fc-section-cards carousel-wrapper">
+            <?php // data-carousel-label names the carousel region that initCardCarousels()
+                  // in main.js sets up. ?>
+            <div class="cards-slick" data-carousel-label="<?php echo esc_attr( get_sub_field('cards_label') ?: __( 'Cards carousel', 'visia_marketing' ) ); ?>" data-slick="<?php echo esc_attr( wp_json_encode( $slick_opts ) ); ?>">
 
                 <?php foreach( $cards ?? [] as $card ): ?>
 
@@ -109,7 +111,7 @@ $slick_opts = [
 
     <?php else: ?>
 
-            <div id="<?php echo $rand_id;?>" class="fc-section-cards grid-container uk-grid uk-grid-medium uk-grid-match">
+            <div id="<?php echo esc_attr($rand_id);?>" class="fc-section-cards grid-container uk-grid uk-grid-medium uk-grid-match">
                 <?php $delay = 0; ?>
 
                 <?php foreach( $cards ?? [] as $card ): ?>

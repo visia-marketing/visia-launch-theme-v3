@@ -4,8 +4,9 @@
     <div class="uk-container">
       <div class="uk-width-1-1">
         
-        <br>
-        <p><br><?php _e( 'Search Results Found For', 'locale' ); ?>: "<?php the_search_query(); ?>" </p>
+        <?php // Was a <p>, so the results page had no <h1> and nothing to orient a screen
+              // reader arriving from the search form. ?>
+        <h1><?php esc_html_e( 'Search Results Found For', 'visia_marketing' ); ?>: "<?php echo esc_html( get_search_query() ); ?>"</h1>
 
         <?php if ( have_posts() ) { ?>
 
@@ -38,11 +39,18 @@
                 </div>
                  <?php endif; ?>
                 <div class="search-results-cell-content">
-                  <h2><a href="<?php echo get_permalink(); ?>"><?php echo $title; ?></a></h2>
-                  <span class="search-permalink"><?php the_permalink(); ?></span>
-                  <p><?php echo $excerpt; ?></p>
-                  <?php 
-                    echo '<a href="' . get_the_permalink() . '" class="uk-button">Read More <i class="fa-solid fa-aruk-container-right"></i></a>';
+                  <h2><a href="<?php echo esc_url( get_permalink() ); ?>"><?php echo esc_html( $title ); ?></a></h2>
+                  <span class="search-permalink"><?php echo esc_html( get_permalink() ); ?></span>
+                  <p><?php echo wp_kses_post( $excerpt ); ?></p>
+                  <?php
+                    // "Read More" repeats on every result, so the result title is appended
+                    // as visually-hidden text to keep each link distinguishable. WCAG 2.4.4.
+                    printf(
+                      '<a href="%s" class="uk-button">%s %s</a>',
+                      esc_url( get_the_permalink() ),
+                      visia_cta_label( __( 'Read More', 'visia_marketing' ), $title ),
+                      visia_icon( 'fa-solid fa-arrow-right' )
+                    );
                   ?>
                 </div>
               </div>      
@@ -51,9 +59,9 @@
 
             </div>
 
-            <div class="search-pagination">
+            <nav class="search-pagination" aria-label="<?php esc_attr_e( 'Search results pages', 'visia_marketing' ); ?>">
               <?php echo paginate_links(); ?>
-            </div>
+            </nav>
 
         <?php } else { ?>
 
@@ -61,7 +69,11 @@
             <div class="search-results-none">
               <div class="uk-container">
                 <div class="uk-width-1-1">
-                  <?php the_field('no_results_message', 'options'); ?>
+                  <?php
+                  // NOT wp_kses_post(): editor-authored rich text from the options page,
+                  // and a likely home for an embedded "can't find it? contact us" form.
+                  echo get_field('no_results_message', 'options');
+                  ?>
                 </div>            
               </div>
             </div>  

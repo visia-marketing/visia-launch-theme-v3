@@ -17,8 +17,14 @@ if( array_key_exists( 'prod_id', $args ) ){
         ?></p>
 
             <div class="uk-card-media uk-margin-auto-top">
-                <a href="<?php echo esc_url(get_the_permalink($id)); ?>" class="uk-flex uk-width-1-1">
-                    <?php echo get_the_post_thumbnail($id, 'woocommerce_thumbnail', array('class' => 'uk-width-1-1')) ?: '<div class="placeholder"></div>'; ?>
+                <?php
+                // Third link to the same product on one card. Its only content is the
+                // thumbnail, so with no featured image it was an entirely empty link, and
+                // with one it just repeated the title link. Hidden from AT and taken out of
+                // the tab order — the title and the CTA below remain reachable.
+                ?>
+                <a href="<?php echo esc_url(get_the_permalink($id)); ?>" class="uk-flex uk-width-1-1" tabindex="-1" aria-hidden="true">
+                    <?php echo get_the_post_thumbnail($id, 'woocommerce_thumbnail', array('class' => 'uk-width-1-1', 'alt' => '')) ?: '<div class="placeholder"></div>'; ?>
                 </a>
             </div>
 
@@ -29,7 +35,10 @@ if( array_key_exists( 'prod_id', $args ) ){
                 echo '<p class="price">' . wc_price($price) . '</p>';
             }
             ?>
-            <a class="uk-button uk-button-outline uk-margin-remove-top uk-margin-remove-right" href="<?php echo esc_url(get_the_permalink($id)); ?>">View Product</a>
+            <?php // "View Product" repeats verbatim on every card in the grid, so the links
+                  // are indistinguishable when listed out of context. The product name is
+                  // appended as visually-hidden text. WCAG 2.4.4. ?>
+            <a class="uk-button uk-button-outline uk-margin-remove-top uk-margin-remove-right" href="<?php echo esc_url(get_the_permalink($id)); ?>"><?php echo visia_cta_label(__('View Product', 'visia_marketing'), get_the_title($id)); ?></a>
         </div>
     </div>
 

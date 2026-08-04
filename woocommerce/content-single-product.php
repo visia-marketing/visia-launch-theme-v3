@@ -75,14 +75,23 @@ if ( post_password_required() ) {
 
 	<div class="g1-product-tabs">
 
+		<?php // Completed tabs pattern: role="tab" needs a role="tablist" parent to be valid,
+		      // aria-selected to report state (the is-active class alone is visual only), and
+		      // aria-controls / aria-labelledby to pair each tab with its panel. WCAG 4.1.2. ?>
 		<nav class="g1-tabs-nav" aria-label="Product sections">
-			<ul class="g1-tabs-nav-list">
+			<ul class="g1-tabs-nav-list" role="tablist">
 				<?php foreach ( $tabs as $index => $tab ) : ?>
-					<li class="g1-tab-nav-item<?php echo $index === 0 ? ' is-active' : ''; ?>"
-						data-tab="g1-tab-<?php echo esc_attr( $index ); ?>"
-						role="tab"
-						tabindex="<?php echo $index === 0 ? '0' : '-1'; ?>">
-						<?php echo esc_html( $tab['tab_title'] ); ?>
+					<li role="presentation">
+						<button type="button"
+							class="g1-tab-nav-item<?php echo $index === 0 ? ' is-active' : ''; ?>"
+							data-tab="g1-tab-<?php echo esc_attr( $index ); ?>"
+							id="g1-tab-label-<?php echo esc_attr( $index ); ?>"
+							role="tab"
+							aria-selected="<?php echo $index === 0 ? 'true' : 'false'; ?>"
+							aria-controls="g1-tab-<?php echo esc_attr( $index ); ?>"
+							tabindex="<?php echo $index === 0 ? '0' : '-1'; ?>">
+							<?php echo esc_html( $tab['tab_title'] ); ?>
+						</button>
 					</li>
 				<?php endforeach; ?>
 			</ul>
@@ -93,7 +102,10 @@ if ( post_password_required() ) {
 
 				<div class="g1-tab-panel<?php echo $index === 0 ? ' is-active' : ''; ?>"
 					 id="g1-tab-<?php echo esc_attr( $index ); ?>"
-					 role="tabpanel">
+					 role="tabpanel"
+					 aria-labelledby="g1-tab-label-<?php echo esc_attr( $index ); ?>"
+					 tabindex="0"
+					 <?php echo $index === 0 ? '' : 'hidden'; ?>>
 
 					<div class="uk-container uk-container-large">
 						<?php
@@ -203,27 +215,56 @@ if ( post_password_required() ) {
 
 	<script>
 	(function() {
-		var navItems = document.querySelectorAll('.g1-tab-nav-item');
+		var navItems = Array.prototype.slice.call(document.querySelectorAll('.g1-tab-nav-item'));
 		var panels   = document.querySelectorAll('.g1-tab-panel');
 
-		navItems.forEach(function(item) {
-			item.addEventListener('click', function() {
-				navItems.forEach(function(n) {
-					n.classList.remove('is-active');
-					n.setAttribute('tabindex', '-1');
-				});
-				panels.forEach(function(p) { p.classList.remove('is-active'); });
-
-				item.classList.add('is-active');
-				item.setAttribute('tabindex', '0');
-				var panel = document.getElementById(item.dataset.tab);
-				if (panel) panel.classList.add('is-active');
+		function select(item, moveFocus) {
+			navItems.forEach(function(n) {
+				n.classList.remove('is-active');
+				n.setAttribute('tabindex', '-1');
+				n.setAttribute('aria-selected', 'false');
+			});
+			panels.forEach(function(p) {
+				p.classList.remove('is-active');
+				// `hidden` as well as the class: an inactive panel that is only visually
+				// hidden still exposes its content and its links to the tab order.
+				p.hidden = true;
 			});
 
+			item.classList.add('is-active');
+			item.setAttribute('tabindex', '0');
+			item.setAttribute('aria-selected', 'true');
+			if (moveFocus) item.focus();
+
+			var panel = document.getElementById(item.dataset.tab);
+			if (panel) {
+				panel.classList.add('is-active');
+				panel.hidden = false;
+			}
+		}
+
+		navItems.forEach(function(item, index) {
+			// Enter/Space are handled natively now that these are <button>s.
+			item.addEventListener('click', function() { select(item, false); });
+
+			// Roving tabindex: the WAI-ARIA tabs pattern moves between tabs with the arrow
+			// keys, not Tab — Tab is what leaves the tablist for the panel.
 			item.addEventListener('keydown', function(e) {
-				if (e.key === 'Enter' || e.key === ' ') {
+				var target = null;
+
+				if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+					target = navItems[(index + 1) % navItems.length];
+				} else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+					target = navItems[(index - 1 + navItems.length) % navItems.length];
+				} else if (e.key === 'Home') {
+					target = navItems[0];
+				} else if (e.key === 'End') {
+					target = navItems[navItems.length - 1];
+				}
+
+				if (target) {
 					e.preventDefault();
-					item.click();
+					select(target, true);
 				}
 			});
 		});
@@ -260,16 +301,34 @@ if ( post_password_required() ) {
 
 			<h2 class="g1-faqs-heading">Frequently Asked Questions</h2>
 
-			<ul class="g1-faqs-list" uk-accordion="collapsible: true">
-				<?php foreach ( $faqs as $faq ) :
+			<?php // Same treatment as flexible/section_faqs.php: the trigger was an <a> with a
+			      // valueless href, which announces as a link and navigates without JS. It is
+			      // a <button> inside a heading now, with the toggle selector redeclared to
+			      // match the extra nesting. ?>
+			<ul class="g1-faqs-list" uk-accordion="collapsible: true; toggle: > .g1-faq-question__heading > .uk-accordion-title">
+				<?php
+				$wc_faq_index = 0;
+				foreach ( $faqs as $faq ) :
 					if ( empty( $faq['question'] ) ) continue;
+					$wc_faq_index++;
+					$wc_q_id = 'wc-faq-question-' . $wc_faq_index;
+					$wc_a_id = 'wc-faq-answer-' . $wc_faq_index;
 				?>
 				<li class="g1-faq-item">
-					<a class="uk-accordion-title g1-faq-question" href>
-						<span class="g1-faq-question__text"><?php echo esc_html( $faq['question'] ); ?></span>
-						<span class="g1-faq-toggle" aria-hidden="true"></span>
-					</a>
-					<div class="uk-accordion-content g1-faq-answer">
+					<h3 class="g1-faq-question__heading">
+						<button type="button"
+								class="uk-accordion-title g1-faq-question"
+								id="<?php echo esc_attr( $wc_q_id ); ?>"
+								aria-expanded="false"
+								aria-controls="<?php echo esc_attr( $wc_a_id ); ?>">
+							<span class="g1-faq-question__text"><?php echo esc_html( $faq['question'] ); ?></span>
+							<span class="g1-faq-toggle" aria-hidden="true"></span>
+						</button>
+					</h3>
+					<div class="uk-accordion-content g1-faq-answer"
+						 id="<?php echo esc_attr( $wc_a_id ); ?>"
+						 role="region"
+						 aria-labelledby="<?php echo esc_attr( $wc_q_id ); ?>">
 						<p><?php echo nl2br( esc_html( $faq['answer'] ) ); ?></p>
 					</div>
 				</li>

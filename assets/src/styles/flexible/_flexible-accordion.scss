@@ -26,6 +26,13 @@
     padding: 0;
   }
 
+  // The accordion trigger is a <button> wrapped in a heading (see section_faqs.php); the
+  // heading is purely semantic and must not introduce spacing or its own type scale.
+  .fc-faq-question__heading {
+    margin: 0;
+    font: inherit;
+  }
+
   .fc-faq-question {
     display: flex;
     align-items: center;
@@ -33,6 +40,16 @@
     gap: $faq-toggle-gap;
     color: $faq-title-color;
     text-decoration: none;
+
+    // Button reset — the trigger was an <a> before.
+    appearance: none;
+    background: none;
+    border: 0;
+    cursor: pointer;
+    font: inherit;
+    padding: 0;
+    text-align: left;
+    width: 100%;
   }
 
   .fc-faq-question__text {

@@ -19,6 +19,7 @@
  */
 $sage_includes = [
   'lib/class-tgm-plugin-activation.php', // TGM Plugin Activation - Handles required and recommended plugin notifications
+  'lib/a11y.php',      // Accessibility helpers shared by /partials and /flexible templates
   'lib/acf.php',       // Advanced Custom Fields integration and configuration
   'lib/assets.php',    // Enqueues and manages scripts and stylesheets
   'lib/extras.php',    // Custom helper functions and additional theme functionality

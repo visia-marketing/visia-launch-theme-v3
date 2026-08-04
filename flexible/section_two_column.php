@@ -44,14 +44,19 @@ switch ($columns_ratio) {
 
   <div class="uk-grid uk-grid-large uk-child-width-1-1@s" uk-grid>
 
-      <div class="<?php echo $left_col; ?> uk-flex-stretch content column">
-        <div class="content uk-width-1-1 uk-flex uk-flex-column uk-height-1-1 uk-flex-stretch uk-flex-<?php echo $vertical_align_col_1; ?>">
-          <?php echo get_sub_field('column_1'); ?>
+      <div class="<?php echo esc_attr($left_col); ?> uk-flex-stretch content column">
+        <div class="content uk-width-1-1 uk-flex uk-flex-column uk-height-1-1 uk-flex-stretch uk-flex-<?php echo esc_attr($vertical_align_col_1); ?>">
+          <?php
+          // NOT wp_kses_post(): WYSIWYG field, already filtered by ACF. wp_kses_post()
+          // strips <form>, <input>, <script> and <iframe>, which breaks embedded Gravity
+          // Forms and video embeds placed in a column.
+          echo get_sub_field('column_1');
+          ?>
         </div>
       </div>
-      <div class="<?php echo $right_col; ?> uk-flex-stretch column">
-        <div class="content  uk-width-1-1 uk-flex uk-flex-column uk-height-1-1  uk-flex-<?php echo $vertical_align_col_2; ?>">
-          <?php echo get_sub_field('column_2'); ?>
+      <div class="<?php echo esc_attr($right_col); ?> uk-flex-stretch column">
+        <div class="content  uk-width-1-1 uk-flex uk-flex-column uk-height-1-1  uk-flex-<?php echo esc_attr($vertical_align_col_2); ?>">
+          <?php echo get_sub_field('column_2'); // See the note on column_1 above. ?>
         </div>
       </div>
 

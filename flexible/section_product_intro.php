@@ -28,14 +28,25 @@ $thumbnails  = $images && count($images) > 1 ? array_slice($images, 1) : [];
                 <?php endif; ?>
 
                 <?php if ( $images && count($images) > 1 ) : ?>
-                    <div class="product-intro-thumbnails">
+                    <?php
+                    // NOTE: the data-full / data-alt attributes below were added for an
+                    // image-switcher that was never built — no script in the theme binds to
+                    // .product-intro-thumb, and there is no CSS for it either. The strip is
+                    // therefore inert, and marking it up as buttons would advertise controls
+                    // that do nothing. It is exposed as a decorative preview instead.
+                    //
+                    // If the switcher is implemented later these must become
+                    // <button type="button" aria-pressed> with a live region announcing the
+                    // swap, and the alt text below must be restored.
+                    ?>
+                    <div class="product-intro-thumbnails" aria-hidden="true">
                         <?php foreach ( $images as $i => $thumb ) : ?>
                             <div class="product-intro-thumb<?php echo $i === 0 ? ' active' : ''; ?>"
                                  data-full="<?php echo esc_url( $thumb['sizes']['large'] ); ?>"
                                  data-alt="<?php echo esc_attr( $thumb['alt'] ); ?>">
                                 <img
                                     src="<?php echo esc_url( $thumb['sizes']['medium'] ); ?>"
-                                    alt="<?php echo esc_attr( $thumb['alt'] ); ?>"
+                                    alt=""
                                 >
                             </div>
                         <?php endforeach; ?>

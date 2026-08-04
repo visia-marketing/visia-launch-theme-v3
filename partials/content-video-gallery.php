@@ -44,24 +44,44 @@ if ( $show_filters ) {
 }
 
 $has_filters = count( $filter_terms ) > 1;
+
+$gallery_id    = visia_unique_id( 'video-gallery' );
+$filters_id    = $gallery_id . '-filters';
+$heading_id    = $gallery_id . '-heading';
+$status_id     = $gallery_id . '-status';
+$gallery_label = $args['label'] ?? __( 'Videos', 'visia_marketing' );
 ?>
 
-<div class="g1-video-gallery"<?php echo $has_filters ? ' uk-filter="target: .js-video-filter"' : ''; ?>>
+<section class="g1-video-gallery" aria-labelledby="<?php echo esc_attr( $heading_id ); ?>"<?php echo $has_filters ? ' uk-filter="target: .js-video-filter"' : ''; ?>>
+
+	<?php // The gallery previously contributed no heading at all, so it was invisible in the
+	      // heading outline and the section had nothing to be named by. ?>
+	<h2 id="<?php echo esc_attr( $heading_id ); ?>" class="screen-reader-text"><?php echo esc_html( $gallery_label ); ?></h2>
 
 	<?php if ( $has_filters ) : ?>
-		<ul class="g1-video-filters" aria-label="Filter videos by type">
-			<li class="g1-video-filter uk-active" uk-filter-control>
-				<a href>All</a>
-			</li>
-			<?php foreach ( $filter_terms as $slug => $name ) : ?>
-				<li class="g1-video-filter" uk-filter-control="filter: .video-type-<?php echo esc_attr( $slug ); ?>">
-					<a href><?php echo esc_html( $name ); ?></a>
+		<?php // The controls were <a href> — a valueless href, i.e. a link to the current
+		      // page — that actually behaved as filter toggles. They are buttons now, they
+		      // report their state through aria-pressed instead of the uk-active class
+		      // alone, and the aria-label sits on a role="group" wrapper where it is
+		      // actually exposed (a bare <ul> does not support naming). WCAG 4.1.2. ?>
+		<div role="group" aria-label="<?php esc_attr_e( 'Filter videos by type', 'visia_marketing' ); ?>">
+			<ul id="<?php echo esc_attr( $filters_id ); ?>" class="g1-video-filters">
+				<li class="g1-video-filter uk-active" uk-filter-control>
+					<button type="button" aria-pressed="true"><?php esc_html_e( 'All', 'visia_marketing' ); ?></button>
 				</li>
-			<?php endforeach; ?>
-		</ul>
+				<?php foreach ( $filter_terms as $slug => $name ) : ?>
+					<li class="g1-video-filter" uk-filter-control="filter: .video-type-<?php echo esc_attr( $slug ); ?>">
+						<button type="button" aria-pressed="false"><?php echo esc_html( $name ); ?></button>
+					</li>
+				<?php endforeach; ?>
+			</ul>
+		</div>
+		<?php // Filtering silently adds and removes cards; this announces the new count.
+		      // main.js writes into it. WCAG 4.1.3. ?>
+		<p id="<?php echo esc_attr( $status_id ); ?>" class="screen-reader-text" role="status" aria-live="polite"></p>
 	<?php endif; ?>
 
-	<ul class="js-video-filter g1-video-cards uk-grid uk-grid-medium" uk-grid uk-lightbox="animation: fade">
+	<ul class="js-video-filter g1-video-cards uk-grid uk-grid-medium"<?php echo $has_filters ? ' data-filter-status="' . esc_attr( $status_id ) . '"' : ''; ?> uk-grid uk-lightbox="animation: fade">
 		<?php foreach ( $video_ids as $vid ) :
 			$terms        = get_the_terms( $vid, 'video-type' );
 			$slugs        = ( $terms && ! is_wp_error( $terms ) ) ? wp_list_pluck( $terms, 'slug' ) : array();
@@ -72,4 +92,4 @@ $has_filters = count( $filter_terms ) > 1;
 			</li>
 		<?php endforeach; ?>
 	</ul>
-</div>
+</section>

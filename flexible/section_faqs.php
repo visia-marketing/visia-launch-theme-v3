@@ -25,36 +25,70 @@ $is_plain = ( 'plain' === $style );
  */
 $enable_schema = get_sub_field('enable_faq_schema');
 $enable_schema = ( null === $enable_schema ) ? true : (bool) $enable_schema;
+
+// Was hard-coded <h4> regardless of what preceded the section, which skipped a level on
+// almost every page. h3 is the sensible default under a section's own h2.
+$heading_tag = visia_heading_tag( get_sub_field('faq_heading_level'), 'h3' );
+
+$faq_uid = visia_unique_id( 'faq' );
 ?>
 
 <div class="fc-section-columns fc-faq-section fc-faq-section--<?php echo esc_attr( $style ); ?>">
 
   <?php if ( is_array( $faqs ) && $faqs ) : ?>
 
-    <ul class="fc-faq-list<?php echo $is_plain ? '' : ' uk-accordion'; ?>" <?php echo $is_plain ? '' : 'uk-accordion'; ?>>
+    <?php
+    // UIkit's accordion looks for `> .uk-accordion-title` by default. The toggle now sits
+    // inside a heading — the accessible pattern is heading-wraps-button, never
+    // button-wraps-heading — so the selector is redeclared to match the new depth.
+    $accordion_attr = $is_plain
+      ? ''
+      : 'uk-accordion="toggle: > .fc-faq-question__heading > .uk-accordion-title"';
+    ?>
+    <ul class="fc-faq-list<?php echo $is_plain ? '' : ' uk-accordion'; ?>" <?php echo $accordion_attr; ?>>
 
-      <?php foreach ( $faqs as $faq ) :
+      <?php
+      $faq_index = 0;
+      foreach ( $faqs as $faq ) :
         if ( empty( $faq['question'] ) ) {
           continue;
         }
-        $answer = isset( $faq['answer'] ) ? wpautop( wp_kses_post( $faq['answer'] ) ) : '';
+        $faq_index++;
+        $answer      = isset( $faq['answer'] ) ? wpautop( wp_kses_post( $faq['answer'] ) ) : '';
+        $question_id = $faq_uid . '-question-' . $faq_index;
+        $answer_id   = $faq_uid . '-answer-' . $faq_index;
         ?>
         <li class="fc-faq-item">
 
           <?php if ( $is_plain ) : ?>
 
             <div class="fc-faq-question">
-              <h4 class="fc-faq-question__text"><?php echo wp_kses_post( $faq['question'] ); ?></h4>
+              <<?php echo $heading_tag; ?> class="fc-faq-question__text"><?php echo wp_kses_post( $faq['question'] ); ?></<?php echo $heading_tag; ?>>
             </div>
             <div class="fc-faq-answer"><?php echo $answer; ?></div>
 
           <?php else : ?>
 
-            <a class="fc-faq-question uk-accordion-title" href>
-              <h4 class="fc-faq-question__text"><?php echo wp_kses_post( $faq['question'] ); ?></h4>
-              <span class="fc-faq-toggle" uk-icon="icon: chevron-down; ratio: 1.5"></span>
-            </a>
-            <div class="fc-faq-answer uk-accordion-content"><?php echo $answer; ?></div>
+            <?php
+            // Was <a href> — a valueless href resolves to the current page, so the control
+            // announced as a link and, without JS, navigated instead of toggling. A
+            // disclosure is a button. aria-expanded/aria-controls declare the state and
+            // the relationship that the uk-open class alone only showed visually.
+            ?>
+            <<?php echo $heading_tag; ?> class="fc-faq-question__heading">
+              <button class="fc-faq-question uk-accordion-title"
+                      type="button"
+                      id="<?php echo esc_attr( $question_id ); ?>"
+                      aria-expanded="false"
+                      aria-controls="<?php echo esc_attr( $answer_id ); ?>">
+                <span class="fc-faq-question__text"><?php echo wp_kses_post( $faq['question'] ); ?></span>
+                <span class="fc-faq-toggle" aria-hidden="true" uk-icon="icon: chevron-down; ratio: 1.5"></span>
+              </button>
+            </<?php echo $heading_tag; ?>>
+            <div class="fc-faq-answer uk-accordion-content"
+                 id="<?php echo esc_attr( $answer_id ); ?>"
+                 role="region"
+                 aria-labelledby="<?php echo esc_attr( $question_id ); ?>"><?php echo $answer; ?></div>
 
           <?php endif; ?>
 

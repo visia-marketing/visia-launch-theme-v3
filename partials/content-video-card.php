@@ -42,17 +42,24 @@ if ( ! $lightbox_url ) return;
 
 <div class="g1-video-card">
 
+	<?php // aria-haspopup declares up front that this opens a dialog rather than navigating
+	      // to the raw media file — UIkit's lightbox intercepts the click. ?>
 	<a class="g1-video-card__cover"
 	   href="<?php echo esc_url( $lightbox_url ); ?>"
 	   data-caption="<?php echo esc_attr( $title ); ?>"
+	   aria-haspopup="dialog"
 	   aria-label="<?php echo esc_attr( $title ? 'Play video: ' . $title : 'Play video' ); ?>">
 
 		<?php if ( $poster_video ) : ?>
-			<video class="g1-video-card__poster" muted playsinline preload="metadata">
+			<?php // A <video> with no controls, used purely as a first-frame still. Some
+			      // screen readers otherwise expose it as an unlabelled media player. ?>
+			<video class="g1-video-card__poster" muted playsinline preload="metadata" aria-hidden="true" tabindex="-1">
 				<source src="<?php echo esc_url( $poster_video ); ?>#t=0.1" type="video/mp4">
 			</video>
 		<?php elseif ( $poster ) : ?>
-			<img class="g1-video-card__poster" src="<?php echo esc_url( $poster ); ?>" alt="<?php echo esc_attr( $title ); ?>" loading="lazy">
+			<?php // alt="" — the link is already named by its aria-label above, so alt text
+			      // here would just repeat the title inside the same control. ?>
+			<img class="g1-video-card__poster" src="<?php echo esc_url( $poster ); ?>" alt="" loading="lazy">
 		<?php endif; ?>
 
 		<span class="g1-video-card__play" aria-hidden="true">
@@ -64,7 +71,9 @@ if ( ! $lightbox_url ) return;
 	</a>
 
 	<?php if ( $title ) : ?>
-		<p class="g1-video-card__title"><?php echo esc_html( $title ); ?></p>
+		<?php // Was a <p>, so a gallery of videos produced no heading structure to navigate.
+		      // h3 sits under the gallery's own h2 in partials/content-video-gallery.php. ?>
+		<h3 class="g1-video-card__title"><?php echo esc_html( $title ); ?></h3>
 	<?php endif; ?>
 
 	<?php if ( $description ) : ?>

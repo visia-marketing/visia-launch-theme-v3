@@ -9,14 +9,16 @@ if ( $source === 'global' ) {
 
     if ( ! $callout ) return;
 
-    $design           = $callout['callout_design'];
-    $background_color = $design['background'];
-    $image            = $design['callout_image'];
-    $content          = $callout['callout_content'];
+    // Null-coalescing throughout: an unconfigured design sub-group returns null and these
+    // were read unconditionally.
+    $design           = $callout['callout_design'] ?? array();
+    $background_color = $design['background'] ?? '';
+    $image            = $design['callout_image'] ?? 0;
+    $content          = $callout['callout_content'] ?? '';
 } else {
-    $design           = get_sub_field('callout_design');
-    $background_color = $design['background'];
-    $image            = $design['callout_image'];
+    $design           = get_sub_field('callout_design') ?: array();
+    $background_color = $design['background'] ?? '';
+    $image            = $design['callout_image'] ?? 0;
     $content          = get_sub_field('callout_content');
 }
 
@@ -40,7 +42,12 @@ if ( $source === 'global' ) {
 
                 <div class="uk-width-1-1 uk-width-1-2@m">
                     <?php if( $image ): ?>
-                        <?php echo wp_get_attachment_image( $image, 'full' ); ?>
+                        <?php
+                        // Decorative: this is the callout's illustration and the copy beside
+                        // it carries the message. Left to wp_get_attachment_image() it
+                        // announced whatever alt happened to be on the media item.
+                        echo visia_decorative_image( $image, 'full' );
+                        ?>
                     <?php endif; ?>
                 </div>
 

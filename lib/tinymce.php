@@ -8,8 +8,8 @@ namespace Roots\Sage\Tinymce;
 
 function visia_mce_color_options($init) {
 
-  $default_colors = file_get_contents( get_template_directory() . '/tinymce/default_colors.json' );
-  $custom_colors = file_get_contents( get_template_directory() . '/tinymce/custom_colors.json' );
+  $default_colors = trim( file_get_contents( get_template_directory() . '/tinymce/default_colors.json' ) );
+  $custom_colors = trim( file_get_contents( get_template_directory() . '/tinymce/custom_colors.json' ) );
 
   // build colour grid default+custom colors
   $init['textcolor_map'] = '['.$default_colors.','.$custom_colors.']';
@@ -44,10 +44,16 @@ function visia_mce_before_init_insert_formats( $init_array ) {
 // Define the style_formats array
 
 // fetch json object
-$style_formats = file_get_contents( get_template_directory() . '/tinymce/style_formats.json' );
-  
+// trim() matters: WordPress only outputs the value as raw JS when its first character is [
+// and its last is ]. A trailing newline makes it wrap the JSON in unescaped quotes, which is a
+// syntax error that stops every TinyMCE editor on the page from initializing.
+$style_formats = trim( file_get_contents( get_template_directory() . '/tinymce/style_formats.json' ) );
+
 // Insert the array, JSON ENCODED, into 'style_formats'
-$init_array['style_formats'] =  $style_formats ;  
+// Skip it if the JSON is invalid, so one typo can't break every editor.
+if ( is_array( json_decode( $style_formats, true ) ) ) {
+  $init_array['style_formats'] = $style_formats;
+}
 
  
 return $init_array;  

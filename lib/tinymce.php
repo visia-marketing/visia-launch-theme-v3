@@ -6,7 +6,7 @@ namespace Roots\Sage\Tinymce;
  * Add custom colors
  */
 
-function visia_mce_color_options($init) {
+function powerup_studio_mce_color_options($init) {
 
   $default_colors = trim( file_get_contents( get_template_directory() . '/tinymce/default_colors.json' ) );
   $custom_colors = trim( file_get_contents( get_template_directory() . '/tinymce/custom_colors.json' ) );
@@ -19,7 +19,7 @@ function visia_mce_color_options($init) {
 
   return $init;
 }
-add_filter('tiny_mce_before_init', __NAMESPACE__ . '\\visia_mce_color_options');
+add_filter('tiny_mce_before_init', __NAMESPACE__ . '\\powerup_studio_mce_color_options');
 
 
 
@@ -27,11 +27,11 @@ add_filter('tiny_mce_before_init', __NAMESPACE__ . '\\visia_mce_color_options');
  * Add styles to TinyMCE
  */
 
- function visia_mce_buttons_2($buttons) {
+ function powerup_studio_mce_buttons_2($buttons) {
   array_unshift($buttons, 'styleselect');
   return $buttons;
 }
-add_filter('mce_buttons_2', __NAMESPACE__ . '\\visia_mce_buttons_2');
+add_filter('mce_buttons_2', __NAMESPACE__ . '\\powerup_studio_mce_buttons_2');
 
 
 
@@ -39,7 +39,7 @@ add_filter('mce_buttons_2', __NAMESPACE__ . '\\visia_mce_buttons_2');
 * Callback function to filter the MCE settings
 */
 
-function visia_mce_before_init_insert_formats( $init_array ) {
+function powerup_studio_mce_before_init_insert_formats( $init_array ) {
 
 // Define the style_formats array
 
@@ -60,5 +60,4 @@ return $init_array;
  
 } 
 // Attach callback to 'tiny_mce_before_init' 
-add_filter( 'tiny_mce_before_init', __NAMESPACE__ . '\\visia_mce_before_init_insert_formats' );
-
+add_filter( 'tiny_mce_before_init', __NAMESPACE__ . '\\powerup_studio_mce_before_init_insert_formats' );

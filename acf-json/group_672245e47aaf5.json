@@ -80,6 +80,43 @@
                     ],
                     "min": "",
                     "max": ""
+                },
+                "layout_6a99a5599e9b6": {
+                    "key": "layout_6a99a5599e9b6",
+                    "name": "section_saved_section",
+                    "label": "Saved Section",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_6a99a56b9e9b9",
+                            "label": "Saved Section",
+                            "name": "saved_section",
+                            "aria-label": "",
+                            "type": "post_object",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "post_type": [
+                                "repeatable-section"
+                            ],
+                            "post_status": "",
+                            "taxonomy": "",
+                            "return_format": "id",
+                            "multiple": 0,
+                            "allow_null": 0,
+                            "allow_in_bindings": 0,
+                            "bidirectional": 0,
+                            "ui": 1,
+                            "bidirectional_target": []
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
                 }
             },
             "min": "",
@@ -108,6 +145,13 @@
                 "operator": "==",
                 "value": "3"
             }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "repeatable-section"
+            }
         ]
     ],
     "menu_order": 2,
@@ -122,5 +166,7 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1761232261
+    "allow_ai_access": false,
+    "ai_description": "",
+    "modified": 1788454773
 }

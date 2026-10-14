@@ -66,7 +66,7 @@ function setup() {
    * One-shot migration of the WordPress media settings to the sizes this theme
    * expects. Guarded by an option so it only ever runs once per install.
    */
-  if ( ! get_option( 'visia_image_sizes_set' ) ) {
+  if ( ! get_option( 'mlcl_image_sizes_set' ) ) {
 		update_option( 'thumbnail_size_w', 300 );
 		update_option( 'thumbnail_size_h', 190 );
 		update_option( 'thumbnail_size_crop', 1 );
@@ -79,8 +79,10 @@ function setup() {
 		update_option( 'medium_size_h', 768 );
 		update_option( 'medium_size_crop', 0 );
 
-		update_option( 'visia_image_sizes_set', true );
+		update_option( 'mlcl_image_sizes_set', true );
 	}
+
+    add_image_size( 'pro_thumb', 100, 100, true );
 
   /**
    * HTML5 Markup
@@ -141,7 +143,10 @@ function assets() {
    */
   wp_enqueue_style('theme-fonts', $fonts, false, null);          // Google/Typekit fonts
   wp_enqueue_style('sage/css', Assets\asset_path('dist/styles/main.min.css'), false, Assets\asset_version('dist/styles/main.min.css')); // Compiled theme styles
-  wp_enqueue_script('font-awesome-kit', 'https://kit.fontawesome.com/f71e020b2c.js', [], null, true); // Font Awesome 7 Kit
+  if( get_field('fontawesome_kit_url', 'option')){
+    wp_enqueue_script('font-awesome-kit', get_field('fontawesome_kit_url', 'option'), [], null, true); // Font Awesome 7 Kit
+  }
+
 
   /**
    * Comment Reply Script
@@ -162,3 +167,8 @@ function assets() {
 }
 // Hook with priority 100 to load after most other scripts/styles
 add_action('wp_enqueue_scripts', __NAMESPACE__ . '\\assets', 100);
+
+function admin_assets() {
+  wp_enqueue_style('font-awesome-webfont', 'https://kit.fontawesome.com/e7333dcbe1.css', [], null);
+}
+add_action('admin_enqueue_scripts', __NAMESPACE__ . '\\admin_assets');

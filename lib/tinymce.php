@@ -12,10 +12,10 @@ function powerup_studio_mce_color_options($init) {
   $custom_colors = trim( file_get_contents( get_template_directory() . '/tinymce/custom_colors.json' ) );
 
   // build colour grid default+custom colors
-  $init['textcolor_map'] = '['.$default_colors.','.$custom_colors.']';
+  $init['textcolor_map'] = '['.$custom_colors.']';
 
-  // enable 6th uk-container for custom colours in grid
-  $init['textcolor_rows'] = 7;
+  // // enable 6th uk-container for custom colours in grid
+  // $init['textcolor_rows'] = 7;
 
   return $init;
 }

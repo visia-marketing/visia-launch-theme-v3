@@ -12,8 +12,8 @@
  * Note: '.clones .layout' are excluded as these are the template/clone fields
  * that ACF uses internally and shouldn't be collapsed.
  */
-add_action('acf/input/admin_head','visia_acf_admin_head');
-function visia_acf_admin_head() { ?>
+add_action('acf/input/admin_head','mlcl_acf_admin_head');
+function mlcl_acf_admin_head() { ?>
   <script type="text/javascript">
   jQuery(document).ready(function($) {
     // Add the collapsed class to all layouts except clone templates
@@ -38,7 +38,7 @@ function visia_acf_admin_head() { ?>
  * @param string $string The string to convert
  * @return string URL-safe anchor string
  */
-function visia_create_anchor($string) {
+function mlcl_create_anchor($string) {
   $string = strtolower($string);                    // Convert to lowercase
   $string = preg_replace('/[^a-z0-9]+/', ' ', $string); // Replace non-alphanumeric with spaces
   $string = trim($string);                          // Remove leading/trailing spaces
@@ -66,7 +66,7 @@ function visia_create_anchor($string) {
  *                          `id` field blank. Saved Sections pass their own prefix so their
  *                          row indexes cannot collide with the host page's.
  */
-function visia_render_flexible_row($id_prefix = 'fc-section-') {
+function mlcl_render_flexible_row($id_prefix = 'fc-section-') {
 
   /**
    * Saved Sections render their own top-level <section> elements, one per row of the
@@ -123,7 +123,7 @@ function visia_render_flexible_row($id_prefix = 'fc-section-') {
  * @param int|false $post_id   Post to read the field from; false uses the current post.
  * @param string    $id_prefix Fallback-id prefix handed to each row.
  */
-function visia_render_flexible_rows($post_id = false, $id_prefix = 'fc-section-') {
+function mlcl_render_flexible_rows($post_id = false, $id_prefix = 'fc-section-') {
 
   /**
    * Cycle guard. A saved section can contain a Saved Section row pointing back at itself
@@ -142,7 +142,7 @@ function visia_render_flexible_rows($post_id = false, $id_prefix = 'fc-section-'
 
   if (have_rows('flexible_content', $post_id)) {
     while (have_rows('flexible_content', $post_id)) : the_row();
-      visia_render_flexible_row($id_prefix);
+      mlcl_render_flexible_row($id_prefix);
     endwhile;
   }
 
@@ -174,9 +174,9 @@ function get_flexible_content() {
   // Check if the flexible_content field has any rows
   if (have_rows('flexible_content')) {
     // Create main wrapper with unique ID based on page title
-    echo '<div class="fc-wrapper" id="fc-wrapper-' . esc_attr(visia_create_anchor(get_the_title())) . '">';
+    echo '<div class="fc-wrapper" id="fc-wrapper-' . esc_attr(mlcl_create_anchor(get_the_title())) . '">';
 
-      visia_render_flexible_rows();
+      mlcl_render_flexible_rows();
 
     echo '</div>';
   }

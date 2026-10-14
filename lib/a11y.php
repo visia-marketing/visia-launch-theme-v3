@@ -9,7 +9,7 @@
  * Text domain matches the rest of the theme: visia_marketing.
  */
 
-if ( ! function_exists( 'visia_sr_text' ) ) {
+if ( ! function_exists( 'mlcl_sr_text' ) ) {
   /**
    * Visually-hidden text.
    *
@@ -19,7 +19,7 @@ if ( ! function_exists( 'visia_sr_text' ) ) {
    * @param string $text  Text to expose to assistive technology only.
    * @return string
    */
-  function visia_sr_text( $text ) {
+  function mlcl_sr_text( $text ) {
     if ( '' === trim( (string) $text ) ) {
       return '';
     }
@@ -28,7 +28,7 @@ if ( ! function_exists( 'visia_sr_text' ) ) {
   }
 }
 
-if ( ! function_exists( 'visia_heading_tag' ) ) {
+if ( ! function_exists( 'mlcl_heading_tag' ) ) {
   /**
    * Resolve a heading level to a safe tag name.
    *
@@ -39,7 +39,7 @@ if ( ! function_exists( 'visia_heading_tag' ) ) {
    * @param string     $default  Fallback when $level is empty or out of range.
    * @return string  One of h2..h6.
    */
-  function visia_heading_tag( $level, $default = 'h2' ) {
+  function mlcl_heading_tag( $level, $default = 'h2' ) {
     $allowed = array( 'h2', 'h3', 'h4', 'h5', 'h6' );
 
     $tag = strtolower( trim( (string) $level ) );
@@ -57,7 +57,7 @@ if ( ! function_exists( 'visia_heading_tag' ) ) {
   }
 }
 
-if ( ! function_exists( 'visia_icon' ) ) {
+if ( ! function_exists( 'mlcl_icon' ) ) {
   /**
    * Decorative icon, hidden from assistive technology.
    *
@@ -68,16 +68,16 @@ if ( ! function_exists( 'visia_icon' ) ) {
    * @param string $label    Optional visually-hidden label rendered alongside the icon.
    * @return string
    */
-  function visia_icon( $classes, $label = '' ) {
+  function mlcl_icon( $classes, $label = '' ) {
     if ( '' === trim( (string) $classes ) ) {
       return '';
     }
 
-    return '<i class="' . esc_attr( $classes ) . '" aria-hidden="true"></i>' . visia_sr_text( $label );
+    return '<i class="' . esc_attr( $classes ) . '" aria-hidden="true"></i>' . mlcl_sr_text( $label );
   }
 }
 
-if ( ! function_exists( 'visia_decorative_image' ) ) {
+if ( ! function_exists( 'mlcl_decorative_image' ) ) {
   /**
    * Render an attachment as a decorative image.
    *
@@ -90,7 +90,7 @@ if ( ! function_exists( 'visia_decorative_image' ) ) {
    * @param array     $attr   Extra attributes merged over the defaults.
    * @return string
    */
-  function visia_decorative_image( $image, $size = 'full', $attr = array() ) {
+  function mlcl_decorative_image( $image, $size = 'full', $attr = array() ) {
     // ACF returns an array when the field's return format is "Image Array".
     if ( is_array( $image ) ) {
       $image = isset( $image['ID'] ) ? $image['ID'] : ( isset( $image['id'] ) ? $image['id'] : 0 );
@@ -108,17 +108,17 @@ if ( ! function_exists( 'visia_decorative_image' ) ) {
   }
 }
 
-if ( ! function_exists( 'visia_new_window_attrs' ) ) {
+if ( ! function_exists( 'mlcl_new_window_attrs' ) ) {
   /**
    * Attributes for a link that opens in a new window.
    *
    * Returns an empty string unless the link actually targets a new window, so call sites can
-   * echo it unconditionally. Pair with visia_new_window_notice() for the AT-facing warning.
+   * echo it unconditionally. Pair with mlcl_new_window_notice() for the AT-facing warning.
    *
    * @param string $target  Link target, typically ACF's $link['target'].
    * @return string
    */
-  function visia_new_window_attrs( $target ) {
+  function mlcl_new_window_attrs( $target ) {
     if ( '_blank' !== trim( (string) $target ) ) {
       return '';
     }
@@ -127,7 +127,7 @@ if ( ! function_exists( 'visia_new_window_attrs' ) ) {
   }
 }
 
-if ( ! function_exists( 'visia_new_window_notice' ) ) {
+if ( ! function_exists( 'mlcl_new_window_notice' ) ) {
   /**
    * Visually-hidden "opens in a new window" warning. WCAG 3.2.5.
    *
@@ -136,16 +136,16 @@ if ( ! function_exists( 'visia_new_window_notice' ) ) {
    * @param string $target  Link target, typically ACF's $link['target'].
    * @return string
    */
-  function visia_new_window_notice( $target ) {
+  function mlcl_new_window_notice( $target ) {
     if ( '_blank' !== trim( (string) $target ) ) {
       return '';
     }
 
-    return visia_sr_text( __( '(opens in a new window)', 'visia_marketing' ) );
+    return mlcl_sr_text( __( '(opens in a new window)', 'visia_marketing' ) );
   }
 }
 
-if ( ! function_exists( 'visia_cta_label' ) ) {
+if ( ! function_exists( 'mlcl_cta_label' ) ) {
   /**
    * Visible CTA text plus hidden context.
    *
@@ -157,7 +157,7 @@ if ( ! function_exists( 'visia_cta_label' ) ) {
    * @param string $context  Item name, e.g. the product or post title.
    * @return string
    */
-  function visia_cta_label( $label, $context = '' ) {
+  function mlcl_cta_label( $label, $context = '' ) {
     $label = (string) $label;
 
     if ( '' === trim( $context ) ) {
@@ -167,11 +167,11 @@ if ( ! function_exists( 'visia_cta_label' ) ) {
     /* translators: %s: name of the item the link points at. */
     $hidden = sprintf( __( 'about %s', 'visia_marketing' ), wp_strip_all_tags( $context ) );
 
-    return esc_html( $label ) . ' ' . visia_sr_text( $hidden );
+    return esc_html( $label ) . ' ' . mlcl_sr_text( $hidden );
   }
 }
 
-if ( ! function_exists( 'visia_unique_id' ) ) {
+if ( ! function_exists( 'mlcl_unique_id' ) ) {
   /**
    * Sequential DOM id, unique per request.
    *
@@ -181,7 +181,7 @@ if ( ! function_exists( 'visia_unique_id' ) ) {
    * @param string $prefix
    * @return string
    */
-  function visia_unique_id( $prefix = 'visia' ) {
+  function mlcl_unique_id( $prefix = 'visia' ) {
     static $counts = array();
 
     $prefix = sanitize_html_class( $prefix );

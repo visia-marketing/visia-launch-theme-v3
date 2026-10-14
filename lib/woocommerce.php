@@ -31,8 +31,8 @@ remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_singl
 remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_rating', 10 );
 
 // SKU just after title (5), before price (10)
-add_action( 'woocommerce_single_product_summary', 'visia_single_product_sku', 7 );
-function visia_single_product_sku() {
+add_action( 'woocommerce_single_product_summary', 'mlcl_single_product_sku', 7 );
+function mlcl_single_product_sku() {
     global $product;
     if ( ! $product || ! wc_product_sku_enabled() || ! $product->get_sku() ) {
         return;
@@ -61,12 +61,12 @@ add_filter( 'woocommerce_product_thumbnails_columns', function () {
 } );
 
 
-add_action( 'woocommerce_before_add_to_cart_button', 'visia_start_button_buffer' );
-add_action( 'woocommerce_after_add_to_cart_button', 'visia_end_button_buffer' );
+add_action( 'woocommerce_before_add_to_cart_button', 'mlcl_start_button_buffer' );
+add_action( 'woocommerce_after_add_to_cart_button', 'mlcl_end_button_buffer' );
 
-function visia_start_button_buffer() { ob_start(); }
+function mlcl_start_button_buffer() { ob_start(); }
 
-function visia_end_button_buffer() {
+function mlcl_end_button_buffer() {
     $output = ob_get_clean();
     // Replace default WooCommerce classes with your own
     echo str_replace( 'single_add_to_cart_button button alt', 'uk-button', $output );
@@ -75,8 +75,8 @@ function visia_end_button_buffer() {
 
 
 // Remove all default WC tabs and suppress the empty tab panel output
-add_filter( 'woocommerce_product_tabs', 'visia_remove_product_tabs', 98 );
-function visia_remove_product_tabs( $tabs ) {
+add_filter( 'woocommerce_product_tabs', 'mlcl_remove_product_tabs', 98 );
+function mlcl_remove_product_tabs( $tabs ) {
     unset( $tabs['description'] );
     unset( $tabs['reviews'] );
     unset( $tabs['additional_information'] );
@@ -216,11 +216,11 @@ add_filter( 'woocommerce_cart_item_thumbnail', function ( $thumbnail, $cart_item
 }, 10, 2 );
 
 // ── Restyle buttons in all WooCommerce notices (success, error, info) ────────
-add_filter( 'wc_add_to_cart_message_html', 'visia_replace_notice_button_classes' );
-add_filter( 'woocommerce_add_error',       'visia_replace_notice_button_classes' );
-add_filter( 'woocommerce_add_notice',      'visia_replace_notice_button_classes' );
-add_filter( 'woocommerce_add_success',     'visia_replace_notice_button_classes' );
+add_filter( 'wc_add_to_cart_message_html', 'mlcl_replace_notice_button_classes' );
+add_filter( 'woocommerce_add_error',       'mlcl_replace_notice_button_classes' );
+add_filter( 'woocommerce_add_notice',      'mlcl_replace_notice_button_classes' );
+add_filter( 'woocommerce_add_success',     'mlcl_replace_notice_button_classes' );
 
-function visia_replace_notice_button_classes( $message ) {
+function mlcl_replace_notice_button_classes( $message ) {
     return str_replace( 'class="button wc-forward', 'class="uk-button uk-button-small', $message );
 }

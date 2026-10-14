@@ -39,3 +39,5 @@ add_filter('excerpt_more', __NAMESPACE__ . '\\excerpt_more');
 	return 'low';
 }
 add_filter( 'wpseo_metabox_prio',  __NAMESPACE__ . '\\yoasttobottom');
+
+

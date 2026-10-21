@@ -16,7 +16,7 @@ add_filter( 'dlm_do_xhr', '__return_false' );
 /**
  * Recommended and Required Plugins
  */
-function mlcl_register_required_plugins() {
+function visia_register_required_plugins() {
   $plugins = array(
     array(
 			'name'   => 'Advanced Custom Fields Pro',
@@ -90,7 +90,7 @@ function mlcl_register_required_plugins() {
   tgmpa( $plugins, $config );
 
 }
-add_action( 'tgmpa_register', 'mlcl_register_required_plugins' );
+add_action( 'tgmpa_register', 'visia_register_required_plugins' );
 
 /**
  * Assigns a specific custom template to newly created pages by default.

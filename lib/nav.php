@@ -170,11 +170,11 @@ add_filter('wp_nav_menu_args', 'roots_nav_menu_args');
 /**
  * Add UIkit button classes to top navigation menu links
  */
-function mlcl_top_nav_link_classes($atts, $item, $args) {
+function visia_top_nav_link_classes($atts, $item, $args) {
   if (isset($args->theme_location) && $args->theme_location === 'top_navigation') {
     $existing = isset($atts['class']) ? $atts['class'] . ' ' : '';
     $atts['class'] = $existing . 'uk-button uk-button-text';
   }
   return $atts;
 }
-add_filter('nav_menu_link_attributes', 'mlcl_top_nav_link_classes', 10, 3);
+add_filter('nav_menu_link_attributes', 'visia_top_nav_link_classes', 10, 3);

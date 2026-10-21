@@ -66,7 +66,7 @@ function setup() {
    * One-shot migration of the WordPress media settings to the sizes this theme
    * expects. Guarded by an option so it only ever runs once per install.
    */
-  if ( ! get_option( 'mlcl_image_sizes_set' ) ) {
+  if ( ! get_option( 'visia_image_sizes_set' ) ) {
 		update_option( 'thumbnail_size_w', 300 );
 		update_option( 'thumbnail_size_h', 190 );
 		update_option( 'thumbnail_size_crop', 1 );
@@ -79,7 +79,7 @@ function setup() {
 		update_option( 'medium_size_h', 768 );
 		update_option( 'medium_size_crop', 0 );
 
-		update_option( 'mlcl_image_sizes_set', true );
+		update_option( 'visia_image_sizes_set', true );
 	}
 
     add_image_size( 'pro_thumb', 100, 100, true );

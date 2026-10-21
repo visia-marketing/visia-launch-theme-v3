@@ -2,38 +2,48 @@
 //
 // Accordion / FAQ
 //
-// One component, three styles chosen by the `faq_style` radio on the Accordion/FAQ
-// layout. The template emits a matching modifier class:
+// Shared by two layouts that render the same component under different class prefixes:
 //
-//   .fc-faq-section--plain      no accordion; every question and answer is always open
-//   .fc-faq-section--stacked    accordion, items flush and divided by rules
-//   .fc-faq-section--separated  accordion, each item a bordered card with a gap between
+//   section_faqs.php       .fc-faq-*        (`faq_style` radio)
+//   section_accordion.php  .fc-accordion-*  (`accordion_style` radio)
+//
+// Each emits a matching modifier class for one of three styles:
+//
+//   --plain      no accordion; every question and answer is always open
+//   --stacked    accordion, items flush and divided by rules
+//   --separated  accordion, each item a bordered card with a gap between
 //
 // The markup is identical across all three apart from the plain style using a `div` for
-// the question instead of the `a.uk-accordion-title` UIkit's JS needs, so everything
-// below keys off the `.fc-faq-*` classes, which are always present.
+// the question instead of the `button.uk-accordion-title` UIkit's JS needs, so everything
+// below keys off the prefixed classes, which are always present. The accordion template's
+// plain style names its question/answer `.fc-accordion-title` / `.fc-accordion-content`,
+// so those are listed alongside `.fc-accordion-question` / `.fc-accordion-answer`.
 //
-// Note the template does not apply `uk-accordion-default` — its `:nth-child(n+2)`
+// Note neither template applies `uk-accordion-default` — its `:nth-child(n+2)`
 // margins and title styling would override the per-style spacing set here.
 //
 //////////////////////////////////////////////////////////////////////////////////////////////
 
-.fc-faq-section {
+.fc-faq-section,
+.fc-accordion-section {
 
-  .fc-faq-list {
+  .fc-faq-list,
+  .fc-accordion-list {
     list-style: none;
     margin: 0;
     padding: 0;
   }
 
-  // The accordion trigger is a <button> wrapped in a heading (see section_faqs.php); the
-  // heading is purely semantic and must not introduce spacing or its own type scale.
-  .fc-faq-question__heading {
+  // The accordion trigger is a <button> wrapped in a heading; the heading is purely
+  // semantic and must not introduce spacing or its own type scale.
+  .fc-faq-question__heading,
+  .fc-accordion-title__heading {
     margin: 0;
     font: inherit;
   }
 
-  .fc-faq-question {
+  .fc-faq-question,
+  .fc-accordion-question {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -52,7 +62,8 @@
     width: 100%;
   }
 
-  .fc-faq-question__text {
+  .fc-faq-question__text,
+  .fc-accordion-title__text {
     font-family: $sans;
     font-size: $faq-title-font-size;
     font-weight: 400;
@@ -62,17 +73,21 @@
   }
 
   // Chevron. Only rendered for the two accordion styles.
-  .fc-faq-toggle {
+  .fc-faq-toggle,
+  .fc-accordion-toggle {
     flex: 0 0 auto;
     color: $faq-toggle-color;
     transition: transform 0.2s ease-in-out;
   }
 
-  .fc-faq-item.uk-open .fc-faq-toggle { transform: scaleY(-1); }
+  .fc-faq-item.uk-open .fc-faq-toggle,
+  .fc-accordion-item.uk-open .fc-accordion-toggle { transform: scaleY(-1); }
 
   // Collapse the outer margins of whatever wpautop produced so the answer's spacing is
   // controlled by the item padding rather than by its first and last paragraphs.
-  .fc-faq-answer {
+  .fc-faq-answer,
+  .fc-accordion-answer,
+  .fc-accordion-content {
     > :first-child { margin-top: 0; }
     > :last-child { margin-bottom: 0; }
   }
@@ -93,6 +108,18 @@
   }
 
   .fc-faq-question { margin-bottom: 0.5rem; }
+}
+
+.fc-accordion-section--plain {
+
+  .fc-accordion-item {
+    padding-bottom: $faq-padding-vertical;
+    border-bottom: 1px solid $faq-border-color;
+
+    & + .fc-accordion-item { margin-top: $faq-padding-vertical; }
+  }
+
+  .fc-accordion-title { margin-bottom: 0.5rem; }
 }
 
 
@@ -116,6 +143,24 @@
   }
 
   .fc-faq-answer { padding-bottom: $faq-padding-vertical; }
+}
+
+.fc-accordion-section--stacked {
+
+  .fc-accordion-item {
+    border-bottom: 1px solid $faq-border-color;
+
+    &:first-child { border-top: 1px solid $faq-border-color; }
+  }
+
+  .fc-accordion-question {
+    padding: $faq-padding-vertical 0;
+    cursor: pointer;
+
+    &:hover { color: $faq-title-hover-color; }
+  }
+
+  .fc-accordion-answer { padding-bottom: $faq-padding-vertical; }
 }
 
 
@@ -142,4 +187,23 @@
   }
 
   .fc-faq-answer { padding-bottom: $faq-padding-vertical; }
+}
+
+.fc-accordion-section--separated {
+
+  .fc-accordion-item {
+    border-top: 1px solid $faq-border-color;
+    border-bottom: 1px solid $faq-border-color;
+
+    & + .fc-accordion-item { margin-top: $faq-item-gap; }
+  }
+
+  .fc-accordion-question {
+    padding: $faq-padding-vertical 0;
+    cursor: pointer;
+
+    &:hover { color: $faq-title-hover-color; }
+  }
+
+  .fc-accordion-answer { padding-bottom: $faq-padding-vertical; }
 }

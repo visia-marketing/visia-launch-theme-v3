@@ -170,12 +170,12 @@
                 "layout_68f91711b3050": {
                     "key": "layout_68f91711b3050",
                     "name": "section_faqs",
-                    "label": "Accordion/FAQ",
+                    "label": "FAQ",
                     "display": "block",
                     "sub_fields": [
                         {
                             "key": "field_68f91711b3052",
-                            "label": "Accordion/FAQ",
+                            "label": "Accordion\/FAQ",
                             "name": "frequently_asked_questions",
                             "aria-label": "",
                             "type": "clone",
@@ -189,6 +189,38 @@
                             },
                             "clone": [
                                 "group_68f9163689802"
+                            ],
+                            "display": "seamless",
+                            "layout": "block",
+                            "prefix_label": 0,
+                            "prefix_name": 0
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_6ad8c6562da4f": {
+                    "key": "layout_6ad8c6562da4f",
+                    "name": "section_accordion",
+                    "label": "Accordion Content",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_6ad8c6682da52",
+                            "label": "Accordion Content",
+                            "name": "accordion_clone",
+                            "aria-label": "",
+                            "type": "clone",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "clone": [
+                                "group_6ad8c84205ead"
                             ],
                             "display": "seamless",
                             "layout": "block",
@@ -352,5 +384,7 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1785369600
+    "allow_ai_access": false,
+    "ai_description": "",
+    "modified": 1792592671
 }
